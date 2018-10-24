@@ -1,0 +1,164 @@
+<% include ../partials/header %>
+    <div class="ui main text container segment">
+        <div class="ui huge header"><%= client.name %>: Add Info Page</div>
+        <form class="ui form" action="/clients/" method="POST">
+            <div class="field">
+                <label>Client's Name</label>
+                <input type="text" name="client[name]" placeholder="Client's Name:">
+            </div>
+            <div class="field">
+                <label>Customer Care Manager:</label>
+                <input type="text" name="show[ccm]" placeholder="Customer Care Manager">
+            </div>
+            <div id="sideBySide" class="ui grid">
+                <div class="five wide column field">
+                    <label>Support Plan:</label>
+                    <select class="ui fluid dropdown" name="client[supportPlan]">
+                        <option value="">Select Support Plan</option>
+                        <option value="Business Standard">Business Standard</option>
+                        <option value="Business Premium">Business Premium</option>
+                        <option value="Business OPs">Business OPs</option>
+                    </select>
+                </div>
+                <div class="five wide column field">
+                    <label>Number of Properties:</label>
+                    <select class="ui fluid dropdown" value='' name="show[properties]">
+                       <option value="">Numbers</option>
+                       <% for(var i = 1; i <= 100; i++){ %>
+                            <% if(i === 1){ %>
+                                <option value="<%= i %>"><%= i %> property</option>
+                            <% } else { %>
+                                <option value="<%= i %>"><%= i %> properies</option>
+                            <% } %>
+                       <% }; %>
+                    </select>
+                </div>
+                <div class="five wide column field">
+                    <label>Number of Products:</label>
+                    <select id="prodNum" class="ui fluid dropdown" value='' name="show[prodNumber]">
+                        <option value="">Numbers</option>
+                        <% for(var i = 1; i <= 10; i++){ %>
+                            <% if(i === 1){ %>
+                                <option value="<%= i %>"><%= i %> product</option>
+                            <% } else { %>
+                                <option value="<%= i %>"><%= i %> products</option>
+                            <% } %>
+                        <% }; %>
+                    </select>
+                </div>
+                <div class="eight wide column field">
+                    <div class="field">
+                        <label>Client's Status:</label>
+                        <select class="ui fluid dropdown" name="client[status]">
+                            <option value="">Current Status:</option>
+                            <option value="In Support">In Support</option>
+                            <option value="Inactive Client">Inactive Client</option>
+                            <option value="In PMO">In PMO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="field">
+                        <label>Client's Timezone:</label>
+                        <select name="client[timezone]" id="DropDownTimezone" >
+                            <option value="" default>Timezone</option>  
+                            <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option>
+                            <option value="-11.0">(GMT -11:00) Midway Island, Samoa</option>
+                            <option value="-10.0">(GMT -10:00) Hawaii</option>
+                            <option value="-9.0">(GMT -9:00) Alaska</option>
+                            <option value="-8.0">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+                            <option value="-7.0">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+                            <option value="-6.0">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+                            <option value="-5.0">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+                            <option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                            <option value="-3.5">(GMT -3:30) Newfoundland</option>
+                            <option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                            <option value="-2.0">(GMT -2:00) Mid-Atlantic</option>
+                            <option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option>
+                            <option value="0.0">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+                            <option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option>
+                            <option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option>
+                            <option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                            <option value="3.5">(GMT +3:30) Tehran</option>
+                            <option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                            <option value="4.5">(GMT +4:30) Kabul</option>
+                            <option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                            <option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                            <option value="5.75">(GMT +5:45) Kathmandu</option>
+                            <option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                            <option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                            <option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                            <option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                            <option value="9.5">(GMT +9:30) Adelaide, Darwin</option>
+                            <option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                            <option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                            <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="field">
+                        <label>Config Lead:</label>
+                        <input type="text" name="show[configLead]" placeholder="Configuration Lead">
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="field">
+                        <label>Install Lead:</label>
+                        <input type="text" name="show[installLead]" placeholder="Installation Lead">
+                    </div>
+                </div>
+                <div class="five wide column field">
+                    <label>License Type:</label>
+                    <select class="ui fluid dropdown" name="show[licenseType]">
+                        <option value="">License Type</option>
+                        <option value="company">Company</option>
+                        <option value="individual">Individual</option>
+                    </select>
+                </div>
+                <div class="five wide column field">
+                    <label>VPN Access:</label>
+                    <select class="ui fluid dropdown" name="show[vpnAccess]">
+                        <option value="">VPN Access</option>
+                        <option value="shared vpn creds">Shared VPN Creds</option>
+                        <option value="individual vpn creds">Individual VPN Creds</option>
+                        <option value="anyconnec">AnyConnect</option>
+                        <option value="gotomypc">GoToMyPC</option>
+                        <option value="tbd">TBD</option>
+                    </select>
+                </div>
+                <div class="five wide column field">
+                    <label>RDP Access:</label>
+                    <select class="ui fluid dropdown" name="show[rdpAccess]">
+                        <option value="">RDP Access</option>
+                        <option value="shared rdp access">Shared RDP Access</option>
+                        <option value="individual rdp access">Individual RDP Access</option>
+                        <option value="webex with client's it">WebEX with Client's IT</option>
+                        <option value="NIL (currently)">NIL (currently)</option>
+                        <option value="tbd">TBD</option>
+                    </select>
+                </div>
+            </div>
+            <div class="five wide column field">
+                <label>Client has 24/7 IT:</label>
+                <select class="ui fluid dropdown" name="show[it_24_7]">
+                    <option value="">Please Select</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                    <option value="unsure">Unsure</option>
+                </select>
+            </div>
+            <div class="five wide column field">
+                <label>Request Method:</label>
+                <select class="ui fluid dropdown" name="show[requestMethod]">
+                    <option value="">Request Method</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                    <option value="unsure">Unsure</option>
+                </select>
+            </div>
+        <input class="ui left inverted green button" type="submit">
+        <a class="ui right inverted red button" href="/clients">Cancel</a>
+        </form>
+    </div>
+<% include ../partials/footer %>

@@ -1,0 +1,56 @@
+hr {
+  margin-top: 2em;  
+}
+
+#product{
+    margin-bottom: 1em;
+}
+
+#newProdForm {
+  margin-top: 2em;
+}
+
+a.ui.right.inverted.red.button {
+  margin-left: 5em;  
+}
+
+.formButtons{
+  margin-top: 2em;
+}
+
+#addButton a{
+  margin-top: 2em;
+}
+
+.bye{
+  display: none;
+}
+
+.lt20{
+  margin-left: 10px;
+}
+
+#actionButtons{
+  display: inline;
+}
+
+#myImg{
+  background: url('https://preview.ibb.co/fiew6y/marvin_meyer_571072_unsplash.jpg')
+}
+
+.itemSize {
+  padding: 0;
+}
+
+.desc {
+  height: auto;
+   width: 100%; 
+}
+
+#newInfo {
+  margin-bottom: 4%; 
+}
+
+.credButtons{
+  margin-top: 6.5%; 
+}

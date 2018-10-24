@@ -1,0 +1,49 @@
+<% include ../partials/header %>
+<% var oneDay = 24*60*60*1000; %>
+<% var startDate = new Date(); %>
+<% var endDate = new Date(message.created);%>
+<% var diffDate =  Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))); %>
+    <div id="newInfo">
+        <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/"><i class="ui arrow left icon"></i> Go Back</a>
+        <div class="ui huge header">
+            <%= message.product %> Knowledge Base
+        </div>
+        <hr>
+        <% if(message.type === "info"){ %>
+        <div class="ui green message">
+        <% } else { %>
+        <div class="ui orange message">
+        <% }; %>
+            <div>
+                Created <%= diffDate %> Days ago by <%= message.creator.display %>
+            </div><br>
+            <div class="ui header">
+                <%= message.desc %>
+            </div>
+            <br>
+            <div>
+                <%= message.message %>
+            </div>
+        </div>
+        <div>
+            <a class="ui blue inverted right floated button" href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/add">
+                Add a Comment
+            </a>
+        </div>
+        <br>
+        <hr>
+        <% message.replies.forEach(function(reply){ %>
+        <% var endDate1 = new Date(reply.created);%>
+        <% var diffDate1 =  Math.round(Math.abs((startDate.getTime() - endDate1.getTime())/(oneDay))); %>
+        <div class="ui blue message">
+            <div>
+                Created <%= diffDate1 %> Days ago by <%= reply.creator.display %>
+            </div>
+            <br>
+            <div>
+                <%= reply.comment %>
+            </div>
+        </div>
+        <% }); %>
+    </div>    
+<% include ../partials/footer %>

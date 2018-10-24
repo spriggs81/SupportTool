@@ -1,0 +1,69 @@
+<% include ../partials/header %>
+    <div class="ui huge header">
+        Adding App Server info to <%= client.name %>:
+    </div>
+    <hr>
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/app" method="POST">
+        <h3 class="ui dividing header">New App Server Form</h3>
+        <div class="two fields">
+            <div class="field">
+                <label>Please Select Environment:</label>
+                <select class="ui fluid dropdown" name="appserver[type]" required>
+                    <option>Select Environment</option>
+                    <option value="Production">Production</option>
+                    <option value="Test">Test</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>RDP Hostname:</label>
+                <input type="text" name="appserver[rdphostname]" placeholder="rdp hostname">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>RDP IP:</label>
+                <input type="text" name="appserver[rdpip]" placeholder="rdp ip">
+            </div>
+            <div class="field">
+                <label>RDP Domain:</label>
+                <input type="text" name="appserver[rdpdomain]" placeholder="rdp domain">
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>Role:</label>
+                <input type="text" name="appserver[role]" placeholder="role">
+            </div>
+            <div class="field">
+                <label>Operating System:</label>
+                <input type="text" name="appserver[os]" placeholder="operating system">
+            </div>
+            <div class="field">
+                <label>App Path:</label>
+                <input type="text" name="appserver[apppath]" placeholder="App Path">
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label>Notes:</label>
+                <textarea name="appserver[notes]"></textarea>
+            </div>
+            <div class="field">
+                <label>CPU Info:</label>
+                <textarea name="appserver[cpu]"></textarea>
+            </div>
+            <div class="field">
+                <label>Ram Info:</label>
+                <textarea name="appserver[ram]"></textarea>
+            </div>
+            <div class="field">
+                <label>Disk Info:</label>
+                <textarea name="appserver[disk]"></textarea>
+            </div>
+        </div>
+        <button class="ui blue inverted button">Submit</button>
+        <a class="ui red inverted button" href="/clients/<%= client._id %>/servers">Done / Go Back</a>
+    </form>
+    
+<% include ../partials/footer %>

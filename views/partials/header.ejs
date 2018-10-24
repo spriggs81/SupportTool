@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Support Tools</title>
+    	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+    	<link rel="stylesheet" type="text/css" href="/stylesheet/app.css">
+    </head>
+    <body onload="startTime()">
+        <div class="ui container">
+            <div class="ui inverted default menu itemSize">
+            <% if(currentUser){ %>
+                <a class="item" href="#">Home</a>
+                <a class="item" href="/clients">Clients</a> 
+                <a class="item" href="/knowledge">Knowledge</a>
+            <% }; %>
+            <% if(currentUser && currentUser.admin === true){%>
+                <a class="item" href="/admin">Admin Page</a>
+            <% }; %>
+            <%if(currentUser){ %>
+                    <% var display = currentUser.firstname +" "+currentUser.lastname %>
+                    <span class="item right floated"><%= display %></span>
+                    <a class="item" href="/logout">Log Out</a>
+            <% }else { %>
+                <a class="item right floated" href="/login">
+                    Login
+                </a>
+                <a class="item" href="/register">
+                    Register
+                </a>
+            <% }; %>
+            </div>
+            <% if(currentUser){%>
+            <div id="myTime" class="ui black label"></div>
+            <% }; %>
+            <div class="container"><br>
+                <% if(error && error.length > 0){ %>
+                <div class="ui red message" role="alert">
+                    <%= error %>
+            </div>
+            <% } %>
+            <% if(success && success.length > 0){ %>
+            <div class="ui green message" role="alert">
+                <%= success %>
+            </div>
+            <% } %>

@@ -1,0 +1,117 @@
+<% include ../partials/header %>
+    <div onload="init2();"></div>
+    <a class="ui purple inverted button" href="/clients"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui center aligned container">
+        <a class="ui green inverted button" href="/clients/<%= client._id %>">Client Info</a>
+        <a class="ui green inverted active button" href="/clients/<%= client._id %>/products">Product Info</a>
+        <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
+    </div>
+    <div class="ui huge header">
+        <%= client.name %>'s Product(s) info:<a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/products/new">Add Product</a>
+    </div>
+    <div class="ui center aligned container">
+        <div class="ui large buttons">
+            <button onclick="hideThis(1);" class="ui button">Production</button>
+            <div class="or"></div>
+            <button onclick="hideThis(2);" class="ui button">Testing</button>
+            <div class="or"></div>
+            <button onclick="hideThis(5);" class="ui button">Inactive</button>
+        </div>
+    </div>
+    <hr>
+    <div id="inProduction">
+        <div class="ui label">
+            Product(s) in Production:
+        </div>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Product:</th>
+                    <th>URL:</th>
+                    <th>VizMaker:</th>
+                    <th>FlowViz</th>
+                    <th>Rabbit MQ:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% client.products.forEach(function(product){ %>
+                <% if(product.type === "Production"){ %>
+                <tr>
+                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                    <td><%= product.url %></td>
+                    <td><%= product.maker %></td>
+                    <td><%= product.flowviz %></td>
+                    <td><%= product.rabbit %></td>
+                </tr>
+            </thead>
+            <tbody>
+                    </tr>
+                <% } %>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <div id="inTesting" class="bye">
+        <div class="ui label">
+            Product(s) in Testing:
+        </div>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Product:</th>
+                    <th>URL:</th>
+                    <th>VizMaker:</th>
+                    <th>FlowViz</th>
+                    <th>Rabbit MQ:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% client.products.forEach(function(product){ %>
+                <% if(product.type === "Test"){ %>
+                <tr>
+                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                    <td><%= product.uiversion %></td>
+                    <td><%= product.url %></td>
+                    <td><%= product.maker %></td>
+                    <td><%= product.flowviz %></td>
+                    <td><%= product.rabbit %></td>
+                </tr>
+                <% }; %>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <div id="inactive" class="bye">
+        <div class="ui label">
+            Inactive Product(s):
+        </div>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Product:</th>
+                    <th>URL:</th>
+                    <th>VizMaker:</th>
+                    <th>FlowViz</th>
+                    <th>Rabbit MQ:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% client.products.forEach(function(product){ %>
+                <% if(product.type === "Inactive"){ %>
+                <tr>
+                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                    <td><%= product.url %></td>
+                    <td><%= product.maker %></td>
+                    <td><%= product.flowviz %></td>
+                    <td><%= product.rabbit %></td>
+                </tr>
+            </thead>
+            <tbody>
+                    </tr>
+                <% }; %>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>        
+
+<% include ../partials/footer %>

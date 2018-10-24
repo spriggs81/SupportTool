@@ -1,0 +1,138 @@
+<% include ../partials/header %>
+        <a class="ui purple inverted button" href="/clients"><i class="ui arrow left icon"></i> Go Back</a>
+        <div class="ui center aligned container">
+            <a class="ui green inverted active button" href="/clients/<%= client._id %>">Client Info</a>
+            <a class="ui green inverted button" href="/clients/<%= client._id %>/products">Product Info</a>
+            <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
+        </div>
+        <div class="ui main text segment" onload="startTime2()">
+            <div class="ui huge header">
+                <%= client.name %>
+                <div id="actionButtons" class="ui center aligned container">
+                    <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
+                        <a class="ui small orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
+                        <button class="ui small red inverted button">Delete Client</button>
+                    </form>
+                </div>
+            </div>
+            <div class="ui meta">
+                <h4>
+                    <span class="ui red"><font>Status: </font></span><%= client.status %><br>
+                    <div class="ui right floated">
+                        Customer's Current Time:
+                    </div>
+                     <div id="displayDate1" class="ui red label">
+                        <%= date1 %> 
+                    </div><br>
+                    <div id="displayDate2" class="ui red label">
+                    <%= date2 %>
+                    </div>
+                </h4>
+            </div>
+            <div class="ui segments">
+                <div class="ui secondary segment">
+                    <span class="ui header">Internal Contacts:</span>
+                </div>
+                <div class="ui segment">
+                    <div class="ui grid">
+                        <div class="six wide column inherit">
+                            <span class="">Customer Care Manager: <%= client.ccm %></span>
+                        </div>
+                        <div class="five wide column">
+                            <span class="">Config Lead: <%= client.configLead %></span>
+                        </div>
+                        <div class="five wide column">
+                            <span class="">Install Lead: <%= client.installLead %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segments">
+                <div class="ui secondary segment">
+                    <span class="ui header">Basic Information:</span>
+                </div>
+                <div class="ui segment">
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <span class="">Client's Support Plan: <%= client.supportPlan %></span>
+                        </div>
+                        <div class="eight wide column">
+                            Time Zone: <span id="orgTime"><%= client.timezone %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segments">
+                <div class="ui secondary segment">
+                    <span class="ui header">License Information:</span>
+                </div>
+                <div class="ui segment">
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <span class="">License Type: <%= client.licenseType %></span>
+                                </div>
+                                <div class="eight wide column">
+                                    <span class="">VPN Access: <%= client.vpnAccess %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <span class="">RDP Access: <%= client.rdpAccess %></span>
+                                </div>
+                                <div class="eight wide column">
+                                    <span class="">IT Dept 24/7 Support? <%= client.it_24_7 %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segments">
+                <div class="ui secondary segment">
+                    <span class="ui header">Connection Info:</span>
+                </div>
+                <div class="ui segment">
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+                            <div class="ui segments">
+                                <div class="ui secondary segment">
+                                    <span class="ui">Client's IT Contact:</span>
+                                </div>
+                                <div class="ui segment">
+                                    <div class="ui grid">
+                                        <div class="sixteen wide column">
+                                            <div class="ui raised segment">
+                                                <p><%= client.clientit %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui segments">
+                                <div class="ui secondary segment">
+                                    <span class="ui">Connection Method:</span>
+                                </div>
+                                <div class="ui segment">
+                                    <div class="ui grid">
+                                        <div class="sixteen wide column">
+                                            <div class="ui raised segment">
+                                                <p><%= client.connection %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="edit" class="ui divided">
+            </div>
+        </div>
+<% include ../partials/footer %>

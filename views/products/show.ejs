@@ -1,0 +1,161 @@
+<% include ../partials/header %>
+    <a class="ui purple inverted button" href="/clients/<%= client._id %>/products"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui aligned huge header">
+        <%= client.name %>'s <%= product.name %> Product
+        <div id="actionButtons" class="ui right floated statistic">
+            <form action="/clients/<%= client._id %>/products/<%= product._id %>?_method=DELETE" method="POST">
+            <a class="ui small orange inverted button" href="/clients/<%= client._id %>/products/<%= product._id %>/edit">Edit Product</a>
+            <button class="ui small red inverted button">Delete Product</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="ui header">
+        Product: <%= product.name %>
+    </div>
+    <div>
+        <span class="ui button disabled">Status of Product: <%= product.type %></span>
+        <span class="ui right floated button disabled">AD User Info: <%= product.aduser %></span>
+    </div>
+    <div class="ui segments">
+        <div class="ui secondary segment">
+            <span class="ui header"><%= product.name %>'s Information:</span>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <div class="six wide column">
+                            URL: <%= product.url %>
+                        </div>
+                        <% if(product.uiversion){ %>
+                        <div class="four wide column">
+                            UI Version: <%= product.uiversion %>
+                        </div>
+                        <% } %>
+                        <% if(product.uiversion){ %>
+                        <div class="four wide column">
+                            BE Version: <%= product.beversion %>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments">
+        <div class="ui secondary segment">
+            <span class="ui header">VizMaker Information:</span>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <% if(product.maker){ %>
+                        <div class="six wide column">
+                            VizMaker URL: <%= product.maker %>
+                        </div>
+                        <% } %>
+                        <% if(product.makerver){ %>
+                        <div class="four wide column">
+                            VizMaker Version: <%= product.makerver %>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments">
+        <div class="ui secondary segment">
+            <span class="ui header">FlowViz Information:</span>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <% if(product.flowviz){ %>
+                        <div class="five wide column">
+                            FlowViz: <%= product.flowviz %>
+                        </div>
+                        <% } %>
+                        <% if(product.flowvizver){ %>
+                        <div class="three wide column">
+                            FlowViz Version: <%= product.flowvizver %>
+                        </div>
+                        <% } %>
+                        <% if(product.flowvizun){ %>
+                        <div class="four wide column">
+                            FlowViz Username: <%= product.flowvizun %>
+                        </div>
+                        <% } %>
+                        <% if(product.flowvizpd){ %>
+                        <div class="four wide column">
+                            FlowViz Password: 
+                            <span id="prodPass" class="bye">
+                                <%= product.flowvizpd %>
+                            </span>
+                            <span class="lt20">
+                                <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
+                                    Show
+                                </button>
+                            </span>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments">
+        <div class="ui secondary segment">
+            <span class="ui header">RabbitMQ Information:</span>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <% if(product.rabbit){ %>
+                        <div class="six wide column">
+                            RabbitMQ URL: <%= product.rabbit %>
+                        </div>
+                        <% } %>
+                        <% if(product.rabbitun){ %>
+                        <div class="four wide column">
+                            RabbitMQ Username: <%= product.rabbitun %>
+                        </div>
+                        <% } %>
+                        <% if(product.rabbitpd){ %>
+                        <div class="four wide column">
+                            RabbitMQ Password: 
+                            <span id="prodPass" class="bye">
+                                <%= product.rabbitpd %>
+                            </span>
+                            <span class="lt20">
+                                <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
+                                    Show
+                                </button>
+                            </span>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments">
+        <div class="ui secondary segment">
+            <span class="ui header">Special Notes:</span>
+        </div>
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                <% if(product.note){ %>
+                    Special Notes: <%= product.note %>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% include ../partials/footer %>

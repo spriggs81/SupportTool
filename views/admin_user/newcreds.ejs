@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+    <% if(creds == 'user'){ %>
+        <div class="ui huge header">
+            <strong><u>Employee Code for a Normal User</u></strong>
+        </div>
+        <form id="newProdForm" class="ui form" action="/admin/users/profile/<%= credprofile._id %>/user?_method=PUT" method="POST">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <label class="ui header">Current User Profile Code:</label>
+                </div>    
+                <div class="eight wide column">
+                    <h1><input class="" name='olduser' value="<%= credprofile.user %>" disabled></input></h1>
+                </div>
+            </div>
+            <div class='ui grid'>
+                <div class="sixteen wide column">
+                    <label>Enter New User Profile Code:</label>
+                </div>
+                <div class="eight wide column">
+                    <input type="number" name="user" class="ui form"></input>
+                </div>
+                <div class"eight wide column">
+                    <div class="credButtons">
+                            <button class="ui left blue inverted button">Update</button>
+                            <a class="ui right red inverted button" href="/admin">Done</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <% }else if(creds == 'admin'){ %>
+        <div class="ui huge header">
+            <strong><u>Employee Code for an Admin User</u></strong>
+        </div>
+        <form id="newProdForm" class="ui form" action="/admin/users/profile/<%= credprofile._id %>/admin?_method=PUT" method="POST">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <label class="ui header">Current Admin Profile Code:</label>
+                </div>    
+                <div class="eight wide column">
+                    <h1><input value="<%= credprofile.admin %>" disabled></input></h1>
+                </div>
+            </div>
+            <div class='ui grid'>
+                <div class="sixteen wide column">
+                    <label>Enter New Admin Profile Code:</label>
+                </div>
+                <div class="eight wide column">
+                    <input type="number" name="admin" class="ui form"></input>
+                </div>
+                <div class"eight wide column">
+                    <div class="credButtons">
+                            <button class="ui left blue inverted button">Update</button>
+                            <a class="ui right red inverted button" href="/admin">Done</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <% }else{ %>
+        <h1>Not Sure How You Got Here, But You Should Go Back<h1>
+    <% } %>
+  
+<% include ../partials/footer %>

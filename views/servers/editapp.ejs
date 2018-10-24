@@ -1,0 +1,69 @@
+<% include ../partials/header %>
+    <a class="ui purple inverted button" href="/clients/<%= client._id %>/servers"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui huge header">
+        Editing App Server info for <%= client.name %>:
+    </div>
+    <hr>
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/app/<%= server._id %>?_method=PUT" method="POST">
+        <h3 class="ui dividing header">Edit App Server Form</h3>
+        <div class="two fields">
+            <div class="field">
+                <label>Please Select Environment:</label>
+                <select class="ui fluid dropdown" name="appserver[type]" required>
+                    <option value="<%= server.type %>"><%= server.type %></option>
+                    <option value="Production">Production</option>
+                    <option value="Test">Test</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>RDP Hostname:</label>
+                <input type="text" name="appserver[rdphostname]" value="<%= server.rdphostname %>">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>RDP IP:</label>
+                <input type="text" name="appserver[rdpip]" value="<%= server.rdpip %>">
+            </div>
+            <div class="field">
+                <label>RDP Domain:</label>
+                <input type="text" name="appserver[rdpdomain]" value="<%= server.rdpdomain %>">
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>Role:</label>
+                <input type="text" name="appserver[role]" value="<%= server.role %>">
+            </div>
+            <div class="field">
+                <label>Operating System:</label>
+                <input type="text" name="appserver[os]" value="<%= server.os %>">
+            </div>
+            <div class="field">
+                <label>App Path:</label>
+                <input type="text" name="appserver[apppath]" value="<%= server.apppath %>">
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label>Notes:</label>
+                <textarea name="appserver[notes]"><%= server.notes %></textarea>
+            </div>
+            <div class="field">
+                <label>CPU Info:</label>
+                <textarea name="appserver[cpu]"><%= server.cpu %></textarea>
+            </div>
+            <div class="field">
+                <label>Ram Info:</label>
+                <textarea name="appserver[ram]"><%= server.ram %></textarea>
+            </div>
+            <div class="field">
+                <label>Disk Info:</label>
+                <textarea name="appserver[disk]"><%= server.disk %></textarea>
+            </div>
+        </div>
+        <button class="ui blue inverted button">Submit</button>
+    </form>
+    
+<% include ../partials/footer %>

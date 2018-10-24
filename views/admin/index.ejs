@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+    
+    <div class="ui center aligned huge header">
+        Welcome to the Admin Page <%= currentUser.firstname %>
+    </div>
+   <h4 class="ui horizontal divider header">
+      <i class="database icon"></i>
+      Admin Settings
+    </h4>
+    <p class="ui center aligned ">Here you will find all you need to Create, Edit, or Delete Users in the App.</p>
+    <h4 class="ui horizontal divider header">
+        <i class="user icon"></i>
+        Users
+    </h4>
+    <table class="ui definition table">
+      <tbody>
+        <tr>
+          <td class="four wide column">New User Profile Numbers</td>
+          <td><a class="ui green inverted button" href="/admin/users/profile/<%= profile._id %>/user">Users Profile</a></td>
+          <td><a class="ui blue inverted button" href="/admin/users/profile/<%= profile._id %>/admin">Admin Profile</a></td>
+        </tr>
+        <tr>
+          <td>All Current Users</td>
+          <td><a class="ui green inverted button" href="/admin/users">All Users</a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+<% include ../partials/footer %>

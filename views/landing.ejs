@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Support Tools</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheet/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    </head>
+    <body>
+    <div class="ui inverted default menu">
+    <div class="ui center aligned huge header">
+ 		</div>
+            <%if(currentUser && currentUser.role === "adminUser"){ %>
+                <span class="ui item right floated">
+                    <a class="item" href="#">
+                        You are logged in as: <%= currentUser.display %>
+                    </a>
+                    <a class="item" href="/logout">
+                        Log Out
+                    </a>
+                </span>
+            <% }else { %>
+                <a class="item right floated" href="/login">
+                    Login
+                </a>
+                <a class="item" href="/register">
+                    Register
+                </a>
+            <% }; %>
+            </div>
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="ui red message" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="ui green message" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+
+<% include partials/footer %>

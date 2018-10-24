@@ -1,0 +1,198 @@
+<% include ../partials/header %>
+    <div class="ui main text segment">
+        <div class="ui huge header">Editing <%= client.name %>:</div>
+        <form class="ui form" action="/clients/<%= client._id %>?_method=PUT" method="POST">
+            <div class="field">
+                <label>Client's Name</label>
+                <input type="text" name="client[name]" value="<%= client.name %>">
+            </div>
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <div class="field">
+                                <label>Customer Care Manager:</label>
+                                <input type="text" name="client[ccm]" value="<%= client.ccm %>">
+                            </div>
+                        </div>
+                        <div class="eight wide column">
+                            <div class="field">
+                                <label>Config Lead:</label>
+                                <input type="text" name="client[configLead]" value="<%= client.configLead %>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <div class="field">
+                                <label>Install Lead:</label>
+                                <input type="text" name="client[installLead]" value="<%= client.installLead %>">
+                            </div>
+                        </div>
+                        <div class="eight wide column field">
+                            <div class="field">
+                                <label>Client's Status:</label>
+                                <select class="ui fluid dropdown" name="client[status]">
+                                    <option value="<%= client.status %>"><%= client.status %>:</option>
+                                    <option value="In PMO">In PMO</option>
+                                    <option value="In Support">In Support</option>
+                                    <option value="Inactive Client">Inactive Client</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide column">
+                    <div class="ui grid">
+                        <div class="seven wide column">
+                            <div class="field">
+                                <label>Client's Timezone:</label>
+                                <select name="client[timezone]" id="DropDownTimezone" >
+                                    <option value="<%= client.timezone %>" default><%= client.timezone %></option>  
+                                    <option value="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</option>
+                                    <option value="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</option>
+                                    <option value="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</option>
+                                    <option value="(GMT -09:00) Alaska">(GMT -9:00) Alaska</option>
+                                    <option value="(GMT -08:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+                                    <option value="(GMT -07:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+                                    <option value="(GMT -06:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+                                    <option value="(GMT -05:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+                                    <option value="(GMT -04:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                                    <option value="(GMT -03:30) Newfoundland">(GMT -3:30) Newfoundland</option>
+                                    <option value="(GMT -03:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                                    <option value="(GMT -02:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</option>
+                                    <option value="(GMT -01:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</option>
+                                    <option value="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+                                    <option value="(GMT +01:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option>
+                                    <option value="(GMT +02:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</option>
+                                    <option value="(GMT +03:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                                    <option value="(GMT +03:30) Tehran">(GMT +3:30) Tehran</option>
+                                    <option value="(GMT +04:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                                    <option value="(GMT +04:30) Kabul">(GMT +4:30) Kabul</option>
+                                    <option value="(GMT +05:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                                    <option value="(GMT +05:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                                    <option value="(GMT +05:45) Kathmandu">(GMT +5:45) Kathmandu</option>
+                                    <option value="(GMT +06:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                                    <option value="(GMT +07:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                                    <option value="(GMT +08:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                                    <option value="(GMT +09:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                                    <option value="(GMT +09:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</option>
+                                    <option value="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                                    <option value="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                                    <option value="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="five wide column field">
+                            <label>Support Plan:</label>
+                            <select class="ui fluid dropdown" name="client[supportPlan]">
+                                <option value="<%= client.supportPlan %>"><%= client.supportPlan %></option>
+                                <option value="Business Standard">Business Standard</option>
+                                <option value="Business Premium">Business Premium</option>
+                                <option value="Business OPs">Business OPs</option>
+                            </select>
+                        </div>
+                        <div class="four wide column field">
+                            <label>Number of Properties:</label>
+                            <select class="ui fluid dropdown" value='' name="client[properties]">
+                                
+                               <option value="<%= client.properties %>"><%= client.properties %></option>
+                               <% for(var i = 1; i <= 200; i++){ %>
+                                    <% if(i === 1){ %>
+                                        <option value="<%= i %>"><%= i %> property</option>
+                                    <% } else { %>
+                                        <option value="<%= i %>"><%= i %> properies</option>
+                                    <% } %>
+                               <% }; %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide field">
+                    <div class="ui grid">
+                        <div class="five wide column field">
+                            <label>License Type:</label>
+                            <select class="ui fluid dropdown" name="client[licenseType]">
+                                <option value="<%= client.licenseType %>"><%= client.licenseType %></option>
+                                <option value="Company">Company</option>
+                                <option value="Individual">Individual</option>
+                            </select>
+                        </div>
+                        <div class="five wide column">
+                            <label>VPN Access:</label>
+                            <select class="ui fluid dropdown" name="client[vpnAccess]">
+                                <option value="<%= client.vpnAccess %>"><%= client.vpnAccess %>s</option>
+                                <option value="Shared VPN Creds">Shared VPN Creds</option>
+                                <option value="Individual VPN Creds">Individual VPN Creds</option>
+                                <option value="AnyConnec">AnyConnect</option>
+                                <option value="GoToMyPC">GoToMyPC</option>
+                                <option value="TBD">TBD</option>
+                            </select>
+                        </div>
+                        <div class="five wide column">
+                            <label>RDP Access:</label>
+                            <select class="ui fluid dropdown" name="client[rdpAccess]">
+                                <option value="<%= client.rdpAccess %>"><%= client.rdpAccess %></option>
+                                <option value="Shared RDP Access">Shared RDP Access</option>
+                                <option value="Individual RDP Access">Individual RDP Access</option>
+                                <option value="WebEX with Client's IT">WebEX with Client's IT</option>
+                                <option value="NIL (currently)">NIL (currently)</option>
+                                <option value="TBD">TBD</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide field">
+                    <div class="ui grid">
+                        <div class="five wide column field">
+                            <label>Client has 24/7 IT:</label>
+                            <select class="ui fluid dropdown" name="client[it_24_7]">
+                                <option value="<%= client.it_24_7 %>"><%= client.it_24_7 %></option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="Unsure">Unsure</option>
+                            </select>
+                        </div>
+                        <div class="five wide column field">
+                            <label>Request Method:</label>
+                            <select class="ui fluid dropdown" name="client[requestMethod]">
+                                <option value="<%= client.requestMethod %>"><%= client.requestMethod %></option>
+                                <option value="Email">Email</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Email/Phone">Email/Phone</option>
+                                <option value="Unsure">Unsure</option>
+                            </select>
+                        </div>
+                        <div class="five wide column field">
+                            <label>Speical Requirement:</label>
+                            <select class="ui fluid dropdown" name="client[specialreq]">
+                                <option value="<%= client.specialreq %>"><%= client.specialreq %></option>
+                                <option value="N/A">N/A</option>
+                                <option value="Client Form">Client Form</option>
+                                <option value="Formated Email">Formated Email</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide field">
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <label>Client's IT Contact Info:</label>
+                            <textarea name="client[clientit]"><%= client.clientit %></textarea>
+                        </div>
+                        <div class="eight wide column">
+                            <label>How To Connect:</label>
+                            <textarea name="client[connection]"><%= client.connection %></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formButtons">
+                <input class="ui left inverted green button" type="submit" value="Submit Edits">
+                <a class="ui right inverted red button" href="/clients/<%= client._id %>">Cancel</a>
+            </div>
+        </form>
+    </div>
+<% include ../partials/footer %>

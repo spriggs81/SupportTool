@@ -1,0 +1,81 @@
+<% include ../partials/header %>
+    <div class="ui huge header">
+        Adding Database Server info to <%= client.name %>:
+    </div>
+    <hr>
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/db" method="POST">
+        <h3 class="ui dividing header">New DB Server Form</h3>
+        <div class="three fields">
+            <div class="field">
+                <label>Please Select Server Environment</label>
+                <select class="ui fluid dropdown" name="dbserver[type]" required>
+                    <option value="">Select Environment</option>
+                    <option value="Production">Production</option>
+                    <option value="Test">Test</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Hostname:</label>
+                <input type="text" name="dbserver[hostname]" placeholder="hostname">
+            </div>
+            <div class="field">
+                <label>IP:</label>
+                <input type="text" name="dbserver[ip]" placeholder="ip">
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label>Port:</label>
+                <input type="text" name="dbserver[port]" placeholder="port">
+            </div>
+            <div class="field">
+                <label>Database Name:</label>
+                <input type="text" name="dbserver[dbname]" placeholder="database name">
+            </div>
+            <div class="field">
+                <label>Database Type:</label>
+                <input type="text" name="dbserver[dbtype]" placeholder="database type">
+            </div>
+            <div class="field">
+                <label>Database Version:</label>
+                <input type="text" name="dbserver[dbversion]" placeholder="database version">
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>Database Schema:</label>
+                <input type="text" name="dbserver[dbschema]" placeholder="Database Schema">
+            </div>
+            <div class="field">
+                <label>JDBC URL:</label>
+                <input type="text" name="dbserver[jdbcurl]" placeholder="jdbc url">
+            </div>
+            <div class="field">
+                <label>Operating System:</label>
+                <input type="text" name="dbserver[os]" placeholder="operating system">
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label>Notes:</label>
+                <textarea name="dbserver[notes]"></textarea>
+            </div>
+            <div class="field">
+                <label>CPU Info:</label>
+                <textarea name="dbserver[cpu]"></textarea>
+            </div>
+            <div class="field">
+                <label>Ram Info:</label>
+                <textarea name="dbserver[ram]"></textarea>
+            </div>
+            <div class="field">
+                <label>Disk Info:</label>
+                <textarea name="dbserver[disk]"></textarea>
+            </div>
+        </div>
+        <button class="ui blue inverted button">Submit</button>
+        <a class="ui red inverted button" href="/clients/<%= client._id %>/servers">Done / Go Back</a><br><br>
+    </form>
+    
+<% include ../partials/footer %>

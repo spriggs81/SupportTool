@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+    <a class="ui purple inverted button" href="/knowledge/<%= productName %>/"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui huge header">
+        You are adding a message to <%= productName %>'s Knowledge Base
+    </div>
+    <div class="ui header">
+        Please enter in your <%= messageType %> to the Knowledge Base:
+    </div> 
+    <form class="ui form" action="/knowledge/<%= productName %>/<%= messageType %>/new" method="POST">
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <label>Desccription:</label><br>
+                <input type="text" name="desc" placeholder="Desccription" required>
+            </div>
+            <div class="sixteen wide column">
+                <label><% if(messageType === "info"){ %>Message:<% } else{ %>Question:<% }; %></label><br>
+                <textArea name="message" required></textArea>
+            </div>
+        </div>
+        <br>
+        <button class="ui green inverted button">Submit <%= messageType %></button>
+
+<% include ../partials/footer %>

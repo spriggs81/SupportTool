@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+    <% var ourProduct = ["advancedViz", "campaignViz", "floorViz", "greetViz", "hostViz", "MapEditor", "patronViz", "resortViz", "tableViz", "techViz", "vizDashboard", "vizMosaic"]; %>
+    <div class="ui huge header">Knowledge Base</div>
+    <hr>
+    <div class="ui grid">
+    <% ourProduct.forEach(function(product){ %>
+        <div class="three wide column">
+        <a class="ui black basic button" href="/knowledge/<%= product %>"><%= product %></a>
+        </div>
+    <% }) %>
+    </div>
+
+<% include ../partials/footer %>

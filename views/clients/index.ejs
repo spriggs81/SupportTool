@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+    
+    <div class="ui grid">
+        <div class="sixteen wide column">
+            <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>
+            <hr>    
+        </div>
+    </div>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th class="six wide">Client Name:</th>
+                <th class="three wide">Support Plan:</th>
+                <th class="three wide">Account Status:</th>
+                <th class="two wide">24/7 IT:</th>
+                <th class="two wide">AD Client:</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% clients.forEach(function(client){ %>
+            <tr>
+              <td><a href="/clients/<%= client._id %>"><%= client.name %></a></td>
+              <td><%= client.supportPlan %></td>
+              <td><%= client.status %></td>
+              <td><%= client.it_24_7 %></td>
+              <td><%= client.adclient %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+<% include ../partials/footer %>

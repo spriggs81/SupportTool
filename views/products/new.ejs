@@ -1,0 +1,119 @@
+<% include ../partials/header %>
+
+    <div class="ui huge header">
+        You are adding Products to <%= client.name %>:
+    </div>
+    
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/products" method="POST">
+        <h3 class="ui dividing header">Adding New Product Form</h3>
+        <div class="two fields">
+            <div class="field">
+                <label>Please Select Product</label>
+                <select class="ui fluid dropdown" name="product[name]">
+                    <option value="">Select Product</option>
+                    <option value="advancedViz">advancedViz</option>
+                    <option value="campaignViz">campaignViz</option>
+                    <option value="floorViz">floorViz</option>
+                    <option value="greetViz">greetViz</option>
+                    <option value="hostViz">hostViz</option>
+                    <option value="MapEditor">MapEditor</option>
+                    <option value="patronViz">patronViz</option>
+                    <option value="resortViz">resortViz</option>
+                    <option value="tableViz">tableViz</option>
+                    <option value="techViz">techViz</option>
+                    <option value="vizDashboard">vizDashboard</option>
+                    <option value="vizMosaic">vizMosaic</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Current Status:</label>
+                <select class="ui fluid dropdown" name="product[type]">
+                    <option value="">Select</option>
+                    <option value="Production">Production</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <h3 class="ui dividing header">Production App Information:</h3>
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>URL:</label>
+                        <input type="text" name="product[url]" placeholder="production url">
+                    </div>
+                    <div class="four wide column">
+                        <label>UI Version:</label>
+                        <input type="text" name="product[uiversion]" placeholder="ui version">
+                    </div>
+                    <div class="four wide column">
+                        <label>BE Version:</label>
+                        <input type="text" name="product[beversion]" placeholder="be version">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>Maker URL:</label>
+                        <input type="text" name="product[maker]" placeholder="maker url">
+                    </div>
+                    <div class="four wide column">
+                        <label>Maker Version:</label>
+                        <input type="text" name="product[makerver]" placeholder="maker version">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>FlowViz URL:</label>
+                        <input type="text" name="product[flowviz]" placeholder="flowviz url">
+                    </div>
+                    <div class="four wide column">
+                        <label>FlowViz Version:</label>
+                        <input type="text" name="product[flowvizver]" placeholder="flowviz version">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>FlowViz Username:</label>
+                        <input type="text" name="product[flowvizun]" placeholder="flowviz username">
+                    </div>
+                    <div class="eight wide column">
+                        <label>FlowViz Password:</label>
+                        <input type="text" name="product[flowvizpd]" placeholder="flowviz password">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="six wide column">
+                        <label>Rabbit MQ URL:</label>
+                        <input type="text" name="product[rabbit]" placeholder="rabbit mq url">
+                    </div>
+                    <div class="five wide column">
+                        <label>Rabbit Username:</label>
+                        <input type="text" name="product[rabbitun]" placeholder="rabbit username">
+                    </div>
+                    <div class="five wide column">
+                        <label>Rabbit Password:</label>
+                        <input type="text" name="product[rabbitpd]" placeholder="rabbit password">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <label>Special Notes:</label>
+                <textarea name="product[note]"></textarea>
+                <hr>
+            </div>
+        </div>
+        <button class="ui blue inverted button">Submit</button>
+        <a class="ui red inverted button" href="/clients/<%= client._id %>">Done / Go Back</a>
+    </form>
+    
+
+<% include ../partials/footer %>

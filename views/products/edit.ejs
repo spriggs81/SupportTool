@@ -1,0 +1,118 @@
+<% include ../partials/header %>
+
+    <div class="ui huge header">
+        You are Editing Products for <%= client.name %>:
+    </div>
+    
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/products/<%= product._id %>?_method=PUT" method="POST">
+        <h3 class="ui dividing header">Editing Product Form</h3>
+        <div class="two fields">
+            <div class="field">
+                <label>Please Select Product</label>
+                <select class="ui fluid dropdown" name="product[name]">
+                    <option value="<%= product.name %>"><%= product.name %></option>
+                    <option value="advancedViz">advancedViz</option>
+                    <option value="campaignViz">campaignViz</option>
+                    <option value="floorViz">floorViz</option>
+                    <option value="greetViz">greetViz</option>
+                    <option value="hostViz">hostViz</option>
+                    <option value="MapEditor">MapEditor</option>
+                    <option value="patronViz">patronViz</option>
+                    <option value="resortViz">resortViz</option>
+                    <option value="tableViz">tableViz</option>
+                    <option value="techViz">techViz</option>
+                    <option value="vizDashboard">vizDashboard</option>
+                    <option value="vizMosaic">vizMosaic</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Current Status:</label>
+                <select class="ui fluid dropdown" name="product[type]">
+                    <option value="<%= product.type %>"><%= product.type %></option>
+                    <option value="Production">Production</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <h3 class="ui dividing header">Production App Information:</h3>
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>URL:</label>
+                        <input type="text" name="product[url]" value="<%= product.url %>">
+                    </div>
+                    <div class="four wide column">
+                        <label>UI Version:</label>
+                        <input type="text" name="product[uiversion]" value="<%= product.uiversion %>">
+                    </div>
+                    <div class="four wide column">
+                        <label>BE Version:</label>
+                        <input type="text" name="product[beversion]" value="<%= product.beversion %>">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>Maker URL:</label>
+                        <input type="text" name="product[maker]" value="<%= product.maker %>">
+                    </div>
+                    <div class="four wide column">
+                        <label>Maker Version:</label>
+                        <input type="text" name="product[makerver]" value="<%= product.makerver %>">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>FlowViz URL:</label>
+                        <input type="text" name="product[flowviz]" value="<%= product.flowviz %>">
+                    </div>
+                    <div class="four wide column">
+                        <label>FlowViz Version:</label>
+                        <input type="text" name="product[flowvizver]" value="<%= product.flowvizver %>">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <label>FlowViz Username:</label>
+                        <input type="text" name="product[flowvizun]" value="<%= product.flowvizun %>">
+                    </div>
+                    <div class="eight wide column">
+                        <label>FlowViz Password:</label>
+                        <input type="text" name="product[flowvizpd]" value="<%= product.flowvizpd %>">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui grid">
+                    <div class="six wide column">
+                        <label>Rabbit MQ URL:</label>
+                        <input type="text" name="product[rabbit]" value="<%= product.rabbit %>">
+                    </div>
+                    <div class="five wide column">
+                        <label>Rabbit Username:</label>
+                        <input type="text" name="product[rabbitun]" value="<%= product.rabbitun %>">
+                    </div>
+                    <div class="five wide column">
+                        <label>Rabbit Password:</label>
+                        <input type="text" name="product[rabbitpd]" value="<%= product.rabbitpd %>">
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column">
+                <label>Special Notes:</label>
+                <textarea name="product[note]"><%= product.note %></textarea>
+            </div>
+        </div><br>
+        <button class="ui blue inverted button">Submit</button>
+        <a class="ui red inverted button" href="/clients/<%= client._id %>">Done / Go Back</a>
+    </form><br>
+    
+
+<% include ../partials/footer %>
