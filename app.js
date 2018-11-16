@@ -3,7 +3,6 @@ var bodyParser       = require("body-parser"),
     methodOverride   = require("method-override"),
     mongoose         = require("mongoose"),
     express          = require("express"),
-    moment           = require("moment"),
     passport         = require("passport"),
     LocalStrategy    = require("passport-local"),
     flash            = require("connect-flash"),
@@ -16,13 +15,14 @@ var clientRoutes    = require("./routes/clients"),
     productRoutes   = require("./routes/products"),
     serverRoutes    = require("./routes/servers"),
     adminRoutes     = require("./routes/admin"),
+    adminDbRoutes   = require("./routes/admin_db"),
     adminUserRoutes = require("./routes/admin_user"),
     indexRoutes     = require("./routes/index"),
     knowledgeRoutes = require("./routes/knowledge");
 
 // APP CONFIG    
-//mongoose.connect("mongodb://localhost/support_tools_v3",
-mongoose.connect("mongodb://spriggsdata:v1zexplorer@ds151242.mlab.com:51242/support_tool", (err) => {
+//mongoose.connect("mongodb://spriggsdata:v1zexplorer@ds151242.mlab.com:51242/support_tool",
+mongoose.connect("mongodb://localhost/support_tools_v4", (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
@@ -62,6 +62,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
 app.use("/admin/users", adminUserRoutes);
+app.use("/admin/db", adminDbRoutes);
 app.use("/clients", clientRoutes);
 app.use("/clients/:id/products", productRoutes);
 app.use("/clients/:id/servers", serverRoutes);

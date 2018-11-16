@@ -23,7 +23,7 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 });
 
 // New App Server Form route 
-router.get("/new/app", middleware.isLoggedIn, function(req, res) {
+router.get("/new/app", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "Can't find client!!!");
@@ -35,7 +35,7 @@ router.get("/new/app", middleware.isLoggedIn, function(req, res) {
 });
 
 // New DB Server Form route 
-router.get("/new/db", middleware.isLoggedIn, function(req, res) {
+router.get("/new/db", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "Can't find client!!!");
@@ -47,7 +47,7 @@ router.get("/new/db", middleware.isLoggedIn, function(req, res) {
 });
 
 //Add New App Server
-router.post("/app", middleware.isLoggedIn, function(req, res){
+router.post("/app", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -67,8 +67,9 @@ router.post("/app", middleware.isLoggedIn, function(req, res){
     });
 });
 
+
 //Add New Database Sever
-router.post("/db", middleware.isLoggedIn, function(req, res){
+router.post("/db", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -76,7 +77,7 @@ router.post("/db", middleware.isLoggedIn, function(req, res){
         }
         DBserver.create(req.body.appserver, function(err, newDBserver){
             if(err){
-                req.flash('error', "Error trying to create Database Server.  Please try again!!!")
+                req.flash('error', "Error trying to create Database Server.  Please try again!!!");
                 console.log(JSON.stringify(err));
             } else{
                 foundClient.dbservers.push(newDBserver);
@@ -87,6 +88,7 @@ router.post("/db", middleware.isLoggedIn, function(req, res){
         });
     });
 });
+
 
 //Server Show Page for App server
 router.get("/app/:server_id", middleware.isLoggedIn, function(req, res) {
@@ -107,6 +109,7 @@ router.get("/app/:server_id", middleware.isLoggedIn, function(req, res) {
     });
 });
 
+
 //Server Show Page for DB server
 router.get("/db/:server_id", middleware.isLoggedIn, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
@@ -126,8 +129,9 @@ router.get("/db/:server_id", middleware.isLoggedIn, function(req, res) {
     });
 });
 
+
 //Get App Server Edit Form
-router.get('/app/:server_id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/app/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -147,7 +151,7 @@ router.get('/app/:server_id/edit', middleware.isLoggedIn, function(req, res) {
 });
 
 //Update route for app server
-router.put("/app/:server_id", middleware.isLoggedIn, function(req, res) {
+router.put("/app/:server_id", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -167,7 +171,7 @@ router.put("/app/:server_id", middleware.isLoggedIn, function(req, res) {
 });
 
 //Get DB Server Edit Form
-router.get('/db/:server_id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/db/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -187,7 +191,7 @@ router.get('/db/:server_id/edit', middleware.isLoggedIn, function(req, res) {
 });
 
 //Update route for db server
-router.put("/db/:server_id", middleware.isLoggedIn, function(req, res) {
+router.put("/db/:server_id", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -207,7 +211,7 @@ router.put("/db/:server_id", middleware.isLoggedIn, function(req, res) {
 });
 
 //delete route for App Server
-router.delete("/app/:server_id", middleware.isLoggedIn, function(req, res){
+router.delete("/app/:server_id", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -226,7 +230,7 @@ router.delete("/app/:server_id", middleware.isLoggedIn, function(req, res){
 });
 
 //delete route for DB Server
-router.delete("/db/:server_id", middleware.isLoggedIn, function(req, res){
+router.delete("/db/:server_id", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");

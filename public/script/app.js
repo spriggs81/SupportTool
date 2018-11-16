@@ -22,12 +22,6 @@ function hideThis(num){
            
             case 6: document.querySelector("#inactServers").classList.remove("bye"); document.querySelector("#dbServers").classList.add("bye"); document.querySelector("#appServers").classList.add("bye");
             break;
-           
-            case 7: document.querySelector("#info").classList.remove("bye"); document.querySelector("#questions").classList.add("bye");
-            break;
-           
-            case 8: document.querySelector("#questions").classList.remove("bye"); document.querySelector("#info").classList.add("bye");
-            break;
             
             default: console.log("There was an error in the Switch Statement");
         }

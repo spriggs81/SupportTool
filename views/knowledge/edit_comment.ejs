@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+    <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui header">
+        You are editing a comment to "<%= message.desc %>"
+    </div>
+    <form action="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/<%= comment._id %>/edit?_method=PUT" method="POST" class="ui form">
+        <div class="field">
+            <label>
+                Comment
+            </label>
+            <textArea name="comment"><%=  comment.comment %></textArea>
+        </div>
+        <button class="ui green inverted right floated button">
+            Update Comment
+        </button>
+    </form>
+    
+<% include ../partials/footer %>

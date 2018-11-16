@@ -1,9 +1,11 @@
 <% include ../partials/header %>
+
 <% var oneDay = 24*60*60*1000; %>
 <% var startDate = new Date(); %>
+    
     <a class="ui purple inverted button" href="/knowledge/"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui huge header">
-        <%= productName %> - Support's Knowledge Base
+        <%= product.name %> - Support's Knowledge Base
     </div>
     <div class="ui header">
         Please Select A Cateogory:
@@ -12,78 +14,13 @@
         <div class="sixteen wide column">
             <div class="ui center aligned container">
                 <div class="ui buttons">
-                  <button class="ui blue button" onclick="hideThis(7)">Helpful Info</button>
+                  <a class="ui blue button" href="/knowledge/<%= product._id %>/info">Helpful Info</a>
                   <div class="or"></div>
-                  <button class="ui yellow button" onclick="hideThis(8)">Questions</button>
+                  <a class="ui yellow button" href="/knowledge/<%= product._id %>/questions">Questions</a>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <div id="info">
-        <div>
-            <a class="ui blue inverted right floated button" href="/knowledge/<%= productName %>/info/new">
-                Add Some New Helpful Info
-            </a>
-        </div>
-        <br><br>
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th class="four wide">Creator:</th>
-                    <th class="four wide">Created:</th>
-                    <th class="eight wide">Desccription:</th>
-                </tr>
-            </thead>
-            <tbody>
-            <% messages.forEach(function(message){ %>
-            <% if(message.product === productName){ %>
-            <% if(message.type === "info"){ %>
-                <tr>
-                    <td><%= message.creator.display %></td>
-                    <% var endDate = new Date(message.created);%>
-                    <% var diffDate =  Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))); %>
-                    <td><%= diffDate %> Days Ago</td>
-                    <td><a href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>"><%= message.desc %></a></td>
-                </tr>
-            <% } %>
-            <% } %>
-            <% }) %>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="questions" class="bye">
-        <div>
-            <a class="ui blue inverted right floated button" href="/knowledge/<%= productName %>/questions/new">
-                Add A New Question
-            </a>
-        </div>
-        <br><br>
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th class="four wide">Creator:</th>
-                    <th class="four wide">Created:</th>
-                    <th class="eight wide">Desccription:</th>
-                </tr>
-            </thead>
-            <tbody>
-            <% messages.forEach(function(message){ %>
-            <% if(message.product === productName){ %>
-            <% if(message.type === "questions"){ %>
-                <tr>
-                    <td><%= message.creator.display %></td>
-                    <% var endDate1 = new Date(message.created);%>
-                    <% var diffDate1 =  Math.round(Math.abs((startDate.getTime() - endDate1.getTime())/(oneDay))); %>
-                    <td><%= diffDate1 %> Days Ago</td>
-                    <td><a href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>"><%= message.desc %></a></td>
-                </tr>
-            <% } %>
-            <% } %>
-            <% }) %>
-            </tbody>
-        </table>
-    </div>
 
 <% include ../partials/footer %>

@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+    
+    <h1 class="ui huge header">All Current Products</h1>
+    <div class="ui divider"></div>
+    <form class="ui form" action="/admin/db/products/new" method="POST">
+      <div class="field">
+        <label>Name</label>
+        <div class="two fields">
+          <div class="field">
+                <input class="" name="name" required></input>
+            </div>
+            <div class="field">
+                <button class="ui green inverted left button">Add Product</button>
+                <a href="/admin" class="ui red inverted right button">Go Back</a>
+            </div>      
+        </div>
+    </form>
+    <div id="productdbinfo" class="">
+         <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="five wide">Product Name:</th>
+                    <th class="four wide">Edit Option:</th>
+                    <th class="four wide">Delete Option:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% products.forEach(function(product){ %>
+                <tr>
+                  <td><%= product.name %></a></td>
+                  <td><a href="/admin/db/products/<%= product._id %>/edit" class="ui green inverted button">Edit</a></td>
+                  <td><button class="ui red inverted disabled button">Delete</button></td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    
+<% include ../partials/footer %>

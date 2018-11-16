@@ -23,7 +23,7 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 });
 
 //Add New Product Form Route
-router.get("/new", middleware.isLoggedIn, function(req, res) {
+router.get("/new", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', 'We cannot find the Client!!!')
@@ -36,7 +36,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 });
 
 //Add New Product
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, client) {
         if(err){
             console.log(err);
@@ -76,7 +76,7 @@ router.get("/:product_id", middleware.isLoggedIn, function(req, res) {
 });
 
 //Get Product Edit Form
-router.get('/:product_id/edit', middleware.isLoggedIn, function(req, res) {
+router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -95,8 +95,8 @@ router.get('/:product_id/edit', middleware.isLoggedIn, function(req, res) {
     });
 });
 
-//Product update route
-router.put("/:product_id", middleware.isLoggedIn, function(req, res){
+//Product Edit route
+router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We connot find the Client!!!");
@@ -116,7 +116,7 @@ router.put("/:product_id", middleware.isLoggedIn, function(req, res){
 });
 
 //Delete a Product
-router.delete("/:product_id", middleware.isLoggedIn, function(req, res){
+router.delete("/:product_id", middleware.checkIsAdmin, function(req, res){
     Product.findByIdAndRemove(req.params.product_id, function(err){
         if(err){
             console.log(err);

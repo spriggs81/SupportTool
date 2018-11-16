@@ -10,15 +10,9 @@
     <div class="ui inverted default menu">
     <div class="ui center aligned huge header">
  		</div>
-            <%if(currentUser && currentUser.role === "adminUser"){ %>
-                <span class="ui item right floated">
-                    <a class="item" href="#">
-                        You are logged in as: <%= currentUser.display %>
-                    </a>
-                    <a class="item" href="/logout">
-                        Log Out
-                    </a>
-                </span>
+            <%if(currentUser){ %>
+                <a class="item right floated" href="/clients"><%= currentUser.firstname +" "+currentUser.lastname %></a>
+                <a class="item" href="/logout">Log Out</a>
             <% }else { %>
                 <a class="item right floated" href="/login">
                     Login

@@ -2,12 +2,14 @@
     <a class="ui purple inverted button" href="/clients/<%= client._id %>/products"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui aligned huge header">
         <%= client.name %>'s <%= product.name %> Product
+        <% if(currentUser && currentUser.admin === true){ %>
         <div id="actionButtons" class="ui right floated statistic">
             <form action="/clients/<%= client._id %>/products/<%= product._id %>?_method=DELETE" method="POST">
             <a class="ui small orange inverted button" href="/clients/<%= client._id %>/products/<%= product._id %>/edit">Edit Product</a>
             <button class="ui small red inverted button">Delete Product</button>
             </form>
         </div>
+        <% } %>
     </div>
     <hr>
     <div class="ui header">

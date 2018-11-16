@@ -1,4 +1,7 @@
 <% include ../partials/header %>
+
+    
+    <a class="ui purple inverted button" href="/admin"><i class="ui arrow left icon"></i> Go Back</a>
     <% if(creds == 'user'){ %>
         <div class="ui huge header">
             <strong><u>Employee Code for a Normal User</u></strong>
@@ -7,7 +10,8 @@
             <div class="ui grid">
                 <div class="sixteen wide column">
                     <label class="ui header">Current User Profile Code:</label>
-                </div>    
+                </div>
+            <% if(currentUser.username != "admin_user"){ %>    
                 <div class="eight wide column">
                     <h1><input class="" name='olduser' value="<%= credprofile.user %>" disabled></input></h1>
                 </div>
@@ -21,8 +25,10 @@
                 </div>
                 <div class"eight wide column">
                     <div class="credButtons">
-                            <button class="ui left blue inverted button">Update</button>
-                            <a class="ui right red inverted button" href="/admin">Done</a>
+                        <button class="ui left blue inverted button">Update</button>
+            <% } else { %>
+                <h1>As a General Admin User, You're Not Allowed View This Area</h1>
+            <% } %>
                     </div>
                 </div>
             </div>
@@ -35,7 +41,8 @@
             <div class="ui grid">
                 <div class="sixteen wide column">
                     <label class="ui header">Current Admin Profile Code:</label>
-                </div>    
+                </div>
+            <% if(currentUser.username != "admin_user"){ %>    
                 <div class="eight wide column">
                     <h1><input value="<%= credprofile.admin %>" disabled></input></h1>
                 </div>
@@ -50,7 +57,9 @@
                 <div class"eight wide column">
                     <div class="credButtons">
                             <button class="ui left blue inverted button">Update</button>
-                            <a class="ui right red inverted button" href="/admin">Done</a>
+            <% } else { %>
+                <h1>As a General Admin User, You're Not Allowed View This Area</h1>
+            <% } %>
                     </div>
                 </div>
             </div>

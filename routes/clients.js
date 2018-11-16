@@ -22,12 +22,12 @@ router.get("/", middleware.isLoggedIn, function(req, res){
 });
 
 //New Client Form
-router.get("/new", middleware.isLoggedIn, function(req, res){
+router.get("/new", middleware.checkIsAdmin, function(req, res){
     res.render("clients/new");
 });
 
 //Creates New Client
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.checkIsAdmin, function(req, res){
     Client.create(req.body.client, function(err, newClient){
         if(err){
             req.flash('error', "Oh No, Something Went Wrong Creating the Client!!!");
@@ -58,7 +58,7 @@ router.get("/:id", middleware.isLoggedIn, function(req, res) {
 });
 
 //Client Edit Form Route
-router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
+router.get("/:id/edit", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient){
         if(err){
             req.flash('error', "Cannot find the Client!!! Please Try Again");
@@ -70,7 +70,7 @@ router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
 });
 
 //Client Edit Update Route
-router.put("/:id", middleware.isLoggedIn, function(req, res) {
+router.put("/:id", middleware.checkIsAdmin, function(req, res) {
     Client.findByIdAndUpdate(req.params.id, req.body.client, function(err, updatedClient){
         if(err){
             console.log(err);
@@ -83,7 +83,8 @@ router.put("/:id", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-router.delete("/:id", middleware.isLoggedIn, function(req, res){
+//client delete route
+router.delete("/:id", middleware.checkIsAdmin, function(req, res){
     Client.findByIdAndRemove(req.params.id, function(err){
         if(err){
             req.flash('error',"There was an error removing this Client, please try again!!!");

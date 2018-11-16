@@ -9,6 +9,7 @@
         Current Users:
     </div>
     <br>
+    <% if(currentUser.username != "admin_user"){ %>
     <table class="ui celled table">
             <thead>
                 <tr>
@@ -30,7 +31,7 @@
                             Yes
                         <% }else{ %>
                             No
-                        <% }; %>
+                        <% } %>
                     </td>
                     <td>
                         <div class="ui grid">
@@ -50,6 +51,8 @@
             <% }); %>
         </tbody>
     </table>
-    
+    <% } else { %>
+        <h1>As a General Admin User, You're Not Allowed View This Area</h1>
+    <% } %>
 
 <% include ../partials/footer %>

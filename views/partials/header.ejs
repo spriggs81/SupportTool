@@ -17,8 +17,7 @@
                 <a class="item" href="/admin">Admin Page</a>
             <% }; %>
             <%if(currentUser){ %>
-                    <% var display = currentUser.firstname +" "+currentUser.lastname %>
-                    <span class="item right floated"><%= display %></span>
+                    <span class="item right floated"><%= currentUser.firstname +" "+currentUser.lastname %></span>
                     <a class="item" href="/logout">Log Out</a>
             <% }else { %>
                 <a class="item right floated" href="/login">

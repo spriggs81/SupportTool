@@ -6,7 +6,7 @@ var middleware = require("../middleware");
 
 
 //admin user index page
-router.get("/", middleware.isLoggedIn, function(req, res) {
+router.get("/", middleware.checkIsAdmin, function(req, res) {
     User.find({}, function(err, foundUsers){
         if(err){
             req.flash('error', 'We cannot find any Users!!!');
@@ -17,8 +17,8 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-//user create route
-router.get("/profile/:profile_id/:creds", middleware.isLoggedIn, function(req, res) {
+//user creds create page route
+router.get("/profile/:profile_id/:creds", middleware.checkIsAdmin, function(req, res) {
     Credprofile.findById(req.params.profile_id, function(err, foundCredprofile) {
         if(err){
             console.log(err);
@@ -30,7 +30,8 @@ router.get("/profile/:profile_id/:creds", middleware.isLoggedIn, function(req, r
     });
 });
 
-router.put("/profile/:profile_id/:creds", middleware.isLoggedIn, function(req, res){
+//user creds create route
+router.put("/profile/:profile_id/:creds", middleware.checkIsAdmin, function(req, res){
     Credprofile.findById(req.params.profile_id, function(err, foundMe){
         console.log(req.params.profile_id);
         if(err){
@@ -71,7 +72,7 @@ router.put("/profile/:profile_id/:creds", middleware.isLoggedIn, function(req, r
 });
 
 //create user post route
-router.post("/", middleware.isLoggedIn, function(req, res) {
+router.post("/", middleware.checkIsAdmin, function(req, res) {
     var newUser = new User({
         employeecode: req.body.employeecode,
         username: req.body.username,
@@ -91,7 +92,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 });
 
 //user delete route
-router.delete("/:user_id", middleware.isLoggedIn, function(req, res) {
+router.delete("/:user_id", middleware.checkIsAdmin, function(req, res) {
     User.findByIdAndRemove(req.params.user_id, function(err){
         if(err){
             console.log(err);

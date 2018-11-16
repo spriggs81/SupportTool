@@ -22,9 +22,6 @@ router.get("/register", function(req, res) {
 router.post("/register", function(req, res) {
     Credprofile.find({}, function(err, foundprofiles){
         var foundprofile = foundprofiles[0];
-        console.log(foundprofile)
-        console.log(req.body.code)
-        console.log(foundprofile)
         if(err){
             console.log(err);
             req.flash('error','Please report this issue to an admin!');
@@ -86,6 +83,7 @@ router.post("/login", passport.authenticate("local",
     }), function (req, res) {
 })
 
+//logout route
 router.get("/logout", function(req, res) {
     req.logout()
     req.flash('success', "You're Now Logged Out!!!")

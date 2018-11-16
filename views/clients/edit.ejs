@@ -31,14 +31,25 @@
                                 <input type="text" name="client[installLead]" value="<%= client.installLead %>">
                             </div>
                         </div>
-                        <div class="eight wide column field">
+                        <div class="five wide column field">
                             <div class="field">
                                 <label>Client's Status:</label>
                                 <select class="ui fluid dropdown" name="client[status]">
-                                    <option value="<%= client.status %>"><%= client.status %>:</option>
+                                    <option value="<%= client.status %>"><%= client.status %></option>
                                     <option value="In PMO">In PMO</option>
                                     <option value="In Support">In Support</option>
                                     <option value="Inactive Client">Inactive Client</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="three wide column field">
+                            <div class="field">
+                                <label>AD Client:</label>
+                                <select class="ui fluid dropdown" name="client[adclient]">
+                                    <option value="<%= client.adclient %>"><%= client.adclient %></option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="Not Sure">Not Sure</option>
                                 </select>
                             </div>
                         </div>

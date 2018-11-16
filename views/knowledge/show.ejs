@@ -4,26 +4,43 @@
 <% var endDate = new Date(message.created);%>
 <% var diffDate =  Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))); %>
     <div id="newInfo">
-        <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/"><i class="ui arrow left icon"></i> Go Back</a>
+        <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/<%= message.type %>"><i class="ui arrow left icon"></i> Go Back</a>
         <div class="ui huge header">
-            <%= message.product %> Knowledge Base
+            <%= product.name %> Knowledge Base
         </div>
         <hr>
         <% if(message.type === "info"){ %>
         <div class="ui green message">
         <% } else { %>
-        <div class="ui orange message">
+        <div class="ui yellow message">
         <% }; %>
-            <div>
-                Created <%= diffDate %> Days ago by <%= message.creator.display %>
-            </div><br>
-            <div class="ui header">
+            <div class="ui center aligned header">
                 <%= message.desc %>
             </div>
             <br>
             <div>
-                <%= message.message %>
+                <h3><%= message.message %></h3>
             </div>
+            <br>
+            <br>
+            <div>
+                <% options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true, timeZone: 'UTC', timeZoneName: 'short' }; %>
+                <% if(message.type === "info"){ %>
+                This information was provided by <%= message.creator.firstname + " " + message.creator.lastname %> on <%= Intl.DateTimeFormat('en-US', options).format(message.created) %>
+                <% } else { %>
+                This question was asked by <%= message.creator.firstname + " " + message.creator.lastname %> on <%= Intl.DateTimeFormat('en-US', options).format(message.created) %>
+                <% }; %>
+            </div>
+            <br>
+            <% if(currentUser && currentUser._id == message.creator._id || currentUser.admin == true){ %>
+            <%if(message.type == "questions"){ var thismessage = "Question" } else { var thismessage = "Info"}%>
+            <div>
+                <form action='/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/delete?_method=DELETE' method='POST' onsubmit='return confirm("Are you sure you want to delete this <%= thismessage %>?");'>
+                    <a href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/edit" class="ui small blue inverted button">Edit <%= thismessage %></a>
+                    <button class="ui small red inverted button">Delete <%= thismessage %></button>
+                </form>
+            </div>
+            <% } %>
         </div>
         <div>
             <a class="ui blue inverted right floated button" href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/add">
@@ -33,15 +50,23 @@
         <br>
         <hr>
         <% message.replies.forEach(function(reply){ %>
-        <% var endDate1 = new Date(reply.created);%>
-        <% var diffDate1 =  Math.round(Math.abs((startDate.getTime() - endDate1.getTime())/(oneDay))); %>
-        <div class="ui blue message">
-            <div>
-                Created <%= diffDate1 %> Days ago by <%= reply.creator.display %>
-            </div>
-            <br>
-            <div>
-                <%= reply.comment %>
+        <div class="ui comments">
+            <div class="comment">
+                <div class="content">
+                  <a class="author"><%= reply.creator.firstname + " " + reply.creator.lastname %></a>
+                  <div class="metadata">
+                    <span class="date"><%= Intl.DateTimeFormat('en-US', options).format(reply.created) %></span>
+                  </div>
+                  <div class="text">
+                    <p><%= reply.comment %></p>
+                  </div>
+                </div>
+                <% if(currentUser && currentUser._id == reply.creator._id || currentUser.admin == true){ %>
+                <form action='/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/<%= reply._id %>/delete?_method=DELETE' method='POST' onsubmit='return confirm("Are you sure you want to delete this Comment?");'>
+                    <a href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/<%= reply._id %>/edit" class="ui mini blue inverted button">Edit Comment</a>
+                    <button class="ui mini red inverted button">Delete Comment</button>
+                </form>
+                <% } %>
             </div>
         </div>
         <% }); %>

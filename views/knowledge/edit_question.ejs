@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+    <a class="ui purple inverted button" href="/knowledge"><i class="ui arrow left icon"></i> Go Back</a>
+    <div class="ui huge header">
+        You are editing a question in <%= product.name %>'s Knowledge Base
+    </div>
+    <div class="ui header">
+        Please edit your question to the Knowledge Base:
+    </div> 
+    <form class="ui form" action="/knowledge/<%= product._id %>/questions/<%= message._id %>/edit?_method=PUT" method="POST">
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <label>Desccription:</label><br>
+                <input type="text" name="desc" value="<%= message.desc %>" required>
+            </div>
+            <div class="sixteen wide column">
+                <label>Question:</label><br>
+                <textArea name="message" required><%= message.message %></textArea>
+            </div>
+        </div>
+        <br>
+        <button class="ui green inverted button">Submit Question</button>
+
+<% include ../partials/footer %>

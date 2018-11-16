@@ -8,7 +8,7 @@ var Credprofile = require("../models/credprofile");
 //  ADMIN ROUTES
 // =====================
 //Admin ladning page;
-router.get("/", middleware.isLoggedIn, function(req, res) {
+router.get("/", middleware.checkIsAdmin, function(req, res) {
     Credprofile.find({}, function(err, foundProfiles){
         if(err){
             console.log(err);

@@ -1,10 +1,12 @@
 <% include ../partials/header %>
     
     <div class="ui grid">
+        <% if(currentUser && currentUser.admin === true){ %>
         <div class="sixteen wide column">
             <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>
             <hr>    
         </div>
+        <% } %>
     </div>
     <table class="ui celled table">
         <thead>

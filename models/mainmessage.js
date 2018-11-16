@@ -7,7 +7,9 @@ var mainmessageSchema = new mongoose.Schema({
         id: {type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        display: String
+        _id: String,
+        firstname: String,
+        lastname: String
     },
     created: {type: Date, default: Date.now},
     desc: String,
