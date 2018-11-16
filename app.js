@@ -21,8 +21,8 @@ var clientRoutes    = require("./routes/clients"),
     knowledgeRoutes = require("./routes/knowledge");
 
 // APP CONFIG    
-//mongoose.connect("mongodb://spriggsdata:v1zexplorer@ds151242.mlab.com:51242/support_tool",
-mongoose.connect("mongodb://localhost/support_tools_v4", (err) => {
+//mongoose.connect("mongodb://localhost/support_tools_v4",
+mongoose.connect("mongodb://spriggsdata:v1zexplorer@ds151242.mlab.com:51242/support_tool", (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
