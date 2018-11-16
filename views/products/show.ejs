@@ -77,33 +77,42 @@
                 <div class="sixteen wide column">
                     <div class="ui grid">
                         <% if(product.flowviz){ %>
-                        <div class="five wide column">
-                            FlowViz: <%= product.flowviz %>
+                        <div class="sixteen wide column">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    FlowViz: <%= product.flowviz %>
+                                </div>
+                                <% } %>
+                                <% if(product.flowvizver){ %>
+                                <div class="eight wide column">
+                                    FlowViz Version: <%= product.flowvizver %>
+                                </div>
+                                <% } %>
+                            </div>
                         </div>
-                        <% } %>
-                        <% if(product.flowvizver){ %>
-                        <div class="three wide column">
-                            FlowViz Version: <%= product.flowvizver %>
+                        <div class="sixteen wide column">
+                            <div class="ui grid">
+                                <% if(product.flowvizun){ %>
+                                <div class="eight wide column">
+                                    FlowViz Username: <%= product.flowvizun %>
+                                </div>
+                                <% } %>
+                                <% if(product.flowvizpd){ %>
+                                <div class="eight wide column">
+                                    <label>
+                                        Password:
+                                    </label>
+                                    <input id="prodPass" type="password" value="<%= product.flowvizpd %>" disabled></input>
+                                
+                                    <span class="lt20">
+                                        <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
+                                            Show
+                                        </button>
+                                    </span>
+                                </div>
+                                <% } %>    
+                            </div>
                         </div>
-                        <% } %>
-                        <% if(product.flowvizun){ %>
-                        <div class="four wide column">
-                            FlowViz Username: <%= product.flowvizun %>
-                        </div>
-                        <% } %>
-                        <% if(product.flowvizpd){ %>
-                        <div class="four wide column">
-                            FlowViz Password: 
-                            <span id="prodPass" class="bye">
-                                <%= product.flowvizpd %>
-                            </span>
-                            <span class="lt20">
-                                <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
-                                    Show
-                                </button>
-                            </span>
-                        </div>
-                        <% } %>
                     </div>
                 </div>
             </div>

@@ -139,6 +139,7 @@ var data = [
         connection: "Bacon ipsum dolor amet pancetta tenderloin short loin, meatball tongue turkey pastrami t-bone short ribs cupim burgdoggen. Pancetta pork loin shankle t-bone, kielbasa picanha hamburger. Meatloaf filet mignon andouille shankle pastrami, ham burgdoggen beef short ribs sausage kevin. Frankfurter meatball beef turkey, hamburger bacon pig flank porchetta."
     },
     {
+
         name: "McMoney Casino",
         supportPlan: 'Business Premium',
         status: 'In Support',
@@ -358,7 +359,7 @@ function seedDB(){
             });
         }
     });
-    Credprofile.remove({}, function(err){
+    /*Credprofile.remove({}, function(err){
         if(err){
            console.log(err)
         } else {
@@ -372,7 +373,7 @@ function seedDB(){
                 }
             });
         }
-    });
+    });*/
 }
 
 module.exports = seedDB;
