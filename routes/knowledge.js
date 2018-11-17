@@ -159,7 +159,7 @@ router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, func
 
 
 //info edit page route
-router.get("/:dbproduct_id/info/:message_id/edit", middleware.isLoggedIn, function(req, res) {
+router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
             console.log(req.params.dbproduct_id);
@@ -179,7 +179,7 @@ router.get("/:dbproduct_id/info/:message_id/edit", middleware.isLoggedIn, functi
 });
 
 //Info Edit Route
-router.put("/:dbproduct_id/info/:message_id/edit", middleware.isLoggedIn, function(req, res) {
+router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     var desc = req.body.desc;
     var message = req.body.message;
     Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
@@ -196,7 +196,7 @@ router.put("/:dbproduct_id/info/:message_id/edit", middleware.isLoggedIn, functi
 
 
 //Questions edit page route
-router.get("/:dbproduct_id/questions/:message_id/edit", middleware.isLoggedIn, function(req, res) {
+router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
             console.log(req.params.dbproduct_id);
@@ -216,7 +216,7 @@ router.get("/:dbproduct_id/questions/:message_id/edit", middleware.isLoggedIn, f
 });
 
 //Questions Edit Route
-router.put("/:dbproduct_id/questions/:message_id/edit", middleware.isLoggedIn, function(req, res) {
+router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     var desc = req.body.desc;
     var message = req.body.message;
     Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
@@ -232,7 +232,7 @@ router.put("/:dbproduct_id/questions/:message_id/edit", middleware.isLoggedIn, f
 });
 
 //Delete info/questions route
-router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.checkMessageOwnership, function(req, res){
     Mainmessage.findByIdAndRemove(req.params.message_id, function(err){
         if(err){
             console.log(err);
@@ -278,7 +278,7 @@ router.post("/:productName/:messageType/:message_id/comment", middleware.isLogge
 });
 
 //Comment edit page route
-router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", middleware.isLoggedIn, function(req, res) {
+router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
     Mainmessage.findById(req.params.message_id, function(err, foundmessage) {
         if(err){
             console.log(req.params.dbproduct_id);
@@ -298,7 +298,7 @@ router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", mi
 });
 
 //Comment Edit Route
-router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", middleware.isLoggedIn, function(req, res) {
+router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
     var message = req.body.comment;
     Replymessage.findByIdAndUpdate(req.params.comment_id, {comment:message}, function(err, updatedMessage){
        if(err){
@@ -313,7 +313,7 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
 });
 
 //Delete Comment route
-router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
     Replymessage.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             console.log(err);
