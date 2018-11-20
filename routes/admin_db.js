@@ -108,14 +108,14 @@ router.put("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req
 
 
 //delete route for DB Server
-router.delete("/products/edit/:dbproduct_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/products/:dbproduct_id/delete", middleware.checkIsAdmin, function(req, res){
     Dbproduct.findByIdAndRemove(req.params.dbproduct_id, function(err) {
         if(err){
             req.flash('error', "We could not delete this Server!!!");
             res.redirect("/products");
         } else {
             req.flash("success", "This has been deleted");
-            res.redirect("/clients/" + req.params.id + "/servers");
+            res.redirect("/admin/db/products");
         }
     });
 });

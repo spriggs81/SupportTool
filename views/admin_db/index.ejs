@@ -27,9 +27,13 @@
             <tbody>
             <% products.forEach(function(product){ %>
                 <tr>
-                  <td><%= product.name %></a></td>
-                  <td><a href="/admin/db/products/<%= product._id %>/edit" class="ui green inverted button">Edit</a></td>
-                  <td><button class="ui red inverted disabled button">Delete</button></td>
+                    <td><%= product.name %></a></td>
+                    <td><a href="/admin/db/products/<%= product._id %>/edit" class="ui green inverted button">Edit <%= product.name %></a></td>
+                    <td>
+                        <form action='/admin/db/products/<%= product._id %>/delete?_method=DELETE' method='POST' onsubmit='return confirm("Are you sure you want to delete <%= product.name %>?  All Info and Questions wil be lost!");'>
+                            <button class="ui red inverted button">Delete <%= product.name %></button>
+                        </form>
+                    </td>
                 </tr>
             <% }); %>
             </tbody>
