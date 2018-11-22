@@ -313,7 +313,7 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
 });
 
 //Delete Comment route
-router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
+/*router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
     Replymessage.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             req.flash('error', err.message);
@@ -323,6 +323,6 @@ router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delet
             res.redirect("/knowledge/" + req.params.dbproduct_id + "/" + req.params.messageType + "/" + req.params.message_id);
         }
     });
-});
+});*/
 
 module.exports = router;
