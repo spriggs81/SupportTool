@@ -316,7 +316,8 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
 router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
     Replymessage.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
-            console.log(err);
+            req.flash('error', err.message);
+            res.redirect("back");
         } else {
             req.flash('success', "This has been deleted");
             res.redirect("/knowledge/" + req.params.dbproduct_id + "/" + req.params.messageType + "/" + req.params.message_id);
