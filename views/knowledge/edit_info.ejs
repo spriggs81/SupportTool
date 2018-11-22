@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-    <a class="ui purple inverted button" href="/knowledge"><i class="ui arrow left icon"></i> Go Back</a>
+    <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui huge header">
         You are editing a message in <%= product.name %>'s Knowledge Base
     </div>

@@ -281,9 +281,8 @@ router.post("/:productName/:messageType/:message_id/comment", middleware.isLogge
 router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
     Mainmessage.findById(req.params.message_id, function(err, foundmessage) {
         if(err){
-            console.log(req.params.dbproduct_id);
             req.flash('error', err.message);
-            res.redirect('/knowledge');
+            res.redirect('/knowledge' + req.params.productName + "/" + req.params.messageType + "/" + req.params.message_id);
         } else {
             Replymessage.findById(req.params.comment_id, function(err, foundcomment) {
                 if(err){
@@ -313,7 +312,7 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
 });
 
 //Delete Comment route
-/*router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
+router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
     Replymessage.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             req.flash('error', err.message);
@@ -323,6 +322,6 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
             res.redirect("/knowledge/" + req.params.dbproduct_id + "/" + req.params.messageType + "/" + req.params.message_id);
         }
     });
-});*/
+});
 
 module.exports = router;

@@ -1,3 +1,4 @@
+var mongoose         = require("mongoose");
 var Mainmessage = require("../models/mainmessage");
 var Replymessage = require("../models/replymessage");
 
@@ -7,14 +8,16 @@ var middlewareObj = {};
 
 middlewareObj.checkMessageOwnership = function(req, res, next){
     if(req.isAuthenticated()){
-        Mainmessage.findById(req.params.id, function(err, foundMessage){
+        console.log("this is user: " + req.user._id);
+        Mainmessage.findById(req.params.message_id, function(err, foundMessage){
+        console.log("this is from params: " + foundMessage.creator._id);
             if(err){
                 console.log(err || !foundMessage);
                 req.flash("error","Can Not Find Message!");
                 res.redirect("back");
             } else {
-                //does user own the campground
-                if(foundMessage.creator._id.equals(req.user._id) || req.user.admin == true){
+                //does user own the Message
+                if(foundMessage.creator._id == req.user._id || req.user.admin == true){
                     next();    
                 } else {
                     req.flash("error","You don't have permissions to do that!");
@@ -30,7 +33,7 @@ middlewareObj.checkMessageOwnership = function(req, res, next){
 
 middlewareObj.checkIsAdmin = function(req, res, next){
     if(req.isAuthenticated()){
-        //does user own the campground
+        //does user have admin rights
         if(req.user.admin == true){
             next();    
         } else {
@@ -51,8 +54,8 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 console.log(err);
                 res.redirect("back");
             } else {
-                //does user own the campground
-                if(foundComment.author.id.equals(req.user._id) || req.user.admin == true){
+                //does user own the comment
+                if(foundComment.creator._id == req.user._id || req.user.admin == true){
                     next();    
                 } else {
                     req.flash("error","You don't have permissions to do that!");
