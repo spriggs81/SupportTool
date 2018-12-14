@@ -71,25 +71,6 @@ router.put("/profile/:profile_id/:creds", middleware.checkIsAdmin, function(req,
     });
 });
 
-//create user post route
-router.post("/", middleware.checkIsAdmin, function(req, res) {
-    var newUser = new User({
-        employeecode: req.body.employeecode,
-        username: req.body.username,
-        display: req.body.display,
-        role: req.body.role
-    });
-    User.register(newUser, req.body.password, function(err, newUser) {
-        if(err){
-            console.log(err);
-            req.flash('error', 'Oh No, Something Went Wrong Creating the User!!!');
-            res.redirect("/admin");
-        } else {
-            req.flash('success', req.body.display +" has been added as a User!");
-            res.redirect("/admin");
-        }
-    });
-});
 
 //user delete route
 router.delete("/:user_id", middleware.checkIsAdmin, function(req, res) {

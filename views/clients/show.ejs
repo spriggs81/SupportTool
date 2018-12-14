@@ -19,7 +19,7 @@
             </div>
             <div class="ui meta">
                 <h4>
-                    <span class="ui red"><font>Status: </font></span><%= client.status %><br>
+                    <h2>Status: <%= client.status %><br></h2>
                     <div class="ui right floated">
                         Customer's Current Time:
                     </div>
@@ -55,11 +55,14 @@
                 </div>
                 <div class="ui segment">
                     <div class="ui grid">
-                        <div class="eight wide column">
+                        <div class="six wide column">
                             <span class="">Client's Support Plan: <%= client.supportPlan %></span>
                         </div>
-                        <div class="eight wide column">
+                        <div class="six wide column">
                             Time Zone: <span id="orgTime"><%= client.timezone %></span>
+                        </div>
+                        <div class="four wide column">
+                            Properties: <%= client.properties %>
                         </div>
                     </div>
                 </div>
@@ -72,10 +75,13 @@
                     <div class="ui grid">
                         <div class="sixteen wide column">
                             <div class="ui grid">
-                                <div class="eight wide column">
+                                <div class="four wide column">
+                                    <span class="">AD Client: <%= client.adclient %></span>
+                                </div>
+                                <div class="six wide column">
                                     <span class="">License Type: <%= client.licenseType %></span>
                                 </div>
-                                <div class="eight wide column">
+                                <div class="six wide column">
                                     <span class="">VPN Access: <%= client.vpnAccess %></span>
                                 </div>
                             </div>

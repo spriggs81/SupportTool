@@ -6,7 +6,7 @@ var Dbproduct = require("../models/dbproduct");
 
 //Product Index Ruote
 router.get("/products", middleware.checkIsAdmin, function(req, res) {
-    Dbproduct.find({}, function(err, foundProducts){
+    Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, foundProducts){
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');
@@ -20,7 +20,7 @@ router.get("/products", middleware.checkIsAdmin, function(req, res) {
 
 //Product New Route
 router.post("/products/new", middleware.checkIsAdmin, function(req, res) {
-    var name = req.body.name;
+    var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
     //turning to lower case  -  used to help with dup entries
@@ -71,7 +71,7 @@ router.get("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req
 
 //DB Product Edit Route
 router.put("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req, res) {
-    var name = req.body.name;
+    var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
     //turning to lower case  -  used to help with dup entries

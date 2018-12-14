@@ -1,8 +1,22 @@
 <% include ../partials/header %>
 
+    <div class="backdrop"></div>
+    <div class="modal">
+        <form class="ui form" action="/knowledge" method="POST">
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <label>Product Name:</label>
+                    <input class="" name="name" required></input>
+                </div>
+                <div class="sixteen wide column">
+                    <button class="ui green inverted left button">Add Product</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="ui huge header">Knowledge Base</div>
     <% if(currentUser && currentUser.admin === true){ %>
-    <a href="/admin/db/products" class="ui green inverted button">Add New Product</a>
+    <a href="#" class="ui green inverted button kprod">Add New Product</a>
     <% } %>
     <hr>
     <table class="ui celled table">

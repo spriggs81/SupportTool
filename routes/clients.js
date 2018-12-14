@@ -1,16 +1,12 @@
 var express     = require("express");
 var router      = express.Router({mergeParams: true});
 var Client      = require("../models/client");
-var User        = require("../models/user");
-var Product     = require("../models/product");
-var Appserver   = require("../models/appserver");
-var DBserver    = require("../models/dbserver");
 var middleware  = require("../middleware");
 var moment      = require("moment");
 
 //Index page shows all clients
 router.get("/", middleware.isLoggedIn, function(req, res){   
-    Client.find({}, function(err, allClients){
+    Client.find().sort({name:1}).exec(function(err, allClients){
         if(err){
             console.log(err);
             req.flash('error', 'We cannot find any Clients!!!');
@@ -28,7 +24,10 @@ router.get("/new", middleware.checkIsAdmin, function(req, res){
 
 //Creates New Client
 router.post("/", middleware.checkIsAdmin, function(req, res){
-    Client.create(req.body.client, function(err, newClient){
+    req.body.client.clientit = req.sanitize(req.body.client.clientit);
+    req.body.client.connect = req.sanitize(req.body.client.connect);
+    var client = req.body.client;
+    Client.create(client, function(err, newClient){
         if(err){
             req.flash('error', "Oh No, Something Went Wrong Creating the Client!!!");
             res.redirect("/clients/new");
@@ -71,7 +70,10 @@ router.get("/:id/edit", middleware.checkIsAdmin, function(req, res) {
 
 //Client Edit Update Route
 router.put("/:id", middleware.checkIsAdmin, function(req, res) {
-    Client.findByIdAndUpdate(req.params.id, req.body.client, function(err, updatedClient){
+    req.body.client.clientit = req.sanitize(req.body.client.clientit);
+    req.body.client.connect = req.sanitize(req.body.client.connect);
+    var client = req.body.client;
+    Client.findByIdAndUpdate(req.params.id, client, function(err, updatedClient){
         if(err){
             console.log(err);
             req.flash('error', "We were not able to Update the Client, please try again!!!");

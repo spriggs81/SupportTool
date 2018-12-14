@@ -22,7 +22,7 @@ var clientRoutes    = require("./routes/clients"),
 
 // APP CONFIG    
 //mongoose.connect("mongodb://localhost/support_tools_v4",
-mongoose.connect("mongodb://data:data@ds151242.mlab.com:51242/support_tool", (err) => {
+mongoose.connect("mongodb://spriggsdata:v1zexplorer@ds151242.mlab.com:51242/support_tool", (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {

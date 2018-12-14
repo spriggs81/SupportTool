@@ -48,6 +48,7 @@ router.get("/new/db", middleware.checkIsAdmin, function(req, res) {
 
 //Add New App Server
 router.post("/app", middleware.checkIsAdmin, function(req, res){
+    req.body = req.sanitize(req.body);
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -70,6 +71,7 @@ router.post("/app", middleware.checkIsAdmin, function(req, res){
 
 //Add New Database Sever
 router.post("/db", middleware.checkIsAdmin, function(req, res){
+    req.body = req.sanitize(req.body);
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -152,6 +154,7 @@ router.get('/app/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
 
 //Update route for app server
 router.put("/app/:server_id", middleware.checkIsAdmin, function(req, res) {
+    req.body = req.sanitize(req.body);
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -192,6 +195,7 @@ router.get('/db/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
 
 //Update route for db server
 router.put("/db/:server_id", middleware.checkIsAdmin, function(req, res) {
+    req.body = req.sanitize(req.body);
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");

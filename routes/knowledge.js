@@ -7,7 +7,7 @@ var middleware      = require("../middleware");
 
 //Landing Route
 router.get("/", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.find({}, function(err, allproducts) {
+    Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, allproducts) {
         if(err){
             console.log(err);
             req.flash('error', "Error looking for DB Productd");
@@ -92,7 +92,6 @@ router.get("/:productName/questions", middleware.isLoggedIn, function(req, res) 
 router.get("/:dbproduct_id/info/new", middleware.isLoggedIn, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
-            console.log(req.params.dbproduct_id);
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
@@ -106,7 +105,6 @@ router.get("/:dbproduct_id/info/new", middleware.isLoggedIn, function(req, res) 
 router.get("/:dbproduct_id/questions/new", middleware.isLoggedIn, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
-            console.log(req.params.dbproduct_id);
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
@@ -121,8 +119,8 @@ router.post("/:productName/:messageType/new", middleware.isLoggedIn, function(re
     var product = req.params.productName;
     var type = req.params.messageType;
     var creator = req.user;
-    var desc = req.body.desc;
-    var message = req.body.message;
+    var desc = req.sanitize(req.body.desc);
+    var message = req.sanitize(req.body.message);
     var newMessage = {product: product, type: type, creator:creator, desc:desc, message:message};
     Mainmessage.create(newMessage, function(err, newMainMessage){
        if(err){
@@ -162,7 +160,6 @@ router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, func
 router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
-            console.log(req.params.dbproduct_id);
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
@@ -180,8 +177,8 @@ router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwners
 
 //Info Edit Route
 router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
-    var desc = req.body.desc;
-    var message = req.body.message;
+    var desc = req.sanitize(req.body.desc);
+    var message = req.sanitize(req.body.message);
     Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
        if(err){
            console.log(err);
@@ -199,7 +196,6 @@ router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwners
 router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
         if(err){
-            console.log(req.params.dbproduct_id);
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
@@ -216,9 +212,9 @@ router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageO
 });
 
 //Questions Edit Route
-router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
-    var desc = req.body.desc;
-    var message = req.body.message;
+router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {;
+    var desc = req.sanitize(req.body.desc);
+    var message = req.sanitize(req.body.message);
     Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
        if(err){
            console.log(err);
@@ -258,12 +254,14 @@ router.get("/:productName/:messageType/:message_id/comment/add", middleware.isLo
 
 //Post comment Route
 router.post("/:productName/:messageType/:message_id/comment", middleware.isLoggedIn, function(req, res) {
+    var creator = req.user;
+    var comment = req.sanitize(req.body.comment);
     Mainmessage.findById(req.params.message_id, function(err, message){
         if(err){
             req.flash('error', "Cannot find Messages!");
             res.redirect("/knowledge");
         }
-        var newComment = {creator: req.user, comment: req.body.comment};
+        var newComment = {creator: creator, comment: comment};
         Replymessage.create(newComment, function(err, newReplyMessage){
            if(err){
                req.flash('error', "We Cannot Add Your Comment!");
@@ -298,7 +296,7 @@ router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", mi
 
 //Comment Edit Route
 router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
-    var message = req.body.comment;
+    var message = req.sanitize(req.body.comment);
     Replymessage.findByIdAndUpdate(req.params.comment_id, {comment:message}, function(err, updatedMessage){
        if(err){
            console.log(err);
@@ -322,6 +320,44 @@ router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delet
             res.redirect("/knowledge/" + req.params.dbproduct_id + "/" + req.params.messageType + "/" + req.params.message_id);
         }
     });
+});
+
+//DBProduct New Route
+router.post("/", middleware.checkIsAdmin, function(req, res) {
+    req.body.name = req.sanitize(req.body.name);
+    var name = req.body.name;
+    //removing special chara and spaces
+    var step1 = name.replace(/[^A-Z0-9]/ig, "");
+    //turning to lower case  -  used to help with dup entries
+    var keyname = step1.toLowerCase();
+    //checking to make sure that the entry isn't blank or not sense
+    if(keyname === ''){
+        req.flash('error',"Product Name can't be blank, only numbers or symbols!");
+        res.redirect("/admin/db/products");
+    } else {
+        //checking for duplicates
+        Dbproduct.find({keyname: keyname}, function(err, foundProduct){
+            if(err){
+                req.flash('error', "Error with Finding DBPRODUCT!!!");
+                res.redirect("/knowledge");
+            } else if(foundProduct == false){
+                //adding new product to DB
+                 Dbproduct.create({name: name, keyname: keyname}, function(err, newProduct){
+                    if(err){
+                        console.log(err);
+                        req.flash('error', err+" error creating dbproduct");
+                        res.redirect("/knowledge");
+                    } else {
+                        req.flash('success', newProduct.name + " has been added to the Product Database!");
+                        res.redirect("/knowledge");
+                    }
+                });     
+            } else {
+                req.flash('error', 'This Product Already Exist!');
+                res.redirect("/knowledge");
+            }
+        });
+    }
 });
 
 module.exports = router;

@@ -3,6 +3,23 @@
 <% var startDate = new Date(); %>
 <% var endDate = new Date(message.created);%>
 <% var diffDate =  Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))); %>
+    <div class="backdrop"></div>
+        <div class="modal">
+            <div class="ui header">
+            You are adding a comment to "<%= message.desc %>"
+        </div>
+        <form action="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment" method="POST" class="ui form">
+            <div class="field">
+                <label>
+                    Comment
+                </label>
+                <textArea name="comment"></textArea>
+            </div>
+            <button class="ui green inverted right floated button">
+                Post Comment
+            </button>
+        </form>
+    </div>
     <div id="newInfo">
         <a class="ui purple inverted button" href="/knowledge/<%= message.product %>/<%= message.type %>"><i class="ui arrow left icon"></i> Go Back</a>
         <div class="ui huge header">
@@ -19,7 +36,7 @@
             </div>
             <br>
             <div>
-                <h3><%= message.message %></h3>
+                <h3><%- message.message %></h3>
             </div>
             <br>
             <br>
@@ -43,7 +60,7 @@
             <% } %>
         </div>
         <div>
-            <a class="ui blue inverted right floated button" href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>/comment/add">
+            <a class="ui blue inverted right floated button kprod" href="#">
                 Add a Comment
             </a>
         </div>
@@ -58,7 +75,7 @@
                     <span class="date"><%= Intl.DateTimeFormat('en-US', options).format(reply.created) %></span>
                   </div>
                   <div class="text">
-                    <p><%= reply.comment %></p>
+                    <p><%- reply.comment %></p>
                   </div>
                 </div>
                 <% if(currentUser && currentUser._id == reply.creator._id || currentUser.admin == true){ %>

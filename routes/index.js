@@ -20,6 +20,9 @@ router.get("/register", function(req, res) {
 
 //create user post route
 router.post("/register", function(req, res) {
+    var username = req.sanitize(req.body.username);
+    var firstname = req.sanitize(req.body.firstname);
+    var lastname = req.sanitize(req.body.lastname);
     Credprofile.find({}, function(err, foundprofiles){
         var foundprofile = foundprofiles[0];
         if(err){
@@ -28,12 +31,11 @@ router.post("/register", function(req, res) {
             res.redirect('/register');
         } else {
             if(req.body.code == foundprofile.user){
-                var role = false;
                 var newUser = new User({
-                    username: req.body.username,
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    admin: role
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    admin: false
                 });
                 User.register(newUser, req.body.password, function(err, newUser) {
                     if(err){
@@ -46,12 +48,11 @@ router.post("/register", function(req, res) {
                     }
                 });
             } else if(req.body.code == foundprofile.admin){
-                var role = true;
                 var newUser = new User({
-                    username: req.body.username,
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    admin: role
+                    username: username,
+                    firstname: firstname,
+                    lastname: lastname,
+                    admin: true
                 });
                 User.register(newUser, req.body.password, function(err, newUser) {
                     if(err){
