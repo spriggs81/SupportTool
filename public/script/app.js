@@ -47,7 +47,7 @@ function checkTime(i){
 
 function checkHour(g){
     g = Number(g);
-    if(g > 13){
+    if(g >= 13){
         g = g - 12;
         return g;
     } else if(g === 0) {
