@@ -66,7 +66,7 @@
         </div>
         <br>
         <hr>
-        <% message.replies.sort("created").forEach(function(reply){ %>
+        <% message.replies.sort(function(a,b){return b.created - a.created}).forEach(function(reply){ %>
         <div class="ui comments">
             <div class="comment">
                 <div class="content">
