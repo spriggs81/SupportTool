@@ -5,11 +5,11 @@
     	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
     	<link rel="stylesheet" type="text/css" href="/stylesheet/app.css">
     </head>
-    <body onload="startTime()">
+    <body onload="startTime(), startTime2()">
         <div class="ui container">
             <div class="ui inverted default menu itemSize">
             <% if(currentUser){ %>
-                <a class="item" href="#">Home</a>
+                <a class="item" href="/home">Home</a>
                 <a class="item" href="/clients">Clients</a> 
                 <a class="item" href="/knowledge">Knowledge</a>
             <% }; %>

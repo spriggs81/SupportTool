@@ -14,7 +14,6 @@ var clientSchema = new mongoose.Schema({
     requestMethod: String,
     properties: Number,
     it_24_7: String,
-    specialreq: String,
     clientit:String,
     connection: String,
     adclient: String,

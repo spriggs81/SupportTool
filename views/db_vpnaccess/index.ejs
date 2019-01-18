@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+    
+    <h1 class="ui huge header">All Current VPN Accesses</h1>
+    <div class="ui divider"></div>
+    <form class="ui form" action="/admin/db/vpnaccess/new" method="POST">
+      <div class="field">
+        <label>Name</label>
+        <div class="two fields">
+          <div class="field">
+                <input class="" name="name" required></input>
+            </div>
+            <div class="field">
+                <button class="ui green inverted left button">Add Product</button>
+                <a href="/admin" class="ui red inverted right button">Go Back</a>
+            </div>      
+        </div>
+    </form>
+    <div id="productdbinfo" class="">
+         <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="five wide">VPN Access:</th>
+                    <th class="four wide">Edit Option:</th>
+                    <th class="four wide">Delete Option:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% accesses.forEach(function(access){ %>
+                <tr>
+                    <td><%= access.name %></a></td>
+                    <td><a href="/admin/db/products/<%= access._id %>/edit" class="ui green inverted button">Edit <%= access.name %></a></td>
+                    <td>
+                        <form action='/admin/db/products/<%= access._id %>/delete?_method=DELETE' method='POST' onsubmit='return confirm("Are you sure you want to delete <%= access.name %>?");'>
+                            <button class="ui red inverted button">Delete <%= access.name %></button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    
+<% include ../partials/footer %>

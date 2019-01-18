@@ -4,14 +4,17 @@
         You are Editing Products for <%= client.name %>:
     </div>
     
-    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/products/<%= product._id %>?_method=PUT" method="POST">
+    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/products/<%= oldProduct._id %>?_method=PUT" method="POST">
         <h3 class="ui dividing header">Editing Product Form</h3>
         <div class="two fields">
             <div class="field">
                 <label>Please Select Product</label>
                 <select class="ui fluid dropdown" name="product[name]">
-                    <option value="<%= product.name %>"><%= product.name %></option>
-                    <option value="advancedViz">advancedViz</option>
+                    <option value="<%= oldProduct.name %>"><%= oldProduct.name %></option>
+                    <% products.forEach(function(product) { %>
+                        <option value="<%= product.name %>"><%= product.name %></option>
+                    <% }); %>
+                    <!--<option value="advancedViz">advancedViz</option>
                     <option value="campaignViz">campaignViz</option>
                     <option value="floorViz">floorViz</option>
                     <option value="greetViz">greetViz</option>
@@ -22,13 +25,13 @@
                     <option value="tableViz">tableViz</option>
                     <option value="techViz">techViz</option>
                     <option value="vizDashboard">vizDashboard</option>
-                    <option value="vizMosaic">vizMosaic</option>
+                    <option value="vizMosaic">vizMosaic</option>-->
                 </select>
             </div>
             <div class="field">
                 <label>Current Status:</label>
                 <select class="ui fluid dropdown" name="product[type]">
-                    <option value="<%= product.type %>"><%= product.type %></option>
+                    <option value="<%= oldProduct.type %>"><%= oldProduct.type %></option>
                     <option value="Production">Production</option>
                     <option value="Testing">Testing</option>
                     <option value="Inactive">Inactive</option>
@@ -41,15 +44,15 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <label>URL:</label>
-                        <input type="text" name="product[url]" value="<%= product.url %>">
+                        <input type="text" name="product[url]" value="<%= oldProduct.url %>">
                     </div>
                     <div class="four wide column">
                         <label>UI Version:</label>
-                        <input type="text" name="product[uiversion]" value="<%= product.uiversion %>">
+                        <input type="text" name="product[uiversion]" value="<%= oldProduct.uiversion %>">
                     </div>
                     <div class="four wide column">
                         <label>BE Version:</label>
-                        <input type="text" name="product[beversion]" value="<%= product.beversion %>">
+                        <input type="text" name="product[beversion]" value="<%= oldProduct.beversion %>">
                     </div>
                 </div>
             </div>
@@ -57,11 +60,11 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <label>Maker URL:</label>
-                        <input type="text" name="product[maker]" value="<%= product.maker %>">
+                        <input type="text" name="product[maker]" value="<%= oldProduct.maker %>">
                     </div>
                     <div class="four wide column">
                         <label>Maker Version:</label>
-                        <input type="text" name="product[makerver]" value="<%= product.makerver %>">
+                        <input type="text" name="product[makerver]" value="<%= oldProduct.makerver %>">
                     </div>
                 </div>
             </div>
@@ -69,11 +72,11 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <label>FlowViz URL:</label>
-                        <input type="text" name="product[flowviz]" value="<%= product.flowviz %>">
+                        <input type="text" name="product[flowviz]" value="<%= oldProduct.flowviz %>">
                     </div>
                     <div class="four wide column">
                         <label>FlowViz Version:</label>
-                        <input type="text" name="product[flowvizver]" value="<%= product.flowvizver %>">
+                        <input type="text" name="product[flowvizver]" value="<%= oldProduct.flowvizver %>">
                     </div>
                 </div>
             </div>
@@ -81,11 +84,11 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <label>FlowViz Username:</label>
-                        <input type="text" name="product[flowvizun]" value="<%= product.flowvizun %>">
+                        <input type="text" name="product[flowvizun]" value="<%= oldProduct.flowvizun %>">
                     </div>
                     <div class="eight wide column">
                         <label>FlowViz Password:</label>
-                        <input type="text" name="product[flowvizpd]" value="<%= product.flowvizpd %>">
+                        <input type="text" name="product[flowvizpd]" value="<%= oldProduct.flowvizpd %>">
                     </div>
                 </div>
             </div>
@@ -93,21 +96,21 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <label>Rabbit MQ URL:</label>
-                        <input type="text" name="product[rabbit]" value="<%= product.rabbit %>">
+                        <input type="text" name="product[rabbit]" value="<%= oldProduct.rabbit %>">
                     </div>
                     <div class="five wide column">
                         <label>Rabbit Username:</label>
-                        <input type="text" name="product[rabbitun]" value="<%= product.rabbitun %>">
+                        <input type="text" name="product[rabbitun]" value="<%= oldProduct.rabbitun %>">
                     </div>
                     <div class="five wide column">
                         <label>Rabbit Password:</label>
-                        <input type="text" name="product[rabbitpd]" value="<%= product.rabbitpd %>">
+                        <input type="text" name="product[rabbitpd]" value="<%= oldProduct.rabbitpd %>">
                     </div>
                 </div>
             </div>
             <div class="sixteen wide column">
                 <label>Special Notes:</label>
-                <textarea name="product[note]"><%= product.note %></textarea>
+                <textarea name="product[note]"><%= oldProduct.note %></textarea>
             </div>
         </div><br>
         <button class="ui blue inverted button">Submit</button>

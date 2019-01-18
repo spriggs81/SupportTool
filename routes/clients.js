@@ -1,8 +1,11 @@
-var express     = require("express");
-var router      = express.Router({mergeParams: true});
-var Client      = require("../models/client");
-var middleware  = require("../middleware");
-var moment      = require("moment");
+var express         = require("express");
+var router          = express.Router({mergeParams: true});
+var Client          = require("../models/client");
+var middleware      = require("../middleware");
+var moment          = require("moment");
+var Dbclientstatus  = require("../models/dbclientstatus");
+var Dbsupportplan   = require("../models/dbsupportplan");
+var Dbvpnaccess     = require("../models/dbvpnaccess");
 
 //Index page shows all clients
 router.get("/", middleware.isLoggedIn, function(req, res){   
@@ -19,7 +22,31 @@ router.get("/", middleware.isLoggedIn, function(req, res){
 
 //New Client Form
 router.get("/new", middleware.checkIsAdmin, function(req, res){
-    res.render("clients/new");
+    Dbclientstatus.find({}).sort({'keyname': 1}).exec(function(err, foundClientStatuses){
+        if(err){
+            console.log(err);
+            req.flash('error', 'please report to an admin!');
+            res.redirect('/');
+        } else {
+            Dbsupportplan.find({}).sort({'keyname': 1}).exec(function(err, foundPlans){
+                if(err){
+                    console.log(err);
+                    req.flash('error', 'please report to an admin!');
+                    res.redirect('/');
+                } else {
+                    Dbvpnaccess.find({}).sort({'keyname': 1}).exec(function(err, foundAccesses){
+                        if(err){
+                            console.log(err);
+                            req.flash('error', 'please report to an admin!');
+                            res.redirect('/');
+                        } else {
+                            res.render("clients/new", {statuses: foundClientStatuses, plans: foundPlans, accesses: foundAccesses});
+                        }
+                    });
+                }
+            });
+        }
+    });
 });
 
 //Creates New Client
@@ -63,7 +90,31 @@ router.get("/:id/edit", middleware.checkIsAdmin, function(req, res) {
             req.flash('error', "Cannot find the Client!!! Please Try Again");
             res.redirect("/clients");
         } else {
-            res.render("clients/edit", {client: foundClient});
+            Dbclientstatus.find({}).sort({'keyname': 1}).exec(function(err, foundClientStatuses){
+                if(err){
+                    console.log(err);
+                    req.flash('error', 'please report to an admin!');
+                    res.redirect('/');
+                } else {
+                    Dbsupportplan.find({}).sort({'keyname': 1}).exec(function(err, foundPlans){
+                        if(err){
+                            console.log(err);
+                            req.flash('error', 'please report to an admin!');
+                            res.redirect('/');
+                        } else {
+                            Dbvpnaccess.find({}).sort({'keyname': 1}).exec(function(err, foundAccesses){
+                                if(err){
+                                    console.log(err);
+                                    req.flash('error', 'please report to an admin!');
+                                    res.redirect('/');
+                                } else {
+                                    res.render("clients/edit", {client: foundClient, statuses: foundClientStatuses, plans: foundPlans, accesses: foundAccesses});
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         }
     });
 });

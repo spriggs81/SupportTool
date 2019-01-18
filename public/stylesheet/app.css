@@ -82,3 +82,7 @@ a.ui.right.inverted.red.button {
     left: calc(50% - 190px);
   }
 }
+
+#admindb{
+   margin-bottom: 40px; 
+}

@@ -12,7 +12,7 @@ router.get("/products", middleware.checkIsAdmin, function(req, res) {
             req.flash('error', 'please report to an admin!');
             res.redirect('/');
         } else {
-            res.render("admin_db/index", {products: foundProducts});
+            res.render("db_product/index", {products: foundProducts});
         }
     });
 });
@@ -63,7 +63,7 @@ router.get("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req
             req.flash('error', "i'm an error");
             res.redirect('/admin/db/products');
         } else {
-            res.render('admin_db/edit', {product: foundProduct});
+            res.render('db_product/edit', {product: foundProduct});
         }
     });
 });

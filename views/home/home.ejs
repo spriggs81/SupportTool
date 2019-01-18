@@ -1,0 +1,19 @@
+
+<% include ../partials/header %>
+
+
+    <h1> Hello <%= currentUser.firstname + " " + currentUser.lastname %> </h1>
+    
+    <p>Your current access level is 
+    <% if(currentUser.username === 'admin_user'){ %>
+    limited administrator.  You have most of the rights as a normal administrator, but with limits to the user information data 
+    <% } else if(currentUser.admin === true){ %>
+    Administrator.  You have full access on this application.
+    <% } else { %>
+    Read Only Access.  You can view data and add knowledge based information and questions.
+    <% } %>
+    
+    <div id="myTime2" class="ui black label"></div>
+    <%= new Date()%>
+
+<% include ../partials/footer %>

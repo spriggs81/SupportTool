@@ -11,18 +11,9 @@
                 <label>Please Select Product</label>
                 <select class="ui fluid dropdown" name="product[name]">
                     <option value="">Select Product</option>
-                    <option value="advancedViz">advancedViz</option>
-                    <option value="campaignViz">campaignViz</option>
-                    <option value="floorViz">floorViz</option>
-                    <option value="greetViz">greetViz</option>
-                    <option value="hostViz">hostViz</option>
-                    <option value="MapEditor">MapEditor</option>
-                    <option value="patronViz">patronViz</option>
-                    <option value="resortViz">resortViz</option>
-                    <option value="tableViz">tableViz</option>
-                    <option value="techViz">techViz</option>
-                    <option value="vizDashboard">vizDashboard</option>
-                    <option value="vizMosaic">vizMosaic</option>
+                    <% products.forEach(function(product) { %>
+                        <option value="<%= product.name %>"><%= product.name %></option>
+                    <% }); %>
                 </select>
             </div>
             <div class="field">

@@ -36,9 +36,9 @@
                                 <label>Client's Status:</label>
                                 <select class="ui fluid dropdown" name="client[status]" required>
                                     <option value="">Current Status:</option>
-                                    <option value="In PMO">In PMO</option>
-                                    <option value="In Support">In Support</option>
-                                    <option value="Inactive Client">Inactive Client</option>
+                                    <% statuses.forEach(function(status){ %>
+                                        <option value="<%= status.name %>"><%= status.name %></option>
+                                    <% }); %>
                                 </select>
                             </div>
                         </div>
@@ -74,9 +74,9 @@
                                     <option value="(GMT -03:30) Newfoundland">(GMT -3:30) Newfoundland</option>
                                     <option value="(GMT -03:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
                                     <option value="(GMT -02:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</option>
-                                    <option value="(GMT -01:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</option>
-                                    <option value="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
-                                    <option value="(GMT +01:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option>
+                                    <option value="(GMT -01:00) Azores, Cape Verde Islands">(GMT -1:00) Azores, Cape Verde Islands</option>
+                                    <option value="(GMT +00:00) Western Europe Time, London, Lisbon, Casablanca">(GMT +0:00) Western Europe Time, London, Lisbon, Casablanca</option>
+                                    <option value="(GMT +01:00) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
                                     <option value="(GMT +02:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</option>
                                     <option value="(GMT +03:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
                                     <option value="(GMT +03:30) Tehran">(GMT +3:30) Tehran</option>
@@ -90,7 +90,7 @@
                                     <option value="(GMT +08:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
                                     <option value="(GMT +09:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
                                     <option value="(GMT +09:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</option>
-                                    <option value="(GMT +010:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                                    <option value="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
                                     <option value="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
                                     <option value="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
                                 </select>
@@ -100,9 +100,9 @@
                             <label>Support Plan:</label>
                             <select class="ui fluid dropdown" name="client[supportPlan]">
                                 <option value="">Select Support Plan</option>
-                                <option value="Business Standard">Business Standard</option>
-                                <option value="Business Premium">Business Premium</option>
-                                <option value="Business OPs">Business OPs</option>
+                                <% plans.forEach(function(plan){ %>
+                                    <option value="<%= plan.name %>"><%= plan.name %></option>
+                                <% }); %>
                             </select>
                         </div>
                         <div class="four wide column field">
@@ -134,11 +134,9 @@
                             <label>VPN Access:</label>
                             <select class="ui fluid dropdown" name="client[vpnAccess]">
                                 <option value="">VPN Access</option>
-                                <option value="Shared VPN Creds">Shared VPN Creds</option>
-                                <option value="Individual VPN Creds">Individual VPN Creds</option>
-                                <option value="AnyConnec">AnyConnect</option>
-                                <option value="GoToMyPC">GoToMyPC</option>
-                                <option value="TBD">TBD</option>
+                                <% accesses.forEach(function(access){ %>
+                                    <option value="<%= access.name %>"><%= access.name %></option>
+                                <% }); %>
                             </select>
                         </div>
                         <div class="five wide column">
@@ -173,15 +171,6 @@
                                 <option value="Phone">Phone</option>
                                 <option value="Email/Phone">Email/Phone</option>
                                 <option value="Unsure">Unsure</option>
-                            </select>
-                        </div>
-                        <div class="five wide column field">
-                            <label>Speical Requirement:</label>
-                            <select class="ui fluid dropdown" name="client[specialreq]">
-                                <option value="">Requirement</option>
-                                <option value="N/A">N/A</option>
-                                <option value="Client Form">Client Form</option>
-                                <option value="Formated Email">Formated Email</option>
                             </select>
                         </div>
                     </div>

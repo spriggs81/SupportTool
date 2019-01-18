@@ -6,6 +6,7 @@ var Appserver = require("../models/appserver");
 var DBserver = require("../models/dbserver");
 var User = require("../models/user");
 var middleware = require("../middleware");
+var Dbproduct = require("../models/dbproduct");
 
 //==========================
 //   PRODUCT ROUTES
@@ -22,7 +23,8 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-//Add New Product Form Route
+
+//Add New Product Form Route (Updated)
 router.get("/new", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
@@ -30,10 +32,19 @@ router.get("/new", middleware.checkIsAdmin, function(req, res) {
             console.log(err);
             res.redirect("/clients/:id/products/new");
         } else {
-            res.render("products/new", {client: foundClient});   
+            Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, foundProducts){
+                if(err){
+                    console.log(err);
+                    req.flash('error', 'please report to an admin!');
+                    res.redirect('/');
+                } else {
+                    res.render("products/new", {client: foundClient, products: foundProducts});
+                }
+            });  
         }
     });
 });
+
 
 //Add New Product
 router.post("/", middleware.checkIsAdmin, function(req, res){
@@ -75,7 +86,39 @@ router.get("/:product_id", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-//Get Product Edit Form
+//Get Product Edit Form (Updated)
+router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
+    Client.findById(req.params.id, function(err, foundClient) {
+        if(err){
+            req.flash('error', "We cannot find the Client!!!");
+            res.redirect("/clients");
+        } else{
+            Product.findById(req.params.product_id, function(err, oldProduct){
+                if(err){
+                    req.flash('error',"We cannot find this Product!");
+                    console.log(err);
+                    res.redirect("/clients/:id/products");
+                } else {
+                     Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, foundProducts){
+                        if(err){
+                            console.log(err);
+                            req.flash('error', 'please report to an admin!');
+                            res.redirect('/');
+                        } else {
+                            res.render("products/edit", {client: foundClient, oldProduct: oldProduct, products:foundProducts});
+                            //res.render("products/new", {client: foundClient, products: foundProducts});
+                        }
+                    });
+                }                
+            });
+        }
+    });
+});
+
+
+
+
+/*//Get Product Edit Form
 router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
@@ -93,7 +136,7 @@ router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
             });
         }
     });
-});
+});*/
 
 //Product Edit route
 router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
