@@ -1,5 +1,5 @@
 hr {
-  margin-top: 2em;  
+  margin-top: 2em;
 }
 
 #product{
@@ -11,7 +11,7 @@ hr {
 }
 
 a.ui.right.inverted.red.button {
-  margin-left: 5em;  
+  margin-left: 5em;
 }
 
 .formButtons{
@@ -44,15 +44,15 @@ a.ui.right.inverted.red.button {
 
 .desc {
   height: auto;
-   width: 100%; 
+   width: 100%;
 }
 
 #newInfo {
-  margin-bottom: 4%; 
+  margin-bottom: 4%;
 }
 
 .credButtons{
-  margin-top: 6.5%; 
+  margin-top: 6.5%;
 }
 
 .backdrop {
@@ -83,6 +83,6 @@ a.ui.right.inverted.red.button {
   }
 }
 
-#admindb{
-   margin-bottom: 40px; 
+.after40{
+   margin-bottom: 40px;
 }

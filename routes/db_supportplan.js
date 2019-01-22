@@ -46,7 +46,7 @@ router.post("/supportplan/new", middleware.checkIsAdmin, function(req, res) {
                         req.flash('success', newPlan.name + " has been added to the Support Plan Database!");
                         res.redirect("/admin/db/supportplan");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Support Plan Already Exist!');
                 res.redirect("/admin/db/supportplan");
@@ -55,7 +55,7 @@ router.post("/supportplan/new", middleware.checkIsAdmin, function(req, res) {
     }
 });
 
-//bd edit page routeEdit page 
+//bd edit page routeEdit page
 router.get("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, function(req, res){
     Dbsupportplan.findById(req.params.dbsupportplan_id, function(err, foundPlan){
         if(err){
@@ -97,7 +97,7 @@ router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, funct
                         req.flash('success', updatedPlan.name + " has been updated in the Product Database!");
                         res.redirect("/admin/db/supportplan");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Product Already Exist!');
                 res.redirect("/admin/db/supportplan");
@@ -108,7 +108,7 @@ router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, funct
 
 
 //delete route for DB Server
-router.delete("/supportplan/:dbsupportplan_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/supportplan/:dbsupportplan_id/delete", middleware.checkIsAdminDelete, function(req, res){
     Dbsupportplan.findByIdAndRemove(req.params.dbsupportplan_id, function(err) {
         if(err){
             req.flash('error', "We could not delete this Server!!!");

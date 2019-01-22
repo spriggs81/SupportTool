@@ -8,9 +8,7 @@ var middlewareObj = {};
 
 middlewareObj.checkMessageOwnership = function(req, res, next){
     if(req.isAuthenticated()){
-        console.log("this is user: " + req.user._id);
         Mainmessage.findById(req.params.message_id, function(err, foundMessage){
-        console.log("this is from params: " + foundMessage.creator._id);
             if(err){
                 console.log(err || !foundMessage);
                 req.flash("error","Can Not Find Message!");
@@ -18,7 +16,7 @@ middlewareObj.checkMessageOwnership = function(req, res, next){
             } else {
                 //does user own the Message
                 if(foundMessage.creator._id == req.user._id || req.user.admin == true){
-                    next();    
+                    next();
                 } else {
                     req.flash("error","You don't have permissions to do that!");
                     res.redirect("back");
@@ -35,10 +33,25 @@ middlewareObj.checkIsAdmin = function(req, res, next){
     if(req.isAuthenticated()){
         //does user have admin rights
         if(req.user.admin == true){
-            next();    
+            next();
         } else {
             req.flash("error","You don't have permissions to do that!");
             res.redirect("back");
+        }
+    }else {
+        req.flash("error","You need to be logged in to do that");
+        res.redirect("back");
+    }
+};
+
+middlewareObj.checkIsAdminDelete = function(req, res, next){
+    if(req.isAuthenticated()){
+        //does user have admin rights
+        if(req.user.admin !== true || req.user.username == 'admin_user'){
+          req.flash("error","You don't have permissions to do that!");
+          res.redirect("back");                
+        } else {
+          next();
         }
     }else {
         req.flash("error","You need to be logged in to do that");
@@ -56,7 +69,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
             } else {
                 //does user own the comment
                 if(foundComment.creator._id == req.user._id || req.user.admin == true){
-                    next();    
+                    next();
                 } else {
                     req.flash("error","You don't have permissions to do that!");
                     res.redirect("back");

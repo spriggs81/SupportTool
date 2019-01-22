@@ -46,7 +46,7 @@ router.post("/products/new", middleware.checkIsAdmin, function(req, res) {
                         req.flash('success', newProduct.name + " has been added to the Product Database!");
                         res.redirect("/admin/db/products");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Product Already Exist!');
                 res.redirect("/admin/db/products");
@@ -55,7 +55,7 @@ router.post("/products/new", middleware.checkIsAdmin, function(req, res) {
     }
 });
 
-//bd edit page routeEdit page 
+//bd edit page routeEdit page
 router.get("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req, res){
     Dbproduct.findById(req.params.dbproduct_id, function(err, foundProduct){
         if(err){
@@ -97,7 +97,7 @@ router.put("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req
                         req.flash('success', updatedProduct.name + " has been updated in the Product Database!");
                         res.redirect("/admin/db/products");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Product Already Exist!');
                 res.redirect("/admin/db/products");
@@ -108,7 +108,7 @@ router.put("/products/:dbproduct_id/edit", middleware.checkIsAdmin, function(req
 
 
 //delete route for DB Server
-router.delete("/products/:dbproduct_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/products/:dbproduct_id/delete", middleware.checkIsAdminDelete, function(req, res){
     Dbproduct.findByIdAndRemove(req.params.dbproduct_id, function(err) {
         if(err){
             req.flash('error', "We could not delete this Server!!!");

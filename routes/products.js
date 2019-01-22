@@ -40,7 +40,7 @@ router.get("/new", middleware.checkIsAdmin, function(req, res) {
                 } else {
                     res.render("products/new", {client: foundClient, products: foundProducts});
                 }
-            });  
+            });
         }
     });
 });
@@ -62,7 +62,7 @@ router.post("/", middleware.checkIsAdmin, function(req, res){
                 client.save();
                 req.flash('success', "You have added a New Product to " + client.name);
                 res.redirect('/clients/' + req.params.id +'/products/new');
-            } 
+            }
         });
     });
 });
@@ -109,34 +109,11 @@ router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
                             //res.render("products/new", {client: foundClient, products: foundProducts});
                         }
                     });
-                }                
+                }
             });
         }
     });
 });
-
-
-
-
-/*//Get Product Edit Form
-router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
-        if(err){
-            req.flash('error', "We cannot find the Client!!!");
-            res.redirect("/clients");
-        } else{
-            Product.findById(req.params.product_id, function(err, foundProduct){
-                if(err){
-                    req.flash('error',"We cannot find this Product!");
-                    console.log(err);
-                    res.redirect("/clients/:id/products");
-                } else {
-                    res.render("products/edit", {client: foundClient, product: foundProduct});
-                }                
-            });
-        }
-    });
-});*/
 
 //Product Edit route
 router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
@@ -159,7 +136,7 @@ router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
 });
 
 //Delete a Product
-router.delete("/:product_id", middleware.checkIsAdmin, function(req, res){
+router.delete("/:product_id", middleware.checkIsAdminDelete, function(req, res){
     Product.findByIdAndRemove(req.params.product_id, function(err){
         if(err){
             console.log(err);

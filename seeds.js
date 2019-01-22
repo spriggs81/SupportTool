@@ -256,7 +256,7 @@ function seedDB(){
                                     rabbit: "",
                                     rabbitun: "",
                                     rabbitpd: "",
-                                    note: "Kevin ground round brisket capicola pancetta spare ribs. Drumstick pancetta shankle, cupim ground round jerky leberkas pork belly turducken sausage ham. Strip steak pork chop landjaeger meatball ham boudin chuck biltong ground round. Salami ham hock drumstick pork chop burgdoggen cupim. Flank sirloin meatball ground round, spare ribs ham hock pork belly andouille chuck picanha cow shank shankle."  
+                                    note: "Kevin ground round brisket capicola pancetta spare ribs. Drumstick pancetta shankle, cupim ground round jerky leberkas pork belly turducken sausage ham. Strip steak pork chop landjaeger meatball ham boudin chuck biltong ground round. Salami ham hock drumstick pork chop burgdoggen cupim. Flank sirloin meatball ground round, spare ribs ham hock pork belly andouille chuck picanha cow shank shankle."
                                 }, function(err, product){
                                     if(err){
                                         console.log(err);
@@ -355,11 +355,11 @@ function seedDB(){
                             }
                         });
                     }
-                });    
+                });
             });
         }
     });
-    /*Credprofile.remove({}, function(err){
+    Credprofile.remove({}, function(err){
         if(err){
            console.log(err)
         } else {
@@ -367,13 +367,13 @@ function seedDB(){
             var user = 12345;
             Credprofile.create({user: user, admin: admin}, function(err, newprofile){
                 if(err){
-                    console.log(err);   
+                    console.log(err);
                 } else {
                     console.log('New Profile Added');
                 }
             });
         }
-    });*/
+    });
 }
 
 module.exports = seedDB;

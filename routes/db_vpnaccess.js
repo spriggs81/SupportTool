@@ -46,7 +46,7 @@ router.post("/vpnaccess/new", middleware.checkIsAdmin, function(req, res) {
                         req.flash('success', newAccess.name + " has been added to the VPN Access Database!");
                         res.redirect("/admin/db/vpnaccess");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This VPN Access Already Exist!');
                 res.redirect("/admin/db/vpnaccess");
@@ -55,7 +55,7 @@ router.post("/vpnaccess/new", middleware.checkIsAdmin, function(req, res) {
     }
 });
 
-//bd edit page routeEdit page 
+//bd edit page routeEdit page
 router.get("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(req, res){
     Dbvpnaccess.findById(req.params.dbvpnaccess_id, function(err, foundAccess){
         if(err){
@@ -97,7 +97,7 @@ router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(
                         req.flash('success', updatedAccess.name + " has been updated in the VPN Access Database!");
                         res.redirect("/admin/db/vpnaccess");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This VPN Access Already Exist!');
                 res.redirect("/admin/db/vpnaccess");
@@ -108,7 +108,7 @@ router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(
 
 
 //delete route for DB Server
-router.delete("/vpnaccess/:dbvpnaccess_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/vpnaccess/:dbvpnaccess_id/delete", middleware.checkIsAdminDelete, function(req, res){
     Dbvpnaccess.findByIdAndRemove(req.params.dbvpnaccess_id, function(err) {
         if(err){
             req.flash('error', "We could not delete this Server!!!");

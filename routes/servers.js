@@ -22,26 +22,26 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-// New App Server Form route 
+// New App Server Form route
 router.get("/new/app", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "Can't find client!!!");
             res.redirect("/clients/:id/server/new");
         } else {
-            res.render("servers/newapp", {client: foundClient});  
+            res.render("servers/newapp", {client: foundClient});
         }
     });
 });
 
-// New DB Server Form route 
+// New DB Server Form route
 router.get("/new/db", middleware.checkIsAdmin, function(req, res) {
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "Can't find client!!!");
             res.redirect("/clients/:id/server/new");
         } else {
-            res.render("servers/newdb", {client: foundClient});  
+            res.render("servers/newdb", {client: foundClient});
         }
     });
 });
@@ -63,7 +63,7 @@ router.post("/app", middleware.checkIsAdmin, function(req, res){
                 foundClient.save();
                 req.flash('success', "A New Application Server has been Added to " + foundClient.name);
                 res.redirect('/clients/' + foundClient._id +'/servers/new/app');
-            } 
+            }
         });
     });
 });
@@ -86,7 +86,7 @@ router.post("/db", middleware.checkIsAdmin, function(req, res){
                 foundClient.save();
                 req.flash('success', "A New Database Server has been Added to " + foundClient.name);
                 res.redirect('/clients/' + foundClient._id +'/servers/new/db');
-            } 
+            }
         });
     });
 });
@@ -105,7 +105,7 @@ router.get("/app/:server_id", middleware.isLoggedIn, function(req, res) {
                     res.redirect("back");
                 } else {
                     res.render("servers/showapp", {client: foundClient, server: foundServer});
-                } 
+                }
             });
         }
     });
@@ -125,7 +125,7 @@ router.get("/db/:server_id", middleware.isLoggedIn, function(req, res) {
                     res.redirect("back");
                 } else {
                     res.render("servers/showdb", {client: foundClient, server: foundServer});
-                } 
+                }
             });
         }
     });
@@ -146,7 +146,7 @@ router.get('/app/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
                     res.redirect("/clients/:id/servers");
                 } else {
                     res.render("servers/editapp", {client: foundClient, server: foundServer});
-                }                
+                }
             });
         }
     });
@@ -187,7 +187,7 @@ router.get('/db/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
                     res.redirect("/clients/:id/servers");
                 } else {
                     res.render("servers/editdb", {client: foundClient, server: foundServer});
-                }                
+                }
             });
         }
     });
@@ -215,7 +215,7 @@ router.put("/db/:server_id", middleware.checkIsAdmin, function(req, res) {
 });
 
 //delete route for App Server
-router.delete("/app/:server_id", middleware.checkIsAdmin, function(req, res){
+router.delete("/app/:server_id", middleware.checkIsAdminDelete, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
@@ -234,7 +234,7 @@ router.delete("/app/:server_id", middleware.checkIsAdmin, function(req, res){
 });
 
 //delete route for DB Server
-router.delete("/db/:server_id", middleware.checkIsAdmin, function(req, res){
+router.delete("/db/:server_id", middleware.checkIsAdminDelete, function(req, res){
     Client.findById(req.params.id, function(err, foundClient) {
         if(err){
             req.flash('error', "We cannot find the Client!!!");

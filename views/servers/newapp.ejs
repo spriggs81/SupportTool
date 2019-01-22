@@ -3,7 +3,7 @@
         Adding App Server info to <%= client.name %>:
     </div>
     <hr>
-    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/app" method="POST">
+    <form id="newProdForm" class="ui form after40" action="/clients/<%= client._id %>/servers/app" method="POST">
         <h3 class="ui dividing header">New App Server Form</h3>
         <div class="two fields">
             <div class="field">
@@ -65,5 +65,5 @@
         <button class="ui blue inverted button">Submit</button>
         <a class="ui red inverted button" href="/clients/<%= client._id %>/servers">Done / Go Back</a>
     </form>
-    
+
 <% include ../partials/footer %>

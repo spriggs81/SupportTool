@@ -25,16 +25,21 @@ var homeRoute               = require("./routes/home"),
     indexRoutes             = require("./routes/index"),
     knowledgeRoutes         = require("./routes/knowledge");
 
+//app connection CONFIG
+var DATABASE = "mongodb://localhost/support_tools_v4",
+    PORT     = 3000,
+    IP       = "127.0.0.1";
+
 //setup MongoDB
-mongoose.connect(process.env.DATABASEURL,{ useNewUrlParser: true }, (err) => { 
+mongoose.connect(DATABASE, (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
-        console.log("Error in DB Connection : " + JSON.stringify(err, undefined, 2)); 
+        console.log("Error in DB Connection : " + JSON.stringify(err, undefined, 2));
     }
 });
 
-// APP CONFIG    
+// APP CONFIG
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -81,6 +86,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, IP, function(){
     console.log("Support Tool Is Online!");
 });

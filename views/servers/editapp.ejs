@@ -4,7 +4,7 @@
         Editing App Server info for <%= client.name %>:
     </div>
     <hr>
-    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/app/<%= server._id %>?_method=PUT" method="POST">
+    <form id="newProdForm" class="ui form ater40" action="/clients/<%= client._id %>/servers/app/<%= server._id %>?_method=PUT" method="POST">
         <h3 class="ui dividing header">Edit App Server Form</h3>
         <div class="two fields">
             <div class="field">
@@ -65,5 +65,5 @@
         </div>
         <button class="ui blue inverted button">Submit</button>
     </form>
-    
+
 <% include ../partials/footer %>

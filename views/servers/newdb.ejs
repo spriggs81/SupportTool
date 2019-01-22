@@ -3,7 +3,7 @@
         Adding Database Server info to <%= client.name %>:
     </div>
     <hr>
-    <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/db" method="POST">
+    <form id="newProdForm" class="ui form after40" action="/clients/<%= client._id %>/servers/db" method="POST">
         <h3 class="ui dividing header">New DB Server Form</h3>
         <div class="three fields">
             <div class="field">
@@ -77,5 +77,5 @@
         <button class="ui blue inverted button">Submit</button>
         <a class="ui red inverted button" href="/clients/<%= client._id %>/servers">Done / Go Back</a><br><br>
     </form>
-    
+
 <% include ../partials/footer %>

@@ -1,4 +1,4 @@
-<% include ../partials/header %>    
+<% include ../partials/header %>
     <a class="ui purple inverted button" href="/clients/"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui center aligned container">
         <a class="ui green inverted button" href="/clients/<%= client._id %>">Client Info</a>
@@ -20,7 +20,7 @@
             <div class="or"></div>
             <button onclick="hideThis(6);" class="ui button">Inactive Servers</button>
         </div>
-        
+
     </div>
     <hr>
     <div id="appServers">
@@ -144,47 +144,50 @@
             </tbody>
         </table>
         <hr>
-        <div class="ui label">
-            Test Database Server(s):
-        </div>
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th>Hostname:</th>
-                    <th>IP:</th>
-                    <th>Port:</th>
-                    <th>DB Name::</th>
-                    <th>DB Type:</th>
-                    <th>DB Version:</th>
-                    <th>DB Schema</th>
-                    <th>OS:</th>
-                    <th>CPU:</th>
-                    <th>RAM:</th>
-                    <th>Disk:</th>
-                </tr>
-            </thead>
-            <tbody>
-             <% client.dbservers.forEach(function(dbserver){ %>
-                <% if(dbserver.type === "Test"){ %>
-                    <tr>
-                        <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
-                        <td><%= dbserver.ip %></td>
-                        <td><%= dbserver.port %></td>
-                        <td><%= dbserver.dbname %></td>
-                        <td><%= dbserver.dbtype %></td>
-                        <td><%= dbserver.dbversion %></td>
-                        <td><%= dbserver.dbschema %></td>
-                        <td><%= dbserver.os %></td>
-                        <td><%= dbserver.cpu %></td>
-                        <td><%= dbserver.ram %></td>
-                        <td><%= dbserver.disk %></td>
-                    </tr>
-                <% }; %>
-            <% }); %>
-            </tbody>
-        </table>
+        <div class="after40">
+          <div class="ui label">
+              Test Database Server(s):
+          </div>
+          <table class="ui celled table">
+              <thead>
+                  <tr>
+                      <th>Hostname:</th>
+                      <th>IP:</th>
+                      <th>Port:</th>
+                      <th>DB Name::</th>
+                      <th>DB Type:</th>
+                      <th>DB Version:</th>
+                      <th>DB Schema</th>
+                      <th>OS:</th>
+                      <th>CPU:</th>
+                      <th>RAM:</th>
+                      <th>Disk:</th>
+                  </tr>
+              </thead>
+              <tbody>
+               <% client.dbservers.forEach(function(dbserver){ %>
+                  <% if(dbserver.type === "Test"){ %>
+                      <tr>
+                          <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
+                          <td><%= dbserver.ip %></td>
+                          <td><%= dbserver.port %></td>
+                          <td><%= dbserver.dbname %></td>
+                          <td><%= dbserver.dbtype %></td>
+                          <td><%= dbserver.dbversion %></td>
+                          <td><%= dbserver.dbschema %></td>
+                          <td><%= dbserver.os %></td>
+                          <td><%= dbserver.cpu %></td>
+                          <td><%= dbserver.ram %></td>
+                          <td><%= dbserver.disk %></td>
+                      </tr>
+                  <% }; %>
+              <% }); %>
+              </tbody>
+          </table>
+        </<div
+      </div>
     </div>
-    <div id="inactServers" class="bye">
+    <div id="inactServers" class="">
         <div>
             <div class="ui label">
                 Inactive Application Server(s):
@@ -228,7 +231,7 @@
             </table>
             <hr>
         </div>
-        <div>
+        <div class="after40">
             <div class="ui label">
                 Inactive Database Server(s):
             </div>
@@ -269,6 +272,6 @@
                 </tbody>
             </table>
             <hr>
-        </div>        
+        </div>
     </div>
 <% include ../partials/footer %>

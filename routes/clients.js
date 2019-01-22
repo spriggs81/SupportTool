@@ -8,7 +8,7 @@ var Dbsupportplan   = require("../models/dbsupportplan");
 var Dbvpnaccess     = require("../models/dbvpnaccess");
 
 //Index page shows all clients
-router.get("/", middleware.isLoggedIn, function(req, res){   
+router.get("/", middleware.isLoggedIn, function(req, res){
     Client.find().sort({name:1}).exec(function(err, allClients){
         if(err){
             console.log(err);
@@ -63,7 +63,7 @@ router.post("/", middleware.checkIsAdmin, function(req, res){
             req.flash('success', req.body.client.name+" has been added to the System!");
             res.redirect("/clients/"+newClient.id);
         }
-    }); 
+    });
 });
 
 //client show page
@@ -137,7 +137,7 @@ router.put("/:id", middleware.checkIsAdmin, function(req, res) {
 });
 
 //client delete route
-router.delete("/:id", middleware.checkIsAdmin, function(req, res){
+router.delete("/:id", middleware.checkIsAdminDelete, function(req, res){
     Client.findByIdAndRemove(req.params.id, function(err){
         if(err){
             req.flash('error',"There was an error removing this Client, please try again!!!");

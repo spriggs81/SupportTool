@@ -46,7 +46,7 @@ router.post("/clientstatus/new", middleware.checkIsAdmin, function(req, res) {
                         req.flash('success', newStatus.name + " has been added to the Client Status Database!");
                         res.redirect("/admin/db/clientstatus");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Status Already Exist!');
                 res.redirect("/admin/db/clientstatus");
@@ -55,7 +55,7 @@ router.post("/clientstatus/new", middleware.checkIsAdmin, function(req, res) {
     }
 });
 
-//bd edit page routeEdit page 
+//bd edit page routeEdit page
 router.get("/clientstatus/:Dbclientstatus_id/edit", middleware.checkIsAdmin, function(req, res){
     Dbclientstatus.findById(req.params.Dbclientstatus_id, function(err, foundStatus){
         if(err){
@@ -97,7 +97,7 @@ router.put("/clientstatus/:Dbclientstatus_id/edit", middleware.checkIsAdmin, fun
                         req.flash('success', updatedStatus.name + " has been updated in the Client Status Database!");
                         res.redirect("/admin/db/clientstatus");
                     }
-                });     
+                });
             } else {
                 req.flash('error', 'This Client Status Already Exist!');
                 res.redirect("/admin/db/clientstatus");
@@ -108,7 +108,7 @@ router.put("/clientstatus/:Dbclientstatus_id/edit", middleware.checkIsAdmin, fun
 
 
 //delete route for DB Server
-router.delete("/clientstatus/:Dbclientstatus_id/delete", middleware.checkIsAdmin, function(req, res){
+router.delete("/clientstatus/:Dbclientstatus_id/delete", middleware.checkIsAdminDelete, function(req, res){
     Dbclientstatus.findByIdAndRemove(req.params.Dbclientstatus_id, function(err) {
         if(err){
             req.flash('error', "We could not delete this Server!!!");

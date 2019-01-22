@@ -61,11 +61,11 @@ router.put("/profile/:profile_id/:creds", middleware.checkIsAdmin, function(req,
                        } else {
                             req.flash('success', 'Profile Code has been Updated!');
                             res.redirect('/admin/users/profile/'+foundProfile._id+'/'+req.params.creds);
-                       }    
+                       }
                     });
                 } else{
                     req.flash('error', 'You have a problem now.')
-                }                
+                }
             }
         }
     });
@@ -73,7 +73,7 @@ router.put("/profile/:profile_id/:creds", middleware.checkIsAdmin, function(req,
 
 
 //user delete route
-router.delete("/:user_id", middleware.checkIsAdmin, function(req, res) {
+router.delete("/:user_id", middleware.checkIsAdminDelete, function(req, res) {
     User.findByIdAndRemove(req.params.user_id, function(err){
         if(err){
             console.log(err);
