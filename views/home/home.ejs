@@ -6,12 +6,18 @@
 
     <p>Your current access level is
     <% if(currentUser.username === 'admin_user'){ %>
-    limited administrator.  You have most of the rights as a normal administrator, but with limits to the user information data and deleting. 
+    limited administrator.  You have most of the rights as a normal administrator, but with limits to the user information data and deleting.
     <% } else if(currentUser.admin === true){ %>
     Administrator.  You have full access on this application.
+      <% if(currentUser.defaultview === false) { %>
+        <p>Your current view is set to Admin Read Mode.  You can use the Admin Edit Mode by clicking here: <form action="/admin/<%= currentUser._id %>/changeview/true?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Edit Mode</button></form>
+      <% } else { %>
+        <p>Your current view is set to Admin Edit Mode.  You can use the Admin Read Mode by clicking here: <form action="/admin/<%= currentUser._id %>/changeview/false?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Read Mode</button></form>
+      <% } %>
     <% } else { %>
     Read Only Access.  You can view data and add knowledge based information and questions.
     <% } %>
+    </p>
 
 
 <% include ../partials/footer %>

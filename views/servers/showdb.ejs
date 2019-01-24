@@ -3,7 +3,7 @@
     <a class="ui purple inverted button" href="/clients/<%= client._id %>/servers"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui aligned huge header">
         <%= client.name %>'s Server Information:
-        <% if(currentUser && currentUser.admin === true){ %>
+        <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
         <div id="actionButtons" class="ui right floated statistic">
             <form action="/clients/<%= client._id %>/servers/db/<%= server._id %>?_method=DELETE" method="POST">
             <a class="ui small orange inverted button" href="/clients/<%= client._id %>/servers/db/<%= server._id %>/edit">Edit Server</a>
@@ -87,17 +87,19 @@
             </div>
         </div>
     </div>
-    <div class="ui segments after40">
-        <div class="ui secondary segment">
-            <span class="ui header">Server Notes:</span>
-        </div>
-        <div class="ui segment">
-            <div class="ui grid">
-                <div class="sixteen wide column">
-                    <%= server.notes %>
-                </div>
-            </div>
-        </div>
+    <div class="after40">
+      <div class="ui segments">
+          <div class="ui secondary segment">
+              <span class="ui header">Server Notes:</span>
+          </div>
+          <div class="ui segment">
+              <div class="ui grid">
+                  <div class="sixteen wide column">
+                      <%= server.notes %>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
 
 <% include ../partials/footer %>

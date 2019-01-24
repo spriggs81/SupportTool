@@ -7,7 +7,7 @@
         <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
     </div>
     <div class="ui huge header">
-        <%= client.name %>'s Product(s) info:<% if(currentUser && currentUser.admin === true){ %><a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/products/new">Add Product</a><% } %>
+        <%= client.name %>'s Product(s) info:<a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/products/new">Add Product</a>
     </div>
     <div class="ui center aligned container">
         <div class="ui large buttons">
@@ -20,6 +20,7 @@
     </div>
     <hr>
     <div id="inProduction">
+      <div class="after40">
         <div class="ui label">
             Product(s) in Production:
         </div>
@@ -50,8 +51,10 @@
             <% }); %>
             </tbody>
         </table>
+      </div>
     </div>
     <div id="inTesting" class="bye">
+      <div class="after40">
         <div class="ui label">
             Product(s) in Testing:
         </div>
@@ -80,8 +83,10 @@
             <% }); %>
             </tbody>
         </table>
+      </div>
     </div>
     <div id="inactive" class="bye">
+      <div class="after40">
         <div class="ui label">
             Inactive Product(s):
         </div>
@@ -112,6 +117,7 @@
             <% }); %>
             </tbody>
         </table>
-    </div>        
+      </div>
+    </div>
 
 <% include ../partials/footer %>

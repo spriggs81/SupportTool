@@ -19,53 +19,54 @@
     <a href="#" class="ui green inverted button kprod">Add New Product</a>
     <% } %>
     <hr>
-    <table class="ui celled table">
-        <thead>
-            <tr>
-                <th class="six wide">Product Name:</th>
-                <th class="three wide">Info Articles:</th>
-                <th class="three wide">Questions:</th>
-            </tr>
-        </thead>
-        <tbody>
-    <% products.forEach(function(product){ %>
-            <tr>
-                <td><a class="ui header" href="/knowledge/<%= product._id %>"><%= product.name %></a></td>
-                <% var info_count = 0; %>
-                <% for(var i = 0; i < allinfo.length; i++){ %>
-                <% if(allinfo[i].product == product._id){ %>
-                <% info_count++ %>
-                <% }%>
-                <% } %>
-                <td>
-                    <a href="/knowledge/<%= product._id %>/info">
-                        <% if(info_count == 0){ %>
-                        Nothing Added Yet
-                        <% } else if(info_count == 1){ %>
-                        <%= info_count %> Helpful Info article
-                        <% } else { %>
-                        <%= info_count %> Helpful Info articles
-                        <% } %>
-                    </a>
-                </td>
-                <% var quest_count = 0; %>
-                <% for(var i = 0; i < allquestions.length; i++){ %>
-                <% if(allquestions[i].product == product._id){ %>
-                <% quest_count++ %>
-                <% }%>
-                <% } %>
-                <td>
-                    <a href="/knowledge/<%= product._id %>/questions">
-                        <% if(quest_count == 1){ %>
-                        <%= quest_count %> Question
-                        <% } else {%>
-                        <%= quest_count %> Questions
-                        <% } %>
-                    </a>
-                </td>
-            </tr>
-    <% }) %>
+    <div class="after40">
+      <table class="ui celled table">
+          <thead>
+              <tr>
+                  <th class="six wide">Product Name:</th>
+                  <th class="three wide">Info Articles:</th>
+                  <th class="three wide">Questions:</th>
+              </tr>
+          </thead>
+          <tbody>
+      <% products.forEach(function(product){ %>
+              <tr>
+                  <td><a class="ui header" href="/knowledge/<%= product._id %>"><%= product.name %></a></td>
+                  <% var info_count = 0; %>
+                  <% for(var i = 0; i < allinfo.length; i++){ %>
+                  <% if(allinfo[i].product == product._id){ %>
+                  <% info_count++ %>
+                  <% }%>
+                  <% } %>
+                  <td>
+                      <a href="/knowledge/<%= product._id %>/info">
+                          <% if(info_count == 0){ %>
+                          Nothing Added Yet
+                          <% } else if(info_count == 1){ %>
+                          <%= info_count %> Helpful Info article
+                          <% } else { %>
+                          <%= info_count %> Helpful Info articles
+                          <% } %>
+                      </a>
+                  </td>
+                  <% var quest_count = 0; %>
+                  <% for(var i = 0; i < allquestions.length; i++){ %>
+                  <% if(allquestions[i].product == product._id){ %>
+                  <% quest_count++ %>
+                  <% }%>
+                  <% } %>
+                  <td>
+                      <a href="/knowledge/<%= product._id %>/questions">
+                          <% if(quest_count == 1){ %>
+                          <%= quest_count %> Question
+                          <% } else {%>
+                          <%= quest_count %> Questions
+                          <% } %>
+                      </a>
+                  </td>
+              </tr>
+      <% }) %>
     </div>
-    
+
 
 <% include ../partials/footer %>

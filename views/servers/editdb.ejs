@@ -4,79 +4,80 @@
         Editing DB Server info for <%= client.name %>:
     </div>
     <hr>
-    <form id="newProdForm" class="ui form after40" action="/clients/<%= client._id %>/servers/db/<%= server._id %>?_method=PUT" method="POST">
-        <h3 class="ui dividing header">Edit DB Server Form</h3>
-        <div class="two fields">
-            <div class="field">
-                <label>Please Select Server Environment</label>
-                <select class="ui fluid dropdown" name="dbserver[type]" required>
-                    <option value="<%= server.type %>"><%= server.type %></option>
-                    <option value="Production">Production</option>
-                    <option value="Test">Test</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Hostname:</label>
-                <input type="text" name="dbserver[hostname]" value="<%= server.hostname %>">
-            </div>
-            <div class="field">
-                <label>IP:</label>
-                <input type="text" name="dbserver[ip]" value="<%= server.ip %>">
-            </div>
-        </div>
-        <div class="four fields">
-            <div class="field">
-                <label>Port:</label>
-                <input type="text" name="dbserver[port]" value="<%= server.port %>">
-            </div>
-            <div class="field">
-                <label>Database Name:</label>
-                <input type="text" name="dbserver[dbname]" value="<%= server.dbname %>">
-            </div>
-            <div class="field">
-                <label>Database Type:</label>
-                <input type="text" name="dbserver[dbtype]" value="<%= server.dbtype %>">
-            </div>
-            <div class="field">
-                <label>Database Version:</label>
-                <input type="text" name="dbserver[dbversion]" value="<%= server.dbversion %>">
-            </div>
-        </div>
-        <div class="three fields">
-            <div class="field">
-                <label>Database Schema:</label>
-                <input type="text" name="dbserver[dbschema]" value="<%= server.dbschema %>">
-            </div>
-            <div class="field">
-                <label>JDBC URL:</label>
-                <input type="text" name="dbserver[jdbcurl]" value="<%= server.jdbcurl %>">
-            </div>
-            <div class="field">
-                <label>Operating System:</label>
-                <input type="text" name="dbserver[os]" value="<%= server.os %>">
-            </div>
-        </div>
-        <div class="four fields">
-            <div class="field">
-                <label>Notes:</label>
-                <textarea name="dbserver[notes]"><%= server.notes %></textarea>
-            </div>
-            <div class="field">
-                <label>CPU Info:</label>
-                <textarea name="dbserver[cpu]"><%= server.cpu %></textarea>
-            </div>
-            <div class="field">
-                <label>Ram Info:</label>
-                <textarea name="dbserver[ram]"><%= server.ram %></textarea>
-            </div>
-            <div class="field">
-                <label>Disk Info:</label>
-                <textarea name="dbserver[disk]"><%= server.disk %></textarea>
-            </div>
-        </div>
-        <button class="ui blue inverted button">Submit</button>
-        <div class="after40"></div>
-    </form>
+    <div class="after40">
+      <form id="newProdForm" class="ui form" action="/clients/<%= client._id %>/servers/db/<%= server._id %>?_method=PUT" method="POST">
+          <h3 class="ui dividing header">Edit DB Server Form</h3>
+          <div class="two fields">
+              <div class="field">
+                  <label>Please Select Server Environment</label>
+                  <select class="ui fluid dropdown" name="dbserver[type]" required>
+                      <option value="<%= server.type %>"><%= server.type %></option>
+                      <option value="Production">Production</option>
+                      <option value="Test">Test</option>
+                      <option value="Inactive">Inactive</option>
+                  </select>
+              </div>
+              <div class="field">
+                  <label>Hostname:</label>
+                  <input type="text" name="dbserver[hostname]" value="<%= server.hostname %>">
+              </div>
+              <div class="field">
+                  <label>IP:</label>
+                  <input type="text" name="dbserver[ip]" value="<%= server.ip %>">
+              </div>
+          </div>
+          <div class="four fields">
+              <div class="field">
+                  <label>Port:</label>
+                  <input type="text" name="dbserver[port]" value="<%= server.port %>">
+              </div>
+              <div class="field">
+                  <label>Database Name:</label>
+                  <input type="text" name="dbserver[dbname]" value="<%= server.dbname %>">
+              </div>
+              <div class="field">
+                  <label>Database Type:</label>
+                  <input type="text" name="dbserver[dbtype]" value="<%= server.dbtype %>">
+              </div>
+              <div class="field">
+                  <label>Database Version:</label>
+                  <input type="text" name="dbserver[dbversion]" value="<%= server.dbversion %>">
+              </div>
+          </div>
+          <div class="three fields">
+              <div class="field">
+                  <label>Database Schema:</label>
+                  <input type="text" name="dbserver[dbschema]" value="<%= server.dbschema %>">
+              </div>
+              <div class="field">
+                  <label>JDBC URL:</label>
+                  <input type="text" name="dbserver[jdbcurl]" value="<%= server.jdbcurl %>">
+              </div>
+              <div class="field">
+                  <label>Operating System:</label>
+                  <input type="text" name="dbserver[os]" value="<%= server.os %>">
+              </div>
+          </div>
+          <div class="four fields">
+              <div class="field">
+                  <label>Notes:</label>
+                  <textarea name="dbserver[notes]"><%= server.notes %></textarea>
+              </div>
+              <div class="field">
+                  <label>CPU Info:</label>
+                  <textarea name="dbserver[cpu]"><%= server.cpu %></textarea>
+              </div>
+              <div class="field">
+                  <label>Ram Info:</label>
+                  <textarea name="dbserver[ram]"><%= server.ram %></textarea>
+              </div>
+              <div class="field">
+                  <label>Disk Info:</label>
+                  <textarea name="dbserver[disk]"><%= server.disk %></textarea>
+              </div>
+          </div>
+          <button class="ui blue inverted button">Submit</button>
+      </form>
+    </div>
 
 <% include ../partials/footer %>

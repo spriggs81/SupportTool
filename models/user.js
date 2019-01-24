@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     admin: Boolean,
+    defaultview:Boolean,
     settings: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usersettings"

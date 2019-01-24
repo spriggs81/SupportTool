@@ -6,11 +6,7 @@
         <a class="ui green inverted active button" href="/clients/<%= client._id %>/servers">Server Info</a>
     </div>
     <div class="ui huge header">
-        <%= client.name %>'s Server info:
-        <% if(currentUser && currentUser.admin === true){ %>
-        <a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/servers/new/db">Add DB Server</a>
-        <a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/servers/new/app">Add App Server</a>
-        <% } %>
+        <%= client.name %>'s Server info:   <a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/servers/new/db">Add DB Server</a>    <a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/servers/new/app">Add App Server</a>
     </div>
     <div class="ui center aligned container">
         <div class="ui large buttons">
@@ -24,6 +20,7 @@
     </div>
     <hr>
     <div id="appServers">
+      <div class="after40">
         <div class="ui label">
             Production Application Server(s):
         </div>
@@ -102,8 +99,10 @@
             <% }); %>
             </tbody>
         </table>
+      </div>
     </div>
     <div id="dbServers" class="bye">
+      <div class="after40">
         <div class="ui label">
             Production Database Server(s):
         </div>
@@ -144,51 +143,49 @@
             </tbody>
         </table>
         <hr>
-        <div class="after40">
-          <div class="ui label">
-              Test Database Server(s):
-          </div>
-          <table class="ui celled table">
-              <thead>
-                  <tr>
-                      <th>Hostname:</th>
-                      <th>IP:</th>
-                      <th>Port:</th>
-                      <th>DB Name::</th>
-                      <th>DB Type:</th>
-                      <th>DB Version:</th>
-                      <th>DB Schema</th>
-                      <th>OS:</th>
-                      <th>CPU:</th>
-                      <th>RAM:</th>
-                      <th>Disk:</th>
-                  </tr>
-              </thead>
-              <tbody>
-               <% client.dbservers.forEach(function(dbserver){ %>
-                  <% if(dbserver.type === "Test"){ %>
-                      <tr>
-                          <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
-                          <td><%= dbserver.ip %></td>
-                          <td><%= dbserver.port %></td>
-                          <td><%= dbserver.dbname %></td>
-                          <td><%= dbserver.dbtype %></td>
-                          <td><%= dbserver.dbversion %></td>
-                          <td><%= dbserver.dbschema %></td>
-                          <td><%= dbserver.os %></td>
-                          <td><%= dbserver.cpu %></td>
-                          <td><%= dbserver.ram %></td>
-                          <td><%= dbserver.disk %></td>
-                      </tr>
-                  <% }; %>
-              <% }); %>
-              </tbody>
-          </table>
-        </<div
+        <div class="ui label">
+            Test Database Server(s):
+        </div>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Hostname:</th>
+                    <th>IP:</th>
+                    <th>Port:</th>
+                    <th>DB Name::</th>
+                    <th>DB Type:</th>
+                    <th>DB Version:</th>
+                    <th>DB Schema</th>
+                    <th>OS:</th>
+                    <th>CPU:</th>
+                    <th>RAM:</th>
+                    <th>Disk:</th>
+                </tr>
+            </thead>
+            <tbody>
+             <% client.dbservers.forEach(function(dbserver){ %>
+                <% if(dbserver.type === "Test"){ %>
+                    <tr>
+                        <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
+                        <td><%= dbserver.ip %></td>
+                        <td><%= dbserver.port %></td>
+                        <td><%= dbserver.dbname %></td>
+                        <td><%= dbserver.dbtype %></td>
+                        <td><%= dbserver.dbversion %></td>
+                        <td><%= dbserver.dbschema %></td>
+                        <td><%= dbserver.os %></td>
+                        <td><%= dbserver.cpu %></td>
+                        <td><%= dbserver.ram %></td>
+                        <td><%= dbserver.disk %></td>
+                    </tr>
+                <% }; %>
+            <% }); %>
+            </tbody>
+        </table>
       </div>
     </div>
-    <div id="inactServers" class="">
-        <div>
+    <div id="inactServers" class="bye">
+        <div class="after40">
             <div class="ui label">
                 Inactive Application Server(s):
             </div>
@@ -231,7 +228,7 @@
             </table>
             <hr>
         </div>
-        <div class="after40">
+        <div>
             <div class="ui label">
                 Inactive Database Server(s):
             </div>
@@ -273,5 +270,6 @@
             </table>
             <hr>
         </div>
+      </div>
     </div>
 <% include ../partials/footer %>

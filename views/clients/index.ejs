@@ -1,40 +1,41 @@
 <% include ../partials/header %>
-    
+
     <% if(currentUser && currentUser.admin === true){ %>
     <!--<div class="ui grid">-->
         <!--<div class="twelve wide column">
             <form class='ui' action='' method="POST">
-                
-            </form>            
+
+            </form>
         </div>-->
         <!--<div class="">-->
-            <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>   
+            <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>
         <!--</div>-->
     <!--</div>-->
     <hr>
     <% } %>
-    
-    <table class="ui celled table">
-        <thead>
-            <tr>
-                <th class="six wide">Client Name:</th>
-                <th class="three wide">Support Plan:</th>
-                <th class="three wide">Account Status:</th>
-                <th class="two wide">24/7 IT:</th>
-                <th class="two wide">AD Client:</th>
-            </tr>
-        </thead>
-        <tbody>
-        <% clients.forEach(function(client){ %>
-            <tr>
-              <td><a href="/clients/<%= client._id %>"><%= client.name %></a></td>
-              <td><%= client.supportPlan %></td>
-              <td><%= client.status %></td>
-              <td><%= client.it_24_7 %></td>
-              <td><%= client.adclient %></td>
-            </tr>
-        <% }); %>
-        </tbody>
-    </table>
+    <div class="after40">
+      <table class="ui celled table">
+          <thead>
+              <tr>
+                  <th class="six wide">Client Name:</th>
+                  <th class="three wide">Support Plan:</th>
+                  <th class="three wide">Account Status:</th>
+                  <th class="two wide">24/7 IT:</th>
+                  <th class="two wide">AD Client:</th>
+              </tr>
+          </thead>
+          <tbody>
+          <% clients.forEach(function(client){ %>
+              <tr>
+                <td><a href="/clients/<%= client._id %>"><%= client.name %></a></td>
+                <td><%= client.supportPlan %></td>
+                <td><%= client.status %></td>
+                <td><%= client.it_24_7 %></td>
+                <td><%= client.adclient %></td>
+              </tr>
+          <% }); %>
+          </tbody>
+      </table>
+    </div>
 
 <% include ../partials/footer %>

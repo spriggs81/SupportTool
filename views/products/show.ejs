@@ -2,7 +2,7 @@
     <a class="ui purple inverted button" href="/clients/<%= client._id %>/products"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui aligned huge header">
         <%= client.name %>'s <%= product.name %> Product
-        <% if(currentUser && currentUser.admin === true){ %>
+        <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
         <div id="actionButtons" class="ui right floated statistic">
             <form action="/clients/<%= client._id %>/products/<%= product._id %>?_method=DELETE" method="POST">
             <a class="ui small orange inverted button" href="/clients/<%= client._id %>/products/<%= product._id %>/edit">Edit Product</a>
@@ -102,15 +102,9 @@
                                     <label>
                                         Password:
                                     </label>
-                                    <input id="prodPass" type="password" value="<%= product.flowvizpd %>" disabled></input>
-                                
-                                    <span class="lt20">
-                                        <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
-                                            Show
-                                        </button>
-                                    </span>
+                                    <%= product.flowvizpd %>
                                 </div>
-                                <% } %>    
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -138,15 +132,7 @@
                         <% } %>
                         <% if(product.rabbitpd){ %>
                         <div class="four wide column">
-                            RabbitMQ Password: 
-                            <span id="prodPass" class="bye">
-                                <%= product.rabbitpd %>
-                            </span>
-                            <span class="lt20">
-                                <button id="prodPassButton" class="mini ui red basic button" onclick="hideThis(5);">
-                                    Show
-                                </button>
-                            </span>
+                            RabbitMQ Password: <%= product.rabbitpd %>
                         </div>
                         <% } %>
                     </div>
@@ -154,19 +140,21 @@
             </div>
         </div>
     </div>
-    <div class="ui segments">
-        <div class="ui secondary segment">
-            <span class="ui header">Special Notes:</span>
-        </div>
-        <div class="ui segment">
-            <div class="ui grid">
-                <div class="sixteen wide column">
-                <% if(product.note){ %>
-                    Special Notes: <%= product.note %>
-                <% } %>
-                </div>
-            </div>
-        </div>
+    <div class="after40">
+      <div class="ui segments">
+          <div class="ui secondary segment">
+              <span class="ui header">Special Notes:</span>
+          </div>
+          <div class="ui segment">
+              <div class="ui grid">
+                  <div class="sixteen wide column">
+                  <% if(product.note){ %>
+                      Special Notes: <%= product.note %>
+                  <% } %>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
 
 <% include ../partials/footer %>

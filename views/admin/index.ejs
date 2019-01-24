@@ -1,53 +1,54 @@
 <% include ../partials/header %>
-    
+
     <div class="ui center aligned huge header">
         Welcome to the Admin Page <%= currentUser.firstname %>
     </div>
-   <h4 class="ui horizontal divider header">
-      <i class="database icon"></i>
-      Admin Settings
-    </h4>
-    <p class="ui center aligned segment">Here are the settings to the application.  <br>Please remember that changes to the settings may not take affect for all users until they refresh their session.  So have the user logout and restart their browser this should correct their issue in many cases.  If the user is still experiencing problems, please make sure that they are stating from the home page and not from a saved favorite or link.  <br>Please contact John Spriggs if these steps don't correct the issue.</p>
-    <h4 class="ui horizontal divider header">
-        <i class="user icon"></i>
-        Users
-    </h4>
-    <table class="ui definition table">
-      <tbody>
-         <tr>
-          <td>All Application Users</td>
-          <td><a class="ui green inverted button" href="/admin/users">All Users</a></td>
-        </tr>
-        <tr>
-          <td class="four wide column">New User Profile Numbers</td>
-          <td><a class="ui green inverted button" href="/admin/users/profile/<%= profile._id %>/user">Users Profile</a></td>
-          <td><a class="ui blue inverted button" href="/admin/users/profile/<%= profile._id %>/admin">Admin Profile</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <h4 class="ui horizontal divider header">
+    <div class="after40">
+     <h4 class="ui horizontal divider header">
         <i class="database icon"></i>
-        Database
-    </h4>
-    <table id="admindb" class="ui definition table">
-      <tbody>
-        <tr>
-          <td class="four wide column">Products</td>
-          <td><a class="ui green inverted button" href="/admin/db/products">All Products</a></td>
-        </tr>
-        <tr>
-          <td class="four wide column">Client Statuses</td>
-          <td><a class="ui green inverted button" href="/admin/db/clientstatus">All Client Statuses</a></td>
-        </tr>
-        <tr>
-          <td class="four wide column">Support Plans</td>
-          <td><a class="ui green inverted button" href="/admin/db/supportplan">All Support Plans</a></td>
-        </tr>
-        <tr>
-          <td class="four wide column">VPN Access</td>
-          <td><a class="ui green inverted button" href="/admin/db/vpnaccess">All VPN Access</a></td>
-        </tr>
-      </tbody>
-    </table>
-    
+        Admin Settings
+      </h4>
+      <p class="ui center aligned segment">Here are the settings to the application.  <br>Please remember that changes to the settings may not take affect for all users until they refresh their session.  So have the user logout and restart their browser this should correct their issue in many cases.  If the user is still experiencing problems, please make sure that they are stating from the home page and not from a saved favorite or link.  <br>Please contact John Spriggs if these steps don't correct the issue.</p>
+      <h4 class="ui horizontal divider header">
+          <i class="user icon"></i>
+          Users
+      </h4>
+      <table class="ui definition table">
+        <tbody>
+           <tr>
+            <td>All Application Users</td>
+            <td><a class="ui green inverted button" href="/admin/users">All Users</a></td>
+          </tr>
+          <tr>
+            <td class="four wide column">New User Profile Numbers</td>
+            <td><a class="ui green inverted button" href="/admin/users/profile/<%= profile._id %>/user">Users Profile</a></td>
+            <td><a class="ui blue inverted button" href="/admin/users/profile/<%= profile._id %>/admin">Admin Profile</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="ui horizontal divider header">
+          <i class="database icon"></i>
+          Database
+      </h4>
+      <table id="admindb" class="ui definition table">
+        <tbody>
+          <tr>
+            <td class="four wide column">Products</td>
+            <td><a class="ui green inverted button" href="/admin/db/products">All Products</a></td>
+          </tr>
+          <tr>
+            <td class="four wide column">Client Statuses</td>
+            <td><a class="ui green inverted button" href="/admin/db/clientstatus">All Client Statuses</a></td>
+          </tr>
+          <tr>
+            <td class="four wide column">Support Plans</td>
+            <td><a class="ui green inverted button" href="/admin/db/supportplan">All Support Plans</a></td>
+          </tr>
+          <tr>
+            <td class="four wide column">VPN Access</td>
+            <td><a class="ui green inverted button" href="/admin/db/vpnaccess">All VPN Access</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 <% include ../partials/footer %>

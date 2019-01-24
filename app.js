@@ -26,12 +26,12 @@ var homeRoute               = require("./routes/home"),
     knowledgeRoutes         = require("./routes/knowledge");
 
 //app local connection CONFIG
-var DATABASEURL = "mongodb://localhost/support_tools_v4",
-    PORT     = 3000,
-    IP       = "127.0.0.1";
+var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4",
+    PORT        = process.env.PORT || 3000,
+    IP          = process.env.IP || "127.0.0.1";
 
 //setup MongoDB
-mongoose.connect(process.env.DATABASEURL, (err) => {
+mongoose.connect(DATABASEURL, (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
@@ -86,6 +86,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, IP, function(){
     console.log("Support Tool Is Online!");
 });

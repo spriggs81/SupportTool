@@ -1,21 +1,22 @@
 <% include ../partials/header %>
+
         <a class="ui purple inverted button" href="/clients"><i class="ui arrow left icon"></i> Go Back</a>
         <div class="ui center aligned container">
             <a class="ui green inverted active button" href="/clients/<%= client._id %>">Client Info</a>
             <a class="ui green inverted button" href="/clients/<%= client._id %>/products">Product Info</a>
             <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
         </div>
-        <div class="ui main text segment" onload="startTime2()">
+        <div class="ui main text segment after40">
             <div class="ui huge header">
                 <%= client.name %>
-                <% if(currentUser && currentUser.admin === true){ %>
-                <div id="actionButtons" class="ui center aligned container">
-                    <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
-                        <a class="ui small orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
-                        <button class="ui small red inverted button">Delete Client</button>
-                    </form>
-                </div>
-                <% } %>
+                  <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
+                  <div id="actionButtons" class="ui center aligned container">
+                      <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
+                          <a class="ui small orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
+                          <button class="ui small red inverted button">Delete Client</button>
+                      </form>
+                  </div>
+                <% }; %>
             </div>
             <div class="ui meta">
                 <h4>
@@ -24,7 +25,7 @@
                         Customer's Current Time:
                     </div>
                      <div id="displayDate1" class="ui red label">
-                        <%= date1 %> 
+                        <%= date1 %>
                     </div><br>
                     <div id="displayDate2" class="ui red label">
                     <%= date2 %>
@@ -140,7 +141,8 @@
                     </div>
                 </div>
             </div>
-            <div id="edit" class="ui divided">
-            </div>
         </div>
+        <div class="after40">
+        </div>
+
 <% include ../partials/footer %>
