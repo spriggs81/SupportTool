@@ -86,6 +86,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(PORT, IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Support Tool Is Online!");
 });
