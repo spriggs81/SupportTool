@@ -1,9 +1,10 @@
 <% include ../partials/header %>
 
+  <a class="ui purple inverted button" href="/clients/<%= client._id %>/servers/db/<%= server._id %>"><i class="ui arrow left icon"></i> Go Back</a>
   <h1 class="ui center aligned header"> Administrator Edit Menu </h1>
   <br>
   <h1> Client: <%= client.name %> </h1>
-  <h1> Database Server: <%= server.rdphostname %> / IP: <%= server.ip %> </h1>
+  <h1> Database Server: <%= server.hostname %> / IP: <%= server.ip %> </h1>
   <div class="ui grid">
     <div class="sixteen wide column">
       <div class="ui segments">

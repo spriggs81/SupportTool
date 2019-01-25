@@ -31,7 +31,7 @@ var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/support_tools_
     IP          = process.env.IP || "localhost";
 
 //setup MongoDB
-mongoose.connect(process.env.DATABASEURL, (err) => {
+mongoose.connect(DATABASEURL, (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
@@ -86,6 +86,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, IP, function(){
     console.log("Support Tool Is Online!");
 });

@@ -7,9 +7,7 @@
         <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
     </div>
     <div class="ui huge header">
-      <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
-        <%= client.name %>'s Product(s) info:<a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/products/new">Add Product</a>
-      <% } %>
+      <h1><%= client.name %>'s Product(s) info:</h1> <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %><a class="ui blue inverted right floated button" href="/clients/<%= client._id %>/products/new">Add Product</a> <% } %>
     </div>
     <div class="ui center aligned container">
         <div class="ui large buttons">
