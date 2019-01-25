@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+  <h1 class="ui center aligned header"> Administrator Edit Menu </h1>
+  <br>
+  <h1> Client: <%= client.name %> </h1>
+  <h1> Application Server: <%= server.rdphostname %> / IP: <%= server.rdpip %> </h1>
+  <div class="ui grid">
+    <div class="sixteen wide column">
+      <div class="ui segments">
+        <div class="ui secondary segment">
+          <span class="ui">Application Server Menu Options:</span>
+        </div>
+        <div class="ui segment">
+          <div class="ui grid">
+            <div class="sixteen wide column">
+              <div class="ui raised segment">
+                <form action="/clients/<%= client._id %>/servers/app/<%= server._id %>?_method=DELETE" method="POST">
+                  <div class="ui large buttons">
+                    <a class="ui orange inverted button" href="/clients/<%= client._id %>/servers/app/<%= server._id %>/edit">Edit Server</a>
+                    <div class="or"></div>
+                    <button class="ui red inverted button">Delete Server</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% include ../partials/footer %>

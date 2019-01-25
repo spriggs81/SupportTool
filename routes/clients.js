@@ -149,4 +149,17 @@ router.delete("/:id", middleware.checkIsAdminDelete, function(req, res){
     });
 });
 
+//Client Menu Route
+router.get("/:id/menu", middleware.checkIsAdmin, function(req, res){
+    Client.findById(req.params.id, function(err, foundClient){
+        if(err){
+            console.log(err);
+            req.flash('error', 'please report to an admin!');
+            res.redirect('/clients');
+        } else {
+          res.render("clients/menu", {client: foundClient});
+        }
+    });
+});
+
 module.exports = router;

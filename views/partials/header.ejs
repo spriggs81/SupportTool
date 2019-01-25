@@ -10,14 +10,14 @@
             <div class="ui inverted default menu itemSize">
             <% if(currentUser){ %>
                 <a class="item" href="/home">Home</a>
-                <a class="item" href="/clients">Clients</a> 
+                <a class="item" href="/clients">Clients</a>
                 <a class="item" href="/knowledge">Knowledge</a>
             <% }; %>
             <% if(currentUser && currentUser.admin === true){%>
                 <a class="item" href="/admin">Admin Page</a>
             <% }; %>
             <%if(currentUser){ %>
-                    <span class="item right floated"><%= currentUser.firstname +" "+currentUser.lastname %></span>
+                    <a class="item right floated" href="/home"><%= currentUser.firstname +" "+currentUser.lastname %></span>
                     <a class="item" href="/logout">Log Out</a>
             <% }else { %>
                 <a class="item right floated" href="/login">

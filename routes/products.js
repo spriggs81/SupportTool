@@ -152,4 +152,24 @@ router.delete("/:product_id", middleware.checkIsAdminDelete, function(req, res){
     });
 });
 
+//Product Menu Route
+router.get('/:product_id/menu', middleware.checkIsAdmin, function(req, res) {
+    Client.findById(req.params.id, function(err, foundClient) {
+        if(err){
+            req.flash('error', "We cannot find the Client!!!");
+            res.redirect("/clients");
+        } else{
+            Product.findById(req.params.product_id, function(err, foundProduct){
+                if(err){
+                    req.flash('error',"We cannot find this Product!");
+                    console.log(err);
+                    res.redirect("/clients/:id/products");
+                } else {
+                  res.render("products/menu", {client: foundClient, product: foundProduct});
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

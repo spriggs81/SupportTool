@@ -10,9 +10,16 @@
     <% } else if(currentUser.admin === true){ %>
     Administrator.  You have full access on this application.
       <% if(currentUser.defaultview === false) { %>
-        <p>Your current view is set to Admin Read Mode.  You can use the Admin Edit Mode by clicking here: <form action="/admin/<%= currentUser._id %>/changeview/true?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Edit Mode</button></form>
+        <p>Your current view is set to Admin Read Mode.  You can use the Admin Edit Mode by clicking here:</p>
+        <form class="after40" action="/admin/<%= currentUser._id %>/changeview/true?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Edit Mode</button></form>
+        <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
+        <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
       <% } else { %>
-        <p>Your current view is set to Admin Edit Mode.  You can use the Admin Read Mode by clicking here: <form action="/admin/<%= currentUser._id %>/changeview/false?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Read Mode</button></form>
+        <p>Your current view is set to Admin Edit Mode.  You can use the Admin Read Mode by clicking here:</p>
+          <form action="/admin/<%= currentUser._id %>/changeview/false?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Read Mode</button></form>
+        <br>
+        <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
+        <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
       <% } %>
     <% } else { %>
     Read Only Access.  You can view data and add knowledge based information and questions.

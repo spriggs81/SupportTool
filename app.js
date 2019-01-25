@@ -28,7 +28,7 @@ var homeRoute               = require("./routes/home"),
 //app local connection CONFIG
 var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4",
     PORT        = process.env.PORT || 3000,
-    IP          = process.env.IP || "127.0.0.1";
+    IP          = process.env.IP || "localhost";
 
 //setup MongoDB
 mongoose.connect(DATABASEURL, (err) => {

@@ -252,4 +252,44 @@ router.delete("/db/:server_id", middleware.checkIsAdminDelete, function(req, res
     });
 });
 
+//App Server Menu Reoute
+router.get('/app/:server_id/menu', middleware.checkIsAdmin, function(req, res) {
+    Client.findById(req.params.id, function(err, foundClient) {
+        if(err){
+            req.flash('error', "We cannot find the Client!!!");
+            res.redirect("/clients");
+        } else{
+            Appserver.findById(req.params.server_id, function(err, foundServer){
+                if(err){
+                    req.flash('error',"We cannot find this Server!");
+                    console.log(err);
+                    res.redirect("/clients/:id/servers");
+                } else {
+                    res.render("servers/menuapp", {client: foundClient, server: foundServer});
+                }
+            });
+        }
+    });
+});
+
+//DB Server Menu Route
+router.get('/db/:server_id/menu', middleware.checkIsAdmin, function(req, res) {
+    Client.findById(req.params.id, function(err, foundClient) {
+        if(err){
+            req.flash('error', "We cannot find the Client!!!");
+            res.redirect("/clients");
+        } else{
+            DBserver.findById(req.params.server_id, function(err, foundServer){
+                if(err){
+                    req.flash('error',"We cannot find this Server!");
+                    console.log(err);
+                    res.redirect("/clients/:id/servers");
+                } else {
+                    res.render("servers/menudb", {client: foundClient, server: foundServer});
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

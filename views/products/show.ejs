@@ -1,7 +1,11 @@
 <% include ../partials/header %>
     <a class="ui purple inverted button" href="/clients/<%= client._id %>/products"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui aligned huge header">
+      <% if(currentUser && currentUser.admin === true && currentUser.defaultview == false){ %>
+        <a href="/clients/<%= client._id %>/products/<%= product._id %>/menu" class="massive ui black button"><%= client.name %>'s <%= product.name %> Product</a>
+      <% } else { %>
         <%= client.name %>'s <%= product.name %> Product
+      <% } %>
         <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
         <div id="actionButtons" class="ui right floated statistic">
             <form action="/clients/<%= client._id %>/products/<%= product._id %>?_method=DELETE" method="POST">

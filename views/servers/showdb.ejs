@@ -2,7 +2,11 @@
 
     <a class="ui purple inverted button" href="/clients/<%= client._id %>/servers"><i class="ui arrow left icon"></i> Go Back</a>
     <div class="ui aligned huge header">
+      <% if(currentUser && currentUser.admin === true && currentUser.defaultview == false){ %>
+        <a href="/clients/<%= client._id %>/servers/db/<%= server._id %>/menu" class="massive ui black button"><%= client.name %>'s Server Information:</a>
+      <% } else { %>
         <%= client.name %>'s Server Information:
+      <% } %>
         <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
         <div id="actionButtons" class="ui right floated statistic">
             <form action="/clients/<%= client._id %>/servers/db/<%= server._id %>?_method=DELETE" method="POST">

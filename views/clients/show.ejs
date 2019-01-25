@@ -8,7 +8,11 @@
         </div>
         <div class="ui main text segment after40">
             <div class="ui huge header">
+              <% if(currentUser && currentUser.admin === true && currentUser.defaultview == false){ %>
+                <a href="/clients/<%= client._id %>/menu" class="massive ui black button"><%= client.name %></a>
+              <% } else { %>
                 <%= client.name %>
+              <% } %>
                   <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
                   <div id="actionButtons" class="ui center aligned container">
                       <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">

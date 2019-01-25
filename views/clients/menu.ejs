@@ -1,0 +1,54 @@
+<% include ../partials/header %>
+
+  <h1 class="ui center aligned header"> Administrator Edit Menu </h1>
+  <br>
+  <h1> Client: <%= client.name %> </h1>
+  <div class="ui grid">
+    <div class="sixteen wide column">
+      <div class="ui segments">
+        <div class="ui secondary segment">
+          <span class="ui">Client's Menu Options:</span>
+        </div>
+        <div class="ui segment">
+          <div class="ui grid">
+            <div class="sixteen wide column">
+              <div class="ui raised segment">
+                <!--<a href="/clients/<%= client._id %>/edit" class="ui green inverted button">Edit This Client</a><a href="/clients/<%= client._id %>/delete" class="ui red inverted button">Delete This Client</a>-->
+                <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
+                  <div class="ui large buttons">
+                    <a class="ui  orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
+                    <div class="or"></div>
+                    <button class="ui red inverted button">Delete Client</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui segments">
+        <div class="ui secondary segment">
+          <span class="ui">Client's Resources Menu Options</span>
+        </div>
+        <div class="ui segment">
+          <div class="ui grid">
+            <div class="sixteen wide column">
+              <div class="ui raised segment">
+                <div class="ui large buttons">
+                  <a class="ui green inverted button" href="/clients/<%= client._id %>/products/new">Add Product</a>
+                  <div class="or"></div>
+                  <a class="ui blue inverted button" href="/clients/<%= client._id %>/servers/new/app">Add App Server</a>
+                  <div class="or"></div>
+                  <a class="ui teal inverted button" href="/clients/<%= client._id %>/servers/new/db">Add DB Server</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% include ../partials/footer %>

@@ -1,17 +1,8 @@
 <% include ../partials/header %>
 
-    <% if(currentUser && currentUser.admin === true){ %>
-    <!--<div class="ui grid">-->
-        <!--<div class="twelve wide column">
-            <form class='ui' action='' method="POST">
-
-            </form>
-        </div>-->
-        <!--<div class="">-->
-            <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>
-        <!--</div>-->
-    <!--</div>-->
-    <hr>
+    <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
+      <a class="ui right floated button" href="/clients/new">Add A New Client</a><br>
+      <hr>
     <% } %>
     <div class="after40">
       <table class="ui celled table">
