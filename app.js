@@ -25,13 +25,8 @@ var homeRoute               = require("./routes/home"),
     indexRoutes             = require("./routes/index"),
     knowledgeRoutes         = require("./routes/knowledge");
 
-//app local connection CONFIG
-var DATABASEURL = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4",
-    PORT        = process.env.PORT || 3000,
-    IP          = process.env.IP || "localhost";
-
 //setup MongoDB
-mongoose.connect(DATABASEURL, (err) => {
+mongoose.connect(process.env.DATABASEURL, (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {
