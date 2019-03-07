@@ -17,7 +17,7 @@
                     <th>First Name:</th>
                     <th>Last Name:</th>
                     <th>Is Admin</th>
-                    <th>Options:</th>
+                    <th class="bye">Options:</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,20 +27,16 @@
                     <td><%=  user.firstname %></td>
                     <td><%=  user.lastname %></td>
                     <td>
-                        <% if( user.admin === true){%>
-                            Yes
-                        <% }else{ %>
-                            No
-                        <% } %>
+                        <% if( user.admin === true){%>Yes<% }else{ %>No<% } %>
                     </td>
-                    <td>
+                    <td class="bye">
                         <div class="ui grid">
                             <div class="eight wide">
-                                <div class="ui blue inverted button disabled">Edit</div>
+                                <div class="ui blue inverted button disabled">Edit <%=  user.username %></div>
                             </div>
                             <div class="eight wide">
                                 <form  class="ui form" action="/admin/users/<%=  user._id %>?_method=DELETE" method="POST">
-                                    <button class="ui red inverted button disabled">Delete</button>
+                                    <button class="ui red inverted button disabled">Delete <%=  user.username %></button>
                                 </form>
                             </div>
                         </div>

@@ -86,3 +86,9 @@ a.ui.right.inverted.red.button {
 .after40{
    margin-bottom: 40px;
 }
+
+.highlight:hover {
+  text-decoration: none;
+   background-color: #808ca0;
+   color: white;
+}

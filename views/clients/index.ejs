@@ -17,7 +17,7 @@
           </thead>
           <tbody>
           <% clients.forEach(function(client){ %>
-              <tr>
+              <tr class="highlight">
                 <td><a href="/clients/<%= client._id %>"><%= client.name %></a></td>
                 <td><%= client.supportPlan %></td>
                 <td><%= client.status %></td>
