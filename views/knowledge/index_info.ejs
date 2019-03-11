@@ -38,12 +38,12 @@
                 </thead>
                 <tbody>
                 <% messages.forEach(function(message){ %>
-                    <tr>
+                    <tr class="highlight" onclick="window.location='/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>'">
                         <td><%= message.creator.firstname + " " + message.creator.lastname %></td>
                         <% var endDate = new Date(message.created);%>
                         <% var diffDate =  Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))); %>
                         <td><%= diffDate %> Days Ago</td>
-                        <td><a href="/knowledge/<%= message.product %>/<%= message.type %>/<%= message._id %>"><%= message.desc %></a></td>
+                        <td><%= message.desc %></td>
                     </tr>
                 <% }); %>
                 </tbody>

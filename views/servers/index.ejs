@@ -42,8 +42,8 @@
             <tbody>
             <% client.appservers.forEach(function(appserver){ %>
                 <% if(appserver.type === "Production"){ %>
-                <tr>
-                    <td><a href="/clients/<%= client._id %>/servers/app/<%= appserver._id %>"><%= appserver.rdphostname %></a></td>
+                <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/app/<%= appserver._id %>'">
+                    <td><%= appserver.rdphostname %></td>
                     <td><%= appserver.rdpip %></td>
                     <td><%= appserver.rdpdomain %></td>
                     <td><%= appserver.role %></td>
@@ -83,8 +83,8 @@
             <tbody>
              <% client.appservers.forEach(function(appserver){ %>
                 <% if(appserver.type === "Test"){ %>
-                    <tr>
-                      <td><a href="/clients/<%= client._id %>/servers/app/<%= appserver._id %>"><%= appserver.rdphostname %></a></td>
+                    <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/app/<%= appserver._id %>'">
+                      <td><%= appserver.rdphostname %></td>
                       <td><%= appserver.rdpip %></td>
                       <td><%= appserver.rdpdomain %></td>
                       <td><%= appserver.role %></td>
@@ -125,8 +125,8 @@
             <tbody>
             <% client.dbservers.forEach(function(dbserver){ %>
                 <% if(dbserver.type === "Production"){ %>
-                <tr>
-                    <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
+                <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/db/<%= dbserver._id %>'">
+                    <td><%= dbserver.hostname %></td>
                     <td><%= dbserver.ip %></td>
                     <td><%= dbserver.port %></td>
                     <td><%= dbserver.dbname %></td>
@@ -165,8 +165,8 @@
             <tbody>
              <% client.dbservers.forEach(function(dbserver){ %>
                 <% if(dbserver.type === "Test"){ %>
-                    <tr>
-                        <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
+                    <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/db/<%= dbserver._id %>'">
+                        <td><%= dbserver.hostname %></td>
                         <td><%= dbserver.ip %></td>
                         <td><%= dbserver.port %></td>
                         <td><%= dbserver.dbname %></td>
@@ -207,8 +207,8 @@
                 <tbody>
                 <% client.appservers.forEach(function(appserver){ %>
                     <% if(appserver.type === "Inactive"){ %>
-                    <tr>
-                        <td><a href="/clients/<%= client._id %>/servers/app/<%= appserver._id %>"><%= appserver.rdphostname %></a></td>
+                    <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/app/<%= appserver._id %>'">
+                        <td><%= appserver.rdphostname %></td>
                         <td><%= appserver.rdpip %></td>
                         <td><%= appserver.rdpdomain %></td>
                         <td><%= appserver.role %></td>
@@ -251,8 +251,8 @@
                 <tbody>
                 <% client.dbservers.forEach(function(dbserver){ %>
                     <% if(dbserver.type === "Inactive"){ %>
-                    <tr>
-                        <td><a href="/clients/<%= client._id %>/servers/db/<%= dbserver._id %>"><%= dbserver.hostname %></a></td>
+                    <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/servers/db/<%= dbserver._id %>'">
+                        <td><%= dbserver.hostname %></td>
                         <td><%= dbserver.ip %></td>
                         <td><%= dbserver.port %></td>
                         <td><%= dbserver.dbname %></td>

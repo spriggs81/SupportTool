@@ -91,4 +91,5 @@ a.ui.right.inverted.red.button {
   text-decoration: none;
    background-color: #808ca0;
    color: white;
+  cursor: pointer;   
 }

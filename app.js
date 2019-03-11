@@ -26,7 +26,7 @@ var homeRoute               = require("./routes/home"),
     knowledgeRoutes         = require("./routes/knowledge");
 
 //setup MongoDB
-mongoose.connect(process.env.DATABASEURL, (err) => {
+mongoose.connect('mongodb://app_user:mRXU721G@ds151242.mlab.com:51242/support_tool', (err) => {
     if(!err){
         console.log("MongoDB Connection Successful!");
     } else {

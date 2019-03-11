@@ -37,8 +37,8 @@
             <tbody>
             <% client.products.forEach(function(product){ %>
                 <% if(product.type === "Production"){ %>
-                <tr>
-                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/products/<%= product._id %>'">
+                    <td><%= product.name %></td>
                     <td><%= product.url %></td>
                     <td><%= product.maker %></td>
                     <td><%= product.flowviz %></td>
@@ -71,8 +71,8 @@
             <tbody>
             <% client.products.forEach(function(product){ %>
                 <% if(product.type === "Test"){ %>
-                <tr>
-                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/products/<%= product._id %>'">
+                    <td><%= product.name %></td>
                     <td><%= product.uiversion %></td>
                     <td><%= product.url %></td>
                     <td><%= product.maker %></td>
@@ -103,8 +103,8 @@
             <tbody>
             <% client.products.forEach(function(product){ %>
                 <% if(product.type === "Inactive"){ %>
-                <tr>
-                    <td><a href="/clients/<%= client._id %>/products/<%= product._id %>"><%= product.name %></a></td>
+                <tr class="highlight" onclick="window.location='/clients/<%= client._id %>/products/<%= product._id %>'">
+                    <td><%= product.name %></td>
                     <td><%= product.url %></td>
                     <td><%= product.maker %></td>
                     <td><%= product.flowviz %></td>

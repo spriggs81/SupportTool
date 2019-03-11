@@ -31,39 +31,35 @@
           <tbody>
       <% products.forEach(function(product){ %>
               <tr>
-                  <td><a class="ui header" href="/knowledge/<%= product._id %>"><%= product.name %></a></td>
+                  <td><span class="ui header"><%= product.name %></span></td>
                   <% var info_count = 0; %>
                   <% for(var i = 0; i < allinfo.length; i++){ %>
                   <% if(allinfo[i].product == product._id){ %>
                   <% info_count++ %>
                   <% }%>
                   <% } %>
-                  <td>
-                      <a href="/knowledge/<%= product._id %>/info">
-                          <% if(info_count == 0){ %>
-                          Nothing Added Yet
-                          <% } else if(info_count == 1){ %>
-                          <%= info_count %> Helpful Info article
-                          <% } else { %>
-                          <%= info_count %> Helpful Info articles
-                          <% } %>
-                      </a>
-                  </td>
-                  <% var quest_count = 0; %>
-                  <% for(var i = 0; i < allquestions.length; i++){ %>
-                  <% if(allquestions[i].product == product._id){ %>
-                  <% quest_count++ %>
-                  <% }%>
-                  <% } %>
-                  <td>
-                      <a href="/knowledge/<%= product._id %>/questions">
-                          <% if(quest_count == 1){ %>
-                          <%= quest_count %> Question
-                          <% } else {%>
-                          <%= quest_count %> Questions
-                          <% } %>
-                      </a>
-                  </td>
+                  <td class="highlight" onclick="window.location='/knowledge/<%= product._id %>/info'">
+                    <% if(info_count == 0){ %>
+                      Nothing Added Yet
+                    <% } else if(info_count == 1){ %>
+                      <%= info_count %> Helpful Info article
+                      <% } else { %>
+                      <%= info_count %> Helpful Info articles
+                      <% } %>
+                    </td>
+                    <% var quest_count = 0; %>
+                    <% for(var i = 0; i < allquestions.length; i++){ %>
+                    <% if(allquestions[i].product == product._id){ %>
+                    <% quest_count++ %>
+                    <% }%>
+                    <% } %>
+                    <td class="highlight" onclick="window.location='/knowledge/<%= product._id %>/questions'">
+                        <% if(quest_count == 1){ %>
+                        <%= quest_count %> Question
+                        <% } else {%>
+                        <%= quest_count %> Questions
+                        <% } %>
+                    </td>
               </tr>
       <% }) %>
     </div>
