@@ -26,7 +26,7 @@ var homeRoute               = require("./routes/home"),
     knowledgeRoutes         = require("./routes/knowledge");
 
 var databaseurl = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4";
-var port = process.env.PORT || 5000;
+var port = process.env.PORT;
 var ip = process.env.IP || "localhost";
 
 //setup MongoDB
