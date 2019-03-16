@@ -2,36 +2,42 @@
 <html>
     <head>
         <title>Support Tools</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+        --><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
         <link rel="stylesheet" type="text/css" href="/stylesheet/landing.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
     </head>
     <body>
-    <div class="ui inverted default menu">
-    <div class="ui center aligned huge header">
- 		</div>
-            <%if(currentUser){ %>
-                <a class="item right floated" href="/clients"><%= currentUser.firstname +" "+currentUser.lastname %></a>
-                <a class="item" href="/logout">Log Out</a>
-            <% }else { %>
-                <a class="item right floated" href="/login">
-                    Login
-                </a>
-                <a class="item" href="/register">
-                    Register
-                </a>
-            <% }; %>
-            </div>
-    <div class="container">
-        <% if(error && error.length > 0){ %>
-            <div class="ui red message" role="alert">
-                <%= error %>
-            </div>
-        <% } %>
-        <% if(success && success.length > 0){ %>
-            <div class="ui green message" role="alert">
-                <%= success %>
-            </div>
-        <% } %>
+    <div class="ui container">
+    <div class="ui inverted default fixed menu">
+      <div class="ui center aligned huge header">
+ 		  </div>
+        <%if(currentUser){ %>
+        <a class="item right floated" href="/clients"><%= currentUser.firstname +" "+currentUser.lastname %></a>
+        <a class="item" href="/logout">Log Out</a>
+        <% }else { %>
+        <a class="item right floated" href="/login">
+          Login
+        </a>
+        <a class="item" href="/register">
+          Register
+        </a>
+        <% }; %>
+    </div>
+    <div>
+      <% if(error && error.length > 0){ %>
+      <div class="ui red message" role="alert">
+        <%= error %>
+      </div>
+      <% } %>
+      <% if(success && success.length > 0){ %>
+      <div class="ui green message" role="alert">
+        <%= success %>
+      </div>
+      <% } %>
+      <div class="ui sizer vertical segment">
+        <h1 id="opening" class="ui huge header">Client's Server Connection & Product Database Tool</h1>
+        <p></p>
+      </div>
 
 <% include partials/footer %>

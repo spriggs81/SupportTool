@@ -1,12 +1,31 @@
 body, html{
     height:100%;
 }
-body{
-    background-image: url('https://images.unsplash.com/photo-1498409785966-ab341407de6e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8a87674644cd4f622df5c57facbccf1e&auto=format&fit=crop&w=1460&q=80');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    background-size:100%;
-    color: white;
+
+html {
+
 }
+
+body{
+  margin-top: 75px;
+  background-color: black;
+  background: url(../images/jaredd-craig-744902-unsplash.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9 */
+}
+
+#opening{
+  margin-top: 10%;
+  color: red;
+  font-size: 2.5em;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  outline-color: red;
+  background-color: black;
+}
+
+/*public\images\jaredd-craig-744902-unsplash.jpg*/

@@ -104,49 +104,35 @@
                     </div>
                 </div>
             </div>
-            <div class="ui segments">
-                <div class="ui secondary segment">
-                    <span class="ui header">Connection Info:</span>
-                </div>
-                <div class="ui segment">
+            <div class="ui grid">
+              <div class="sixteen wide column">
+                <div class="ui segments">
+                  <div class="ui secondary segment">
+                    <span class="ui">Client's IT Contact:</span>
+                  </div>
+                  <div class="ui segment">
                     <div class="ui grid">
-                        <div class="sixteen wide column">
-                            <div class="ui segments">
-                                <div class="ui secondary segment">
-                                    <span class="ui">Client's IT Contact:</span>
-                                </div>
-                                <div class="ui segment">
-                                    <div class="ui grid">
-                                        <div class="sixteen wide column">
-                                            <div class="ui raised segment">
-                                                <p><%= client.clientit %></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sixteen wide column">
-                            <div class="ui segments">
-                                <div class="ui secondary segment">
-                                    <span class="ui">Connection Method:</span>
-                                </div>
-                                <div class="ui segment">
-                                    <div class="ui grid">
-                                        <div class="sixteen wide column">
-                                            <div class="ui raised segment">
-                                                <p><%= client.connection %></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div class="sixteen wide column">
+                        <p><%= client.clientit %></p>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
+              <div class="sixteen wide column">
+                <div class="ui segments">
+                  <div class="ui secondary segment">
+                    <span class="ui">Connection Method:</span>
+                  </div>
+                  <div class="ui segment">
+                    <div class="ui grid">
+                      <div class="sixteen wide column">
+                        <p><%= client.connection %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <div class="after40">
-        </div>
 
 <% include ../partials/footer %>
