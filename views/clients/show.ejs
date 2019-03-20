@@ -6,34 +6,39 @@
             <a class="ui green inverted button" href="/clients/<%= client._id %>/products">Product Info</a>
             <a class="ui green inverted button" href="/clients/<%= client._id %>/servers">Server Info</a>
         </div>
-        <div class="ui main text segment after40">
-            <div class="ui huge header">
-              <% if(currentUser && currentUser.admin === true && currentUser.defaultview == false){ %>
-                <a href="/clients/<%= client._id %>/menu" class="massive ui black button"><%= client.name %></a>
-              <% } else { %>
-                <%= client.name %>
-              <% } %>
-                  <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
-                  <div id="actionButtons" class="ui center aligned container">
-                      <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
-                          <a class="ui small orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
-                          <button class="ui small red inverted button">Delete Client</button>
-                      </form>
-                  </div>
+        <div class="ui main text segment">
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <div class="ui huge header">
+                      <% if(currentUser && currentUser.admin === true && currentUser.defaultview == false){ %>
+                        <a href="/clients/<%= client._id %>/menu" class="massive ui black button"><%= client.name %></a>
+                      <% } else { %><%= client.name %>
+                      <% } %>
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <% if(currentUser && currentUser.admin === true && currentUser.defaultview !== false){ %>
+                    <span id="actionButtons" class="ui center aligned container">
+                        <form action="/clients/<%= client._id %>?_method=DELETE" method="POST">
+                            <a class="ui small orange inverted button" href="/clients/<%= client._id %>/edit">Edit Client</a>
+                            <button class="ui small red inverted button">Delete Client</button>
+                        </form>
+                    </span>
                 <% }; %>
+                </div>
             </div>
             <div class="ui meta">
                 <h4>
                     <h2>Status: <%= client.status %><br></h2>
-                    <div class="ui right floated">
+                    <!--<div class="ui right floated">
                         Customer's Current Time:
                     </div>
                      <div id="displayDate1" class="ui red label">
-                        <%= date1 %>
+                        <%= //date1 %>
                     </div><br>
                     <div id="displayDate2" class="ui red label">
-                    <%= date2 %>
-                    </div>
+                    <%= //date2 %>
+                    </div>-->
                 </h4>
             </div>
             <div class="ui segments">
