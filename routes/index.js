@@ -14,7 +14,7 @@ router.get("/", function(req, res){
 
 //register form route
 router.get("/register", function(req, res) {
-   res.render('register'); 
+   res.render('register');
 });
 
 
@@ -29,7 +29,10 @@ router.post("/register", function(req, res) {
             console.log(err);
             req.flash('error','Please report this issue to an admin!');
             res.redirect('/register');
-        } else {
+       } else if(!foundprofile){
+            req.flash('error', 'Missing Credentials Information, Please see Admin.');
+            res.redirect('/');
+       } else {
             if(req.body.code == foundprofile.user){
                 var newUser = new User({
                     username: username,
@@ -77,7 +80,7 @@ router.get("/login", function(req, res) {
     res.render("login");
 });
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
     {
         successRedirect: "/home",
         failureRedirect: "/login"

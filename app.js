@@ -7,7 +7,7 @@ var bodyParser       = require("body-parser"),
     LocalStrategy    = require("passport-local"),
     flash            = require("connect-flash"),
     User             = require("./models/user"),
-    seedDB           = require("./seeds"),
+    //seedDB           = require("./seeds"),
     app              = express();
 
 
@@ -20,13 +20,15 @@ var homeRoute               = require("./routes/home"),
     db_ProductRoutes        = require("./routes/db_product"),
     db_ClientstatusRoutes   = require("./routes/db_clientstatus"),
     db_SupportplanRoutes    = require("./routes/db_supportplan"),
+    db_Managements          = require("./routes/db_management"),
     db_VpnaccessRoutes      = require("./routes/db_vpnaccess"),
+    db_Department           = require("./routes/db_department"),
     adminUserRoutes         = require("./routes/admin_user"),
     indexRoutes             = require("./routes/index"),
     knowledgeRoutes         = require("./routes/knowledge");
 
 var databaseurl = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4";
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3010;
 var ip = process.env.IP || "localhost";
 
 //setup MongoDB
@@ -65,6 +67,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    // res.locals.settings = req.user.settings;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
@@ -79,12 +82,14 @@ app.use("/admin/db", db_ProductRoutes);
 app.use("/admin/db", db_ClientstatusRoutes);
 app.use("/admin/db", db_SupportplanRoutes);
 app.use("/admin/db", db_VpnaccessRoutes);
+app.use("/admin/db", db_Managements);
+app.use("/admin/db", db_Department);
 app.use("/clients", clientRoutes);
 app.use("/clients/:id/products", productRoutes);
 app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(port, ip, function(){
     console.log("Support Tool Is Online!");
 });

@@ -26,9 +26,9 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
                            res.render("knowledge/landing", {products:allproducts, allinfo:infoMessages, allquestions:questionsMessages});
                         }
                    });
-                }     
+                }
             });
-        }    
+        }
     });
 });
 
@@ -41,7 +41,7 @@ router.get("/:productName", middleware.isLoggedIn, function(req, res) {
             res.redirect("/knowledge");
         } else {
             res.render("knowledge/pickOne", {product: foundproduct});
-        }        
+        }
     });
 });
 
@@ -59,10 +59,10 @@ router.get("/:productName/info", middleware.isLoggedIn, function(req, res) {
                     req.flash('error',"There was a problem locating the information you were looking for.  Please let an Admin know.");
                     res.redirect("back");
                } else {
-                    res.render("knowledge/index_info", {product:foundproduct, messages: foundInfoMessages});   
+                    res.render("knowledge/index_info", {product:foundproduct, messages: foundInfoMessages});
                }
             });
-        }        
+        }
     });
 });
 
@@ -80,10 +80,10 @@ router.get("/:productName/questions", middleware.isLoggedIn, function(req, res) 
                     req.flash('error',"There was a problem locating the information you were looking for.  Please let an Admin know.");
                     res.redirect("back");
                } else {
-                    res.render("knowledge/index_question", {product:foundproduct, messages: foundInfoMessages});   
+                    res.render("knowledge/index_question", {product:foundproduct, messages: foundInfoMessages});
                }
             });
-        }        
+        }
     });
 });
 
@@ -149,7 +149,7 @@ router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, func
                     res.redirect("/knowledge");
                 } else {
                     res.render("knowledge/show", {product: foundproduct, message: message});
-                }        
+                }
             });
         }
     });
@@ -169,7 +169,7 @@ router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwners
                     res.redirect("back");
                 } else {
                     res.render("knowledge/edit_info", {product:foundproduct, message: foundmessage});
-                }        
+                }
             });
         }
     });
@@ -205,7 +205,7 @@ router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageO
                     res.redirect("back");
                 } else {
                     res.render("knowledge/edit_question", {product:foundproduct, message: foundmessage});
-                }        
+                }
             });
         }
     });
@@ -239,19 +239,6 @@ router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.check
     });
 });
 
-
-//comment form Route
-router.get("/:productName/:messageType/:message_id/comment/add", middleware.isLoggedIn, function(req, res) {
-    Mainmessage.findById(req.params.message_id, function(err, message){
-        if(err){
-            req.flash('error', "Cannot find Messages!");
-            res.redirect("/knowledge");
-        } else {
-            res.render("knowledge/comment", {message: message});
-        }        
-    });
-});
-
 //Post comment Route
 router.post("/:productName/:messageType/:message_id/comment", middleware.isLoggedIn, function(req, res) {
     var creator = req.user;
@@ -271,7 +258,7 @@ router.post("/:productName/:messageType/:message_id/comment", middleware.isLogge
                message.save();
                res.redirect("/knowledge/" + req.params.productName + "/" + req.params.messageType + "/" + req.params.message_id);
            }
-        });     
+        });
     });
 });
 
@@ -288,7 +275,7 @@ router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", mi
                     res.redirect("back");
                 } else {
                     res.render("knowledge/edit_comment", {message:foundmessage, comment: foundcomment});
-                }        
+                }
             });
         }
     });
@@ -322,42 +309,5 @@ router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delet
     });
 });
 
-//DBProduct New Route
-router.post("/", middleware.checkIsAdmin, function(req, res) {
-    req.body.name = req.sanitize(req.body.name);
-    var name = req.body.name;
-    //removing special chara and spaces
-    var step1 = name.replace(/[^A-Z0-9]/ig, "");
-    //turning to lower case  -  used to help with dup entries
-    var keyname = step1.toLowerCase();
-    //checking to make sure that the entry isn't blank or not sense
-    if(keyname === ''){
-        req.flash('error',"Product Name can't be blank, only numbers or symbols!");
-        res.redirect("/admin/db/products");
-    } else {
-        //checking for duplicates
-        Dbproduct.find({keyname: keyname}, function(err, foundProduct){
-            if(err){
-                req.flash('error', "Error with Finding DBPRODUCT!!!");
-                res.redirect("/knowledge");
-            } else if(foundProduct == false){
-                //adding new product to DB
-                 Dbproduct.create({name: name, keyname: keyname}, function(err, newProduct){
-                    if(err){
-                        console.log(err);
-                        req.flash('error', err+" error creating dbproduct");
-                        res.redirect("/knowledge");
-                    } else {
-                        req.flash('success', newProduct.name + " has been added to the Product Database!");
-                        res.redirect("/knowledge");
-                    }
-                });     
-            } else {
-                req.flash('error', 'This Product Already Exist!');
-                res.redirect("/knowledge");
-            }
-        });
-    }
-});
 
 module.exports = router;

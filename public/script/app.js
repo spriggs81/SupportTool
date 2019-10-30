@@ -5,27 +5,27 @@ function hideThis(num){
         switch(num){
             case 1: document.querySelector("#inProduction").classList.remove("bye"); document.querySelector("#inTesting").classList.add("bye"); document.querySelector("#inactive").classList.add("bye");
             break;
-            
+
             case 2: document.querySelector("#inTesting").classList.remove("bye"); document.querySelector("#inProduction").classList.add("bye"); document.querySelector("#inactive").classList.add("bye");
             break;
-            
-            case 3: document.querySelector("#appServers").classList.remove("bye"); document.querySelector("#dbServers").classList.add("bye"); document.querySelector("#inactServers").classList.add("bye"); 
+
+            case 3: document.querySelector("#appServers").classList.remove("bye"); document.querySelector("#dbServers").classList.add("bye"); document.querySelector("#inactServers").classList.add("bye");
             break;
-           
-            case 4: document.querySelector("#dbServers").classList.remove("bye"); document.querySelector("#appServers").classList.add("bye"); document.querySelector("#inactServers").classList.add("bye"); 
+
+            case 4: document.querySelector("#dbServers").classList.remove("bye"); document.querySelector("#appServers").classList.add("bye"); document.querySelector("#inactServers").classList.add("bye");
             break;
-            
+
             case 5: document.querySelector("#inactive").classList.remove("bye"); document.querySelector("#inProduction").classList.add("bye"); document.querySelector("#inTesting").classList.add("bye");
             break;
-           
+
             case 6: document.querySelector("#inactServers").classList.remove("bye"); document.querySelector("#dbServers").classList.add("bye"); document.querySelector("#appServers").classList.add("bye");
             break;
-            
+
             default: console.log("There was an error in the Switch Statement");
         }
-        
+
     }
-    
+
 function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -70,10 +70,10 @@ function checkAmPm(h) {
         p = "PM";
     }
     return p;
-    
+
 }
 
-var kProductAdd = document.querySelector('.kprod');
+var modalButton = document.querySelector('.mbutt');
 var backdrop = document.querySelector('.backdrop');
 var modal = document.querySelector('.modal');
 
@@ -87,5 +87,5 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-kProductAdd.onclick = openModal;
+modalButton.onclick = openModal;
 backdrop.onclick = closeModal;

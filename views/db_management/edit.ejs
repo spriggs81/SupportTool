@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+    <div class="ui center header">
+        Please Note That You Are Editing A DB Client Status That Will Affect All Areas Of The Application!
+    </div>
+    <div id="dbprod" class="ui container">
+        <form class="ui form" action="/admin/db/management/<%= manager._id %>/edit?_method=PUT" method="POST">
+          <div class="field">
+            <label>First Name:</label>
+              <div class="four fields">
+                <div class="field">
+                  <input class="" name="firstname" value="<%= manager.firstname %>" required></input>
+                </div>
+                <div class="field">
+                  <input class="" name="lastname" value="<%= manager.lastname %>" required></input>
+                </div>
+                <div class="field">
+                  <select class="" name="role" required>
+                    <option value="<%= manager.role %>"><%= manager.role %></option>
+                    <option value="Lead">Lead</option>
+                    <option value="Manager">Manager</option>
+                  </select>
+                </div>
+                <div class="field">
+                    <button class="ui green inverted left button">Add</button>
+                    <a href="/admin" class="ui red inverted right button">Go Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<% include ../partials/footer %>

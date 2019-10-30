@@ -91,5 +91,27 @@ a.ui.right.inverted.red.button {
   text-decoration: none;
    background-color: #808ca0;
    color: white;
-  cursor: pointer;   
+  cursor: pointer;
+}
+
+.center {
+  text-align: center;
+}
+
+#homeOpening {
+     margin-bottom: 40px;
+     text-align: center;
+}
+
+#withsets {
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 40px;
+     margin-bottom: 50px;
+}
+
+#setSettings{
+  text-align: center;
+  margin-top: 20px;
 }

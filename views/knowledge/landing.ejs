@@ -1,68 +1,66 @@
 <% include ../partials/header %>
 
-    <div class="backdrop"></div>
-    <div class="modal">
-        <form class="ui form" action="/knowledge" method="POST">
-            <div class="ui grid">
-                <div class="sixteen wide column">
+<div class="backdrop"></div>
+<div class="modal">
+     <form class="ui form" action="/admin/db/knowledge" method="POST">
+          <div class="ui grid">
+               <div class="sixteen wide column">
                     <label>Product Name:</label>
                     <input class="" name="name" required></input>
-                </div>
-                <div class="sixteen wide column">
+               </div>
+               <div class="sixteen wide column">
                     <button class="ui green inverted left button">Add Product</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="ui huge header">Knowledge Base</div>
-    <% if(currentUser && currentUser.admin === true){ %>
-    <a href="#" class="ui green inverted button kprod">Add New Product</a>
-    <% } %>
-    <hr>
-    <div class="after40">
-      <table class="ui celled table">
+               </div>
+          </div>
+     </form>
+</div>
+<div class="ui huge header">Knowledge Base</div>
+<% if(currentUser && currentUser.admin === true){ %>
+     <a href="#" class="ui green inverted button mbutt">Add New Product</a>
+<% } %>
+<hr>
+<div class="after40">
+     <table class="ui celled table">
           <thead>
-              <tr>
-                  <th class="six wide">Product Name:</th>
-                  <th class="three wide">Info Articles:</th>
-                  <th class="three wide">Questions:</th>
-              </tr>
+               <tr>
+                    <th class="six wide">Product Name:</th>
+                    <th class="three wide">Info Articles:</th>
+                    <th class="three wide">Questions:</th>
+               </tr>
           </thead>
           <tbody>
-      <% products.forEach(function(product){ %>
-              <tr>
-                  <td><span class="ui header"><%= product.name %></span></td>
-                  <% var info_count = 0; %>
-                  <% for(var i = 0; i < allinfo.length; i++){ %>
-                  <% if(allinfo[i].product == product._id){ %>
-                  <% info_count++ %>
-                  <% }%>
-                  <% } %>
-                  <td class="highlight" onclick="window.location='/knowledge/<%= product._id %>/info'">
-                    <% if(info_count == 0){ %>
-                      Nothing Added Yet
-                    <% } else if(info_count == 1){ %>
-                      <%= info_count %> Helpful Info article
-                      <% } else { %>
-                      <%= info_count %> Helpful Info articles
-                      <% } %>
-                    </td>
-                    <% var quest_count = 0; %>
-                    <% for(var i = 0; i < allquestions.length; i++){ %>
-                    <% if(allquestions[i].product == product._id){ %>
-                    <% quest_count++ %>
-                    <% }%>
-                    <% } %>
-                    <td class="highlight" onclick="window.location='/knowledge/<%= product._id %>/questions'">
-                        <% if(quest_count == 1){ %>
-                        <%= quest_count %> Question
-                        <% } else {%>
-                        <%= quest_count %> Questions
-                        <% } %>
-                    </td>
-              </tr>
-      <% }) %>
-    </div>
+               <% products.forEach(function(product){ %>
+                    <tr>
+                         <td><span class="ui header"><%= product.name %></span></td>
+                         <% var info_count = 0; %>
+                         <% for(var i = 0; i < allinfo.length; i++){ %>
+                              <% if(allinfo[i].product == product._id){ %>
+                                   <% info_count++ %>
+                              <% }%>
+                         <% } %>
+                         <td class="highlight center" onclick="window.location='/knowledge/<%= product._id %>/info'">
+                              <% if(info_count == 1){ %>
+                                   <%= info_count %> Article
+                              <% } else { %>
+                                   <%= info_count %> Articles
+                              <% } %>
+                         </td>
+                         <% var quest_count = 0; %>
+                         <% for(var i = 0; i < allquestions.length; i++){ %>
+                              <% if(allquestions[i].product == product._id){ %>
+                                   <% quest_count++ %>
+                              <% }%>
+                         <% } %>
+                         <td class="highlight" onclick="window.location='/knowledge/<%= product._id %>/questions'">
+                              <% if(quest_count == 1){ %>
+                                   <span class="center"> <%= quest_count %> Question</span>
+                              <% } else {%>
+                                   <%= quest_count %> Questions
+                              <% } %>
+                         </td>
+                    </tr>
+               <% }) %>
+          </div>
 
 
-<% include ../partials/footer %>
+     <% include ../partials/footer %>

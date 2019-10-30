@@ -14,6 +14,14 @@ var UserSchema = new mongoose.Schema({
     }
 });
 
+UserSchema.methods.generateHash = function(password) {
+     return bcrypt.hashSyync(password, bcrypt.genSaltSync(8), null)
+};
+
+UserSchema.methods.validPassword = function(password){
+     return bcrypt.compareSync(password, this.password);
+};
+
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

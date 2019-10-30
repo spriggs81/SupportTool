@@ -80,7 +80,7 @@ router.delete("/:user_id", middleware.checkIsAdminDelete, function(req, res) {
             req.flash('error', 'We cannot find this User!!!');
             res.redirect("/admin");
         } else {
-            res.redirect("/index");
+            res.redirect("/");
         }
     });
 });

@@ -2,12 +2,12 @@
 <html>
     <head>
     	<title>Support Tools</title>
-    	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+    	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css"> -->
     	<link rel="stylesheet" type="text/css" href="/stylesheet/app.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     </head>
-    <body onload="startTime()">
-        <div class="ui container">
-            <div class="ui inverted default fixed menu itemSize">
+    <body class="ui container" onload="startTime()">
+            <div class="ui inverted default menu itemSize">
             <% if(currentUser){ %>
                 <a class="item" href="/home">Home</a>
                 <a class="item" href="/clients">Clients</a>
@@ -17,7 +17,7 @@
                 <a class="item" href="/admin">Admin Page</a>
             <% }; %>
             <%if(currentUser){ %>
-                    <a class="item right floated" href="/home"><%= currentUser.firstname +" "+currentUser.lastname %></span>
+                    <span class="item right floated"><%= currentUser.firstname +" "+currentUser.lastname %></span>
                     <a class="item" href="/logout">Log Out</a>
             <% }else { %>
                 <a class="item right floated" href="/login">
@@ -28,7 +28,7 @@
                 </a>
             <% }; %>
             </div>
-            <% if(currentUser){%>
+            <%if(currentUser){ %>
             <div id="myTime" class="ui black label"></div>
             <% }; %>
             <div class="container"><br>

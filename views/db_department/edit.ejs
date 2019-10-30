@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+    <div class="ui center header">
+        Please Note That You Are Editing Department Information That Will Affect All Areas Of The Application!
+    </div>
+    <div id="dbprod" class="ui container">
+        <form class="ui form" action="/admin/db/departments/<%= depart._id %>/edit?_method=PUT" method="POST">
+          <div class="field">
+            <label>Department:</label>
+              <div class="four fields">
+                <div class="field">
+                  <input class="" name="department" value="<%= depart.department %>" required></input>
+                </div>
+                <div class="field">
+                  <input class="" name="title" value="<%= depart.title %>" required></input>
+                </div>
+                <div class="field">
+                    <button class="ui green inverted left button">Add</button>
+                    <a href="/admin/db/departments" class="ui red inverted right button">Go Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<% include ../partials/footer %>

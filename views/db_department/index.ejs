@@ -1,0 +1,48 @@
+<% include ../partials/header %>
+
+    <h1 class="ui huge header">List of Departments and their Titles</h1>
+    <div class="ui divider"></div>
+    <form class="ui form" action="/admin/db/departments/new" method="POST">
+      <div class="field">
+        <label>Department:</label>
+        <div class="four fields">
+          <div class="field">
+                <input class="" name="department" placeholder="Department Name" required></input>
+            </div>
+            <div class="field">
+              <input class="" name="title" placeholder="Title" required></input>
+            </div>
+            <div class="field">
+                <button class="ui green inverted left button">Add</button>
+                <a href="/admin" class="ui red inverted right button">Go Back</a>
+            </div>
+        </div>
+    </form>
+    <div id="productdbinfo" class="">
+         <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="four wide">Department:</th>
+                    <th class="four wide">Title:</th>
+                    <th class="two wide">Edit:</th>
+                    <th class="two wide">Delete:</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% departs.forEach(function(depart){ %>
+                <tr>
+                    <td><%= depart.department %></td>
+                    <td><%= depart.title %></td>
+                    <td><a href="/admin/db/departments/<%= depart._id %>/edit" class="ui green inverted button">Edit</a></td>
+                    <td>
+                        <form action='/admin/db/departments/<%= depart._id %>/delete?_method=DELETE' method='POST' onsubmit='return confirm("Are you sure you want to delete <%= depart.department + ' / '+ depart.title %>?");'>
+                            <button class="ui red inverted button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+<% include ../partials/footer %>

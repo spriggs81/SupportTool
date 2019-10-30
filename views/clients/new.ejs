@@ -35,9 +35,9 @@
                             <div class="field">
                                 <label>Client's Status:</label>
                                 <select class="ui fluid dropdown" name="client[status]" required>
-                                    <option value="">Current Status:</option>
+                                    <option>Current Status:</option>
                                     <% statuses.forEach(function(status){ %>
-                                        <option value="<%= status.name %>"><%= status.name %></option>
+                                        <option class="list <%= status.name %>" value="<%= status.name %>"><%= status.name %></option>
                                     <% }); %>
                                 </select>
                             </div>

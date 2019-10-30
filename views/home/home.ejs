@@ -1,44 +1,65 @@
 
 <% include ../partials/header %>
+<div class="backdrop"></div>
+<div class="modal">
+     <form class="ui form" action="/knowledge" method="POST">
+          <div class="ui grid">
+               <div class="sixteen wide column">
+                    <% if(settings && settings.urlpic){ %>
+                         <input name="urlpic" placeholder="<%= settings.urlpic %>">
+                    <% } else { %>
+                         <input name="urlpic" placeholder="Please Add a Picture URL">
+                    <% } %>
+               </div>
+               <div class="sixteen wide column">
+                    <% if(settings){ %>
+                    <select class="ui select" name="depart" onchange="department()">
+                         <% dep %>
 
+                    </select>
+                    <% } %>
+               </div>
+          </div>
+     </form>
+</div>
+<div id="homeOpening">
+     <h1> Hello <%= currentUser.firstname + " " + currentUser.lastname %> </h1>
+     <hr>
+</div>
+<% if(settings) {%>
+     <div id="withsets" class="ui grid">
+          <div class="ui sixteen wide">
+               <div class="ui grid">
+                    <div class="ui eight wide">
+                         <img class="ui medium bordered image" src="<%= settings.urlpic %>">
+                    </div>
+                    <div class="ui eight wide">
+                         <ul>
+                              <h3>Department: <%= settings.department %></h3>
+                              <h3>Title: <%= settings.title %></h3>
+                              <h3>Manager: <%= settings.manager %></h3>
+                              <h3>Lead: <%= settings.lead %></h3>
+                         </ul>
+                    </div>
+               </div>
+          </div>
+     </div>
+<% } %>
 
-    <h1> Hello <%= currentUser.firstname + " " + currentUser.lastname %> </h1>
+<div class="accessinfo">
+     <p>Your current access level is
+          <% if(currentUser.username === 'admin_user'){ %>
+               limited administrator.  You have most of the rights as a normal administrator, but with limits to the user information data and deleting.
+          <% } else if(currentUser.admin === true){ %>
+               Administrator.  You have full access on this application.
+          <% } else { %>
+               Read Only Access.  You can view data and add knowledge based information and questions.
+          <% } %>
+     </p>
+</div>
 
-    <p>Your current access level is
-    <% if(currentUser.username === 'admin_user'){ %>
-    limited administrator.  You have most of the rights as a normal administrator, but with limits to the user information data and deleting.
-    <% if(currentUser.defaultview === false) { %>
-      <p>Your current view is set to Admin Read Mode.  You can use the Admin Edit Mode by clicking here:</p>
-      <form class="after40" action="/admin/<%= currentUser._id %>/changeview/true?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Edit Mode</button></form>
-      <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
-      <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
-      <p><strong>Please note that the General User is used by many and the view could be changed without notice.<p>
-    <% } else { %>
-      <p>Your current view is set to Admin Edit Mode.  You can use the Admin Read Mode by clicking here:</p>
-        <form action="/admin/<%= currentUser._id %>/changeview/false?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Read Mode</button></form>
-      <br>
-      <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
-      <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
-      <p><strong>Please note that the General User is used by many and the view could be changed without notice.<p>
-    <% } %>
-  <% } else if(currentUser.admin === true){ %>
-    Administrator.  You have full access on this application.
-      <% if(currentUser.defaultview === false) { %>
-        <p>Your current view is set to Admin Read Mode.  You can use the Admin Edit Mode by clicking here:</p>
-        <form class="after40" action="/admin/<%= currentUser._id %>/changeview/true?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Edit Mode</button></form>
-        <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
-        <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
-      <% } else { %>
-        <p>Your current view is set to Admin Edit Mode.  You can use the Admin Read Mode by clicking here:</p>
-          <form action="/admin/<%= currentUser._id %>/changeview/false?_method=PUT" method="POST"><button type="submit" class="ui blue inverted button">Change View To Read Mode</button></form>
-        <br>
-        <p><strong>Admin Edit Mode:</strong> allows you to see the editing options on the page</p>
-        <p><strong>Admin Read Mode:</strong> removes the editing options on the page and you click the title to access the editing menu</p>
-      <% } %>
-    <% } else { %>
-    Read Only Access.  You can view data and add knowledge based information and questions.
-    <% } %>
-    </p>
-    <br><br>
-    
+<div id="setSettings">
+     <a href="#" class="ui green inverted button disabled">Edit Settings</a>
+</div>
+
 <% include ../partials/footer %>

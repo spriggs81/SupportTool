@@ -359,21 +359,36 @@ function seedDB(){
             });
         }
     });
-    Credprofile.remove({}, function(err){
-        if(err){
-           console.log(err)
-        } else {
-            var admin = 23456;
-            var user = 12345;
-            Credprofile.create({user: user, admin: admin}, function(err, newprofile){
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log('New Profile Added');
-                }
-            });
-        }
-    });
 }
+
+function seedCreds(){
+     console.log('started the seed function!');
+     Credprofile.remove({}, function(err){
+          console.log('removed the pervious data!')
+          if(err){
+               console.log(err)
+          } else {
+               console.log('creating the admin and user')
+               var admin = 23456;
+               var user = 12345;
+               console.log("Adding to the database!");
+               Credprofile.create({user: user, admin: admin}, function(err, newprofile){
+                    console.log(newprofile);
+                    if(err){
+                         console.log(err);
+                    } else {
+                         console.log('New Profile Added');
+                         return;
+                    }
+               });
+          }
+     });
+
+}
+
+function end(){
+    console.log("Database Has Now Been Seeded!!!");
+}
+
 
 module.exports = seedDB;
