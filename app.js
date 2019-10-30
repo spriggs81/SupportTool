@@ -27,9 +27,9 @@ var homeRoute               = require("./routes/home"),
     indexRoutes             = require("./routes/index"),
     knowledgeRoutes         = require("./routes/knowledge");
 
-var databaseurl = process.env.DATABASEURL || "mongodb://localhost/support_tools_v4";
-var port = process.env.PORT || 3010;
-var ip = process.env.IP || "localhost";
+var databaseurl = process.env.DATABASEURL;// || "mongodb://localhost/support_tools_v4";
+var port = process.env.PORT;// || 3010;
+var ip = process.env.IP;// || "localhost";
 
 //setup MongoDB
 mongoose.connect(databaseurl, (err) => {
