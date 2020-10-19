@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var replymessageSchema = new mongoose.Schema({
+const replymessageSchema = new mongoose.Schema({
     creator: {
         id: {type: mongoose.Schema.Types.ObjectId,
             ref: "User"

@@ -1,12 +1,12 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var middleware = require("../middleware");
-var Dbvpnaccess = require("../models/dbvpnaccess");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      middleware = require("../middleware"),
+      Dbvpnaccess = require("../models/dbvpnaccess");
 
 
 //VPN Access Index Ruote
-router.get("/vpnaccess", middleware.checkIsAdmin, function(req, res) {
-    Dbvpnaccess.find({}).sort({'keyname': 1}).exec(function(err, foundAccesses){
+router.get("/vpnaccess", middleware.checkIsAdmin, (req, res) => {
+    Dbvpnaccess.find({}).sort({'keyname': 1}).exec((err, foundAccesses) => {
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');
@@ -19,7 +19,7 @@ router.get("/vpnaccess", middleware.checkIsAdmin, function(req, res) {
 
 
 //VPN Access New Route
-router.post("/vpnaccess/new", middleware.checkIsAdmin, function(req, res) {
+router.post("/vpnaccess/new", middleware.checkIsAdmin, (req, res) => {
     var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
@@ -37,7 +37,7 @@ router.post("/vpnaccess/new", middleware.checkIsAdmin, function(req, res) {
                 res.redirect("/admin/db/vpnaccess");
             } else if(foundAccess == false){
                 //adding new VPN Access to DB
-                 Dbvpnaccess.create({name: name, keyname: keyname}, function(err, newAccess){
+                 Dbvpnaccess.create({name: name, keyname: keyname}, (err, newAccess) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err + " error creating VPN Access");
@@ -56,8 +56,8 @@ router.post("/vpnaccess/new", middleware.checkIsAdmin, function(req, res) {
 });
 
 //bd edit page routeEdit page
-router.get("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(req, res){
-    Dbvpnaccess.findById(req.params.dbvpnaccess_id, function(err, foundAccess){
+router.get("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, (req, res) => {
+    Dbvpnaccess.findById(req.params.dbvpnaccess_id, (err, foundAccess) => {
         if(err){
             console.log(err);
             req.flash('error', "i'm an error");
@@ -70,7 +70,7 @@ router.get("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(
 
 
 //DB VPN Access Edit Route
-router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(req, res) {
+router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, (req, res) => {
     var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
@@ -82,13 +82,13 @@ router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(
         res.redirect("/admin/db/vpnaccess");
     } else {
         //checking for duplicates
-        Dbvpnaccess.find({keyname: keyname}, function(err, foundAccess){
+        Dbvpnaccess.find({keyname: keyname}, (err, foundAccess) => {
             if(err){
                 req.flash('error',err);
                 res.redirect("/admin/db/vpnaccess");
             } else if(foundAccess == false){
                 //updating old VPN Access to new VPN Access name
-                 Dbvpnaccess.findByIdAndUpdate(req.params.dbvpnccess_id,{name: name, keyname: keyname}, function(err, updatedAccess){
+                 Dbvpnaccess.findByIdAndUpdate(req.params.dbvpnccess_id,{name: name, keyname: keyname}, (err, updatedAccess) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err);
@@ -108,8 +108,8 @@ router.put("/vpnaccess/:dbvpnaccess_id/edit", middleware.checkIsAdmin, function(
 
 
 //delete route for DB Server
-router.delete("/vpnaccess/:dbvpnaccess_id/delete", middleware.checkIsAdminDelete, function(req, res){
-    Dbvpnaccess.findByIdAndRemove(req.params.dbvpnaccess_id, function(err) {
+router.delete("/vpnaccess/:dbvpnaccess_id/delete", middleware.checkIsAdminDelete, (req, res) => {
+    Dbvpnaccess.findByIdAndRemove(req.params.dbvpnaccess_id, (err) => {
         if(err){
             req.flash('error', "We could not delete this Server!!!");
             res.redirect("/vpnaccess");

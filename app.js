@@ -1,35 +1,35 @@
-var bodyParser       = require("body-parser"),
-    expressSanitizer = require("express-sanitizer"),
-    methodOverride   = require("method-override"),
-    mongoose         = require("mongoose"),
-    express          = require("express"),
-    passport         = require("passport"),
-    LocalStrategy    = require("passport-local"),
-    flash            = require("connect-flash"),
-    User             = require("./models/user"),
-    //seedDB           = require("./seeds"),
-    app              = express();
+const bodyParser       = require("body-parser"),
+      expressSanitizer = require("express-sanitizer"),
+      methodOverride   = require("method-override"),
+      mongoose         = require("mongoose"),
+      express          = require("express"),
+      passport         = require("passport"),
+      LocalStrategy    = require("passport-local"),
+      flash            = require("connect-flash"),
+      User             = require("./models/user"),
+      //seedDB           = require("./seeds"),
+      app              = express();
 
 
 //requiring routes
-var homeRoute               = require("./routes/home"),
-    clientRoutes            = require("./routes/clients"),
-    productRoutes           = require("./routes/products"),
-    serverRoutes            = require("./routes/servers"),
-    adminRoutes             = require("./routes/admin"),
-    db_ProductRoutes        = require("./routes/db_product"),
-    db_ClientstatusRoutes   = require("./routes/db_clientstatus"),
-    db_SupportplanRoutes    = require("./routes/db_supportplan"),
-    db_Managements          = require("./routes/db_management"),
-    db_VpnaccessRoutes      = require("./routes/db_vpnaccess"),
-    db_Department           = require("./routes/db_department"),
-    adminUserRoutes         = require("./routes/admin_user"),
-    indexRoutes             = require("./routes/index"),
-    knowledgeRoutes         = require("./routes/knowledge");
+const homeRoute               = require("./routes/home"),
+      clientRoutes            = require("./routes/clients"),
+      productRoutes           = require("./routes/products"),
+      serverRoutes            = require("./routes/servers"),
+      adminRoutes             = require("./routes/admin"),
+      db_ProductRoutes        = require("./routes/db_product"),
+      db_ClientstatusRoutes   = require("./routes/db_clientstatus"),
+      db_SupportplanRoutes    = require("./routes/db_supportplan"),
+      db_Managements          = require("./routes/db_management"),
+      db_VpnaccessRoutes      = require("./routes/db_vpnaccess"),
+      db_Department           = require("./routes/db_department"),
+      adminUserRoutes         = require("./routes/admin_user"),
+      indexRoutes             = require("./routes/index"),
+      knowledgeRoutes         = require("./routes/knowledge");
 
-var databaseurl = process.env.DATABASEURL;// || "mongodb://localhost/support_tools_v4";
-var port = process.env.PORT;// || 3010;
-var ip = process.env.IP;// || "localhost";
+const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.DATABASEURL.length > 0 ? process.env.DATABASEURL : "mongodb://localhost:27017/support_tools_v4";
+const port = typeof(Number(process.env.PORT)) == 'number' && process.env.PORT != null ? process.env.PORT : 3000;
+const ip = typeof(process.env.IP) == 'string' && process.env.IP.length > 0 ? process.env.IP : "localhost";
 
 //setup MongoDB
 mongoose.connect(databaseurl, (err) => {
@@ -65,7 +65,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.use(function(req, res, next){
+app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     // res.locals.settings = req.user.settings;
     res.locals.error = req.flash("error");
@@ -90,6 +90,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(port, ip, function(){
+app.listen(port, ip, () => {
     console.log("Support Tool Is Online!");
 });

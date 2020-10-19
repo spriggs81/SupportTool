@@ -1,12 +1,12 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var middleware = require("../middleware");
-var Dbmanagement = require("../models/management");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      middleware = require("../middleware"),
+      Dbmanagement = require("../models/management");
 
 
 //Product Index Ruote
-router.get("/management", middleware.checkIsAdmin, function(req, res) {
-    Dbmanagement.find({}).sort({'keyword': 1}).exec(function(err, foundManagement){
+router.get("/management", middleware.checkIsAdmin, (req, res) => {
+    Dbmanagement.find({}).sort({'keyword': 1}).exec((err, foundManagement) => {
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');
@@ -19,25 +19,25 @@ router.get("/management", middleware.checkIsAdmin, function(req, res) {
 
 
 //Product New Route
-router.post("/management/new", middleware.checkIsAdmin, function(req, res) {
-    var name = req.body.firstname + ' ' + req.body.lastname;
+router.post("/management/new", middleware.checkIsAdmin, (req, res) => {
+    const name = req.body.firstname + ' ' + req.body.lastname;
     //removing special chara and spaces
-    var step1 = name.replace(/[^A-Z0-9]/ig, "");
+    const step1 = name.replace(/[^A-Z0-9]/ig, "");
     //turning to lower case  -  used to help with dup entries
-    var keyname = step1.toLowerCase();
+    const keyname = step1.toLowerCase();
     //checking to make sure that the entry isn't blank or not sense
     if(keyname === ''){
         req.flash('error',"management fields can't be blank, only numbers or symbols!");
         res.redirect("/admin/db/management");
     } else {
         //checking for duplicates
-        Dbmanagement.find({keyword: keyname}, function(err, foundStatus){
+        Dbmanagement.find({keyword: keyname}, (err, foundStatus) => {
             if(err){
                 req.flash('error', "Error with Finding Dbmanagement!!!");
                 res.redirect("/admin/db/management");
             } else if(foundStatus == false){
                 //adding new product to DB
-                 Dbmanagement.create({firstname: req.body.firstname, lastname: req.body.lastname, role: req.body.role, keyword: keyname}, function(err, newManager){
+                 Dbmanagement.create({firstname: req.body.firstname, lastname: req.body.lastname, role: req.body.role, keyword: keyname}, (err, newManager) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err+" error creating client status");
@@ -56,8 +56,8 @@ router.post("/management/new", middleware.checkIsAdmin, function(req, res) {
 });
 
 //bd edit page routeEdit page
-router.get("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, function(req, res){
-    Dbmanagement.findById(req.params.Dbmanagement_id, function(err, foundManager){
+router.get("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, (req, res) => {
+    Dbmanagement.findById(req.params.Dbmanagement_id, (err, foundManager) => {
         if(err){
             console.log(err);
             req.flash('error', "i'm an error");
@@ -70,26 +70,26 @@ router.get("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, functio
 
 
 //DB Product Edit Route
-router.put("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, function(req, res) {
-    var name = req.body.firstname + ' ' + req.body.lastname;
+router.put("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, (req, res) => {
+    const name = req.body.firstname + ' ' + req.body.lastname;
     //removing special chara and spaces
-    var step1 = name.replace(/[^A-Z0-9]/ig, "");
+    const step1 = name.replace(/[^A-Z0-9]/ig, "");
     //turning to lower case  -  used to help with dup entries
-    var keyname = step1.toLowerCase();
+    const keyname = step1.toLowerCase();
     //checking to make sure that the entry isn't blank or not sense
     if(keyname === ''){
         req.flash('error',"Management fields can't be blank, only numbers or symbols!");
         res.redirect("/admin/db/management");
     } else {
         //checking for duplicates
-        Dbmanagement.find({keyword: keyname}, function(err, foundManager){
-          var prekey1 = foundManager[0]._id
+        Dbmanagement.find({keyword: keyname}, (err, foundManager) => {
+          const prekey1 = foundManager[0]._id
           if(err){
             req.flash('error',err);
             res.redirect("/admin/db/management");
           } else if(foundManager == false || prekey1 == req.params.Dbmanagement_id){
             //updating old product to new product name
-            Dbmanagement.findByIdAndUpdate(req.params.Dbmanagement_id,{firstname: req.body.firstname, lastname: req.body.lastname, role: req.body.role, keyword: keyname}, function(err, updatedManager){
+            Dbmanagement.findByIdAndUpdate(req.params.Dbmanagement_id,{firstname: req.body.firstname, lastname: req.body.lastname, role: req.body.role, keyword: keyname}, (err, updatedManager) => {
               if(err){
                 console.log(err);
                 req.flash('error', err);
@@ -109,8 +109,8 @@ router.put("/management/:Dbmanagement_id/edit", middleware.checkIsAdmin, functio
 
 
 //delete route for DB Server
-router.delete("/management/:Dbmanagement_id/delete", middleware.checkIsAdminDelete, function(req, res){
-    Dbmanagement.findByIdAndRemove(req.params.Dbmanagement_id, function(err) {
+router.delete("/management/:Dbmanagement_id/delete", middleware.checkIsAdminDelete, (req, res) => {
+    Dbmanagement.findByIdAndRemove(req.params.Dbmanagement_id, (err) => {
         if(err){
             req.flash('error', "We could not delete this Manager!!!");
             res.redirect("/management");

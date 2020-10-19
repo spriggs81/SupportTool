@@ -1,24 +1,24 @@
-var express         = require("express");
-var router          = express.Router({mergeParams: true})
-var Mainmessage     = require("../models/mainmessage");
-var Replymessage    = require("../models/replymessage");
-var Dbproduct       = require("../models/dbproduct");
-var middleware      = require("../middleware");
+const express         = require("express"),
+      router          = express.Router({mergeParams: true}),
+      Mainmessage     = require("../models/mainmessage"),
+      Replymessage    = require("../models/replymessage"),
+      Dbproduct       = require("../models/dbproduct"),
+      middleware      = require("../middleware");
 
 //Landing Route
-router.get("/", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, allproducts) {
+router.get("/", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.find({}).sort({'keyname': 1}).exec((err, allproducts) => {
         if(err){
             console.log(err);
             req.flash('error', "Error looking for DB Productd");
             res.redirect('/');
         } else {
-            Mainmessage.find({type: "info"}, function(err, infoMessages){
+            Mainmessage.find({type: "info"}, (err, infoMessages) => {
                 if(err) {
                    req.flash('error', err.message);
                    res.redirect("back");
                 } else {
-                    Mainmessage.find({type: "questions"}, function(err, questionsMessages) {
+                    Mainmessage.find({type: "questions"}, (err, questionsMessages) => {
                        if(err){
                            req.flash('error', err.message);
                            res.redirect("back");
@@ -33,8 +33,8 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 });
 
 //Product Waiting Route
-router.get("/:productName", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.productName, function(err, foundproduct){
+router.get("/:productName", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.productName, (err, foundproduct) => {
         if(err){
             console.log(err);
             req.flash('error', "This Product Was Not Found!");
@@ -47,13 +47,13 @@ router.get("/:productName", middleware.isLoggedIn, function(req, res) {
 
 
 //Product Info Route
-router.get("/:productName/info", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.productName, function(err, foundproduct){
+router.get("/:productName/info", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.productName, (err, foundproduct) => {
         if(err){
             req.flash('error', "This Product Was Not Found!");
             res.redirect("/knowledge");
         } else {
-            Mainmessage.find({product: foundproduct._id, type: "info"}, function(err, foundInfoMessages){
+            Mainmessage.find({product: foundproduct._id, type: "info"}, (err, foundInfoMessages) => {
                if(err){
                     console.log(err);
                     req.flash('error',"There was a problem locating the information you were looking for.  Please let an Admin know.");
@@ -68,13 +68,13 @@ router.get("/:productName/info", middleware.isLoggedIn, function(req, res) {
 
 
 //Product Question Route
-router.get("/:productName/questions", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.productName, function(err, foundproduct){
+router.get("/:productName/questions", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.productName, (err, foundproduct) => {
         if(err){
             req.flash('error', "This Product Was Not Found!");
             res.redirect("/knowledge");
         } else {
-            Mainmessage.find({product: foundproduct._id, type: "questions"}, function(err, foundInfoMessages){
+            Mainmessage.find({product: foundproduct._id, type: "questions"}, (err, foundInfoMessages) => {
                if(err){
                     console.log(err);
                     req.flash('error',"There was a problem locating the information you were looking for.  Please let an Admin know.");
@@ -89,8 +89,8 @@ router.get("/:productName/questions", middleware.isLoggedIn, function(req, res) 
 
 
 //Info New Form Route
-router.get("/:dbproduct_id/info/new", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
+router.get("/:dbproduct_id/info/new", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.dbproduct_id, (err, foundproduct) => {
         if(err){
             req.flash('error', err.message);
             res.redirect('/knowledge');
@@ -102,8 +102,8 @@ router.get("/:dbproduct_id/info/new", middleware.isLoggedIn, function(req, res) 
 
 
 //Question New Form Route
-router.get("/:dbproduct_id/questions/new", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
+router.get("/:dbproduct_id/questions/new", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.dbproduct_id, (err, foundproduct) => {
         if(err){
             req.flash('error', err.message);
             res.redirect('/knowledge');
@@ -115,7 +115,7 @@ router.get("/:dbproduct_id/questions/new", middleware.isLoggedIn, function(req, 
 
 
 //New Route
-router.post("/:productName/:messageType/new", middleware.isLoggedIn, function(req, res) {
+router.post("/:productName/:messageType/new", middleware.isLoggedIn, (req, res) => {
     var product = req.params.productName;
     var type = req.params.messageType;
     var creator = req.user;
@@ -136,13 +136,13 @@ router.post("/:productName/:messageType/new", middleware.isLoggedIn, function(re
 
 
 //show Route
-router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, function(req, res) {
-    Dbproduct.findById(req.params.productName, function(err, foundproduct) {
+router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, (req, res) => {
+    Dbproduct.findById(req.params.productName, (err, foundproduct) => {
         if(err){
             req.flash('error', err.message);
             res.redirect("/knowledge/"+req.params.messageType);
         } else {
-            Mainmessage.findById(req.params.message_id).populate("replies").exec(function(err, message){
+            Mainmessage.findById(req.params.message_id).populate("replies").exec((err, message) => {
                 if(err){
                     req.flash('error', "Cannot find Messages!");
                     console.log(err.message);
@@ -157,13 +157,13 @@ router.get("/:productName/:messageType/:message_id", middleware.isLoggedIn, func
 
 
 //info edit page route
-router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
-    Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
+router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, (req, res) => {
+    Dbproduct.findById(req.params.dbproduct_id, (err, foundproduct) => {
         if(err){
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
-            Mainmessage.findById(req.params.message_id, function(err, foundmessage) {
+            Mainmessage.findById(req.params.message_id, (err, foundmessage) => {
                 if(err){
                     req.flash('error', err.message);
                     res.redirect("back");
@@ -176,12 +176,11 @@ router.get("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwners
 });
 
 //Info Edit Route
-router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
+router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwnership, (req, res) => {
     var desc = req.sanitize(req.body.desc);
     var message = req.sanitize(req.body.message);
-    Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
+    Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, (err, updatedMessage) => {
        if(err){
-           console.log(err);
            req.flash('error', "We Cannot Add This New Message to Knowledge Base!");
            res.redirect("/knowledge/" + req.params.messageType);
        } else {
@@ -193,13 +192,13 @@ router.put("/:dbproduct_id/info/:message_id/edit", middleware.checkMessageOwners
 
 
 //Questions edit page route
-router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {
-    Dbproduct.findById(req.params.dbproduct_id, function(err, foundproduct) {
+router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, (req, res) => {
+    Dbproduct.findById(req.params.dbproduct_id, (err, foundproduct) => {
         if(err){
             req.flash('error', err.message);
             res.redirect('/knowledge');
         } else {
-            Mainmessage.findById(req.params.message_id, function(err, foundmessage) {
+            Mainmessage.findById(req.params.message_id, (err, foundmessage) => {
                 if(err){
                     req.flash('error', err.message);
                     res.redirect("back");
@@ -212,10 +211,10 @@ router.get("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageO
 });
 
 //Questions Edit Route
-router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, function(req, res) {;
+router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageOwnership, (req, res) => {;
     var desc = req.sanitize(req.body.desc);
     var message = req.sanitize(req.body.message);
-    Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, function(err, updatedMessage){
+    Mainmessage.findByIdAndUpdate(req.params.message_id, {desc:desc, message:message}, (err, updatedMessage) => {
        if(err){
            console.log(err);
            req.flash('error', "We Cannot Update This Message in The Knowledge Base!");
@@ -228,8 +227,8 @@ router.put("/:dbproduct_id/questions/:message_id/edit", middleware.checkMessageO
 });
 
 //Delete info/questions route
-router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.checkMessageOwnership, function(req, res){
-    Mainmessage.findByIdAndRemove(req.params.message_id, function(err){
+router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.checkMessageOwnership, (req, res) => {
+    Mainmessage.findByIdAndRemove(req.params.message_id, (err) => {
         if(err){
             console.log(err);
         } else {
@@ -240,16 +239,16 @@ router.delete("/:dbproduct_id/:messageType/:message_id/delete", middleware.check
 });
 
 //Post comment Route
-router.post("/:productName/:messageType/:message_id/comment", middleware.isLoggedIn, function(req, res) {
+router.post("/:productName/:messageType/:message_id/comment", middleware.isLoggedIn, (req, res) => {
     var creator = req.user;
     var comment = req.sanitize(req.body.comment);
-    Mainmessage.findById(req.params.message_id, function(err, message){
+    Mainmessage.findById(req.params.message_id, (err, message) => {
         if(err){
             req.flash('error', "Cannot find Messages!");
             res.redirect("/knowledge");
         }
         var newComment = {creator: creator, comment: comment};
-        Replymessage.create(newComment, function(err, newReplyMessage){
+        Replymessage.create(newComment, (err, newReplyMessage) => {
            if(err){
                req.flash('error', "We Cannot Add Your Comment!");
                res.redirect("/knowledge/" + req.params.productName + "/" + req.params.messageType + "/" + req.params.message_id);
@@ -263,13 +262,13 @@ router.post("/:productName/:messageType/:message_id/comment", middleware.isLogge
 });
 
 //Comment edit page route
-router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
-    Mainmessage.findById(req.params.message_id, function(err, foundmessage) {
+router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => {
+    Mainmessage.findById(req.params.message_id, (err, foundmessage) => {
         if(err){
             req.flash('error', err.message);
             res.redirect('/knowledge' + req.params.productName + "/" + req.params.messageType + "/" + req.params.message_id);
         } else {
-            Replymessage.findById(req.params.comment_id, function(err, foundcomment) {
+            Replymessage.findById(req.params.comment_id, (err, foundcomment) => {
                 if(err){
                     req.flash('error', err.message);
                     res.redirect("back");
@@ -282,9 +281,9 @@ router.get("/:productName/:messageType/:message_id/comment/:comment_id/edit", mi
 });
 
 //Comment Edit Route
-router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, function(req, res) {
+router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => {
     var message = req.sanitize(req.body.comment);
-    Replymessage.findByIdAndUpdate(req.params.comment_id, {comment:message}, function(err, updatedMessage){
+    Replymessage.findByIdAndUpdate(req.params.comment_id, {comment:message}, (err, updatedMessage) => {
        if(err){
            console.log(err);
            req.flash('error', "We Cannot Update This Comment in The Knowledge Base!");
@@ -297,8 +296,8 @@ router.put("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/edit", m
 });
 
 //Delete Comment route
-router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, function(req, res){
-    Replymessage.findByIdAndRemove(req.params.comment_id, function(err){
+router.delete("/:dbproduct_id/:messageType/:message_id/comment/:comment_id/delete", middleware.checkCommentOwnership, (req, res) => {
+    Replymessage.findByIdAndRemove(req.params.comment_id, (err) => {
         if(err){
             req.flash('error', err.message);
             res.redirect("back");

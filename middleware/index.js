@@ -1,14 +1,14 @@
-var mongoose         = require("mongoose");
-var Mainmessage = require("../models/mainmessage");
-var Replymessage = require("../models/replymessage");
+const mongoose    = require("mongoose"),
+      Mainmessage = require("../models/mainmessage"),
+      Replymessage = require("../models/replymessage");
 
 //all middleware
-var middlewareObj = {};
+const middlewareObj = {};
 
 
-middlewareObj.checkMessageOwnership = function(req, res, next){
+middlewareObj.checkMessageOwnership = (req, res, next) => {
     if(req.isAuthenticated()){
-        Mainmessage.findById(req.params.message_id, function(err, foundMessage){
+        Mainmessage.findById(req.params.message_id, (err, foundMessage) => {
             if(err){
                 console.log(err || !foundMessage);
                 req.flash("error","Can Not Find Message!");
@@ -29,7 +29,7 @@ middlewareObj.checkMessageOwnership = function(req, res, next){
     }
 };
 
-middlewareObj.checkIsAdmin = function(req, res, next){
+middlewareObj.checkIsAdmin = (req, res, next) => {
     if(req.isAuthenticated()){
         //does user have admin rights
         if(req.user.admin == true){
@@ -44,12 +44,12 @@ middlewareObj.checkIsAdmin = function(req, res, next){
     }
 };
 
-middlewareObj.checkIsAdminDelete = function(req, res, next){
+middlewareObj.checkIsAdminDelete = (req, res, next) => {
     if(req.isAuthenticated()){
         //does user have admin rights
         if(req.user.admin !== true || req.user.username == 'admin_user'){
           req.flash("error","You don't have permissions to do that!");
-          res.redirect("back");                
+          res.redirect("back");
         } else {
           next();
         }
@@ -59,7 +59,7 @@ middlewareObj.checkIsAdminDelete = function(req, res, next){
     }
 };
 
-middlewareObj.checkCommentOwnership = function(req, res, next){
+middlewareObj.checkCommentOwnership = (req, res, next) => {
     if(req.isAuthenticated()){
         Replymessage.findById(req.params.comment_id, function(err, foundComment){
             if(err){
@@ -82,7 +82,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
     }
 };
 
-middlewareObj.isLoggedIn = function(req, res, next){
+middlewareObj.isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()){
         return next();
     }

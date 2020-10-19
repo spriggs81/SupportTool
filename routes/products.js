@@ -1,19 +1,16 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var Client = require("../models/client");
-var Product = require("../models/product");
-var Appserver = require("../models/appserver");
-var DBserver = require("../models/dbserver");
-var User = require("../models/user");
-var middleware = require("../middleware");
-var Dbproduct = require("../models/dbproduct");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      Client = require("../models/client"),
+      Product = require("../models/product"),
+      middleware = require("../middleware"),
+      Dbproduct = require("../models/dbproduct");
 
 //==========================
 //   PRODUCT ROUTES
 //==========================
 //Production Index Route
-router.get("/", middleware.isLoggedIn, function(req, res) {
-    Client.findById(req.params.id).populate("products").exec(function(err, foundClient) {
+router.get("/", middleware.isLoggedIn, (req, res) => {
+    Client.findById(req.params.id).populate("products").exec((err, foundClient) => {
         if(err){
             req.flash('error',  'We cannot find the Client!!!');
             res.redirect("/clients");
@@ -25,16 +22,15 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 
 
 //Add New Product Form Route (Updated)
-router.get("/new", middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/new", middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', 'We cannot find the Client!!!')
             console.log(err);
             res.redirect("/clients/:id/products/new");
         } else {
-            Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, foundProducts){
+            Dbproduct.find({}).sort({'keyname': 1}).exec((err, foundProducts) => {
                 if(err){
-                    console.log(err);
                     req.flash('error', 'please report to an admin!');
                     res.redirect('/');
                 } else {
@@ -47,14 +43,13 @@ router.get("/new", middleware.checkIsAdmin, function(req, res) {
 
 
 //Add New Product
-router.post("/", middleware.checkIsAdmin, function(req, res){
-    Client.findById(req.params.id, function(err, client) {
+router.post("/", middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, client) => {
         if(err){
-            console.log(err);
             req.flash('error', "We cannot find the Client!!!");
             return res.redirect("/clients/" + req.params.id + "/products/new");
         }
-        Product.create(req.body.product, function(err, product){
+        Product.create(req.body.product, (err, product) => {
             if(err){
                 req.flash('error', "There was an error adding the product to the user, try again");
             } else{
@@ -68,13 +63,13 @@ router.post("/", middleware.checkIsAdmin, function(req, res){
 });
 
 //products show page
-router.get("/:product_id", middleware.isLoggedIn, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/:product_id", middleware.isLoggedIn, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "Can't find the Client!!!");
             res.redirect("/clients");
         } else{
-            Product.findById(req.params.product_id, function(err, foundProduct) {
+            Product.findById(req.params.product_id, (err, foundProduct) => {
                 if(err){
                     req.flash('error', "Can't find this Product!!!");
                     res.redirect("/clients/"+req.params.id);
@@ -87,19 +82,18 @@ router.get("/:product_id", middleware.isLoggedIn, function(req, res) {
 });
 
 //Get Product Edit Form (Updated)
-router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/:product_id/edit', middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            Product.findById(req.params.product_id, function(err, oldProduct){
+            Product.findById(req.params.product_id, (err, oldProduct) => {
                 if(err){
                     req.flash('error',"We cannot find this Product!");
-                    console.log(err);
                     res.redirect("/clients/:id/products");
                 } else {
-                     Dbproduct.find({}).sort({'keyname': 1}).exec(function(err, foundProducts){
+                     Dbproduct.find({}).sort({'keyname': 1}).exec((err, foundProducts) => {
                         if(err){
                             console.log(err);
                             req.flash('error', 'please report to an admin!');
@@ -116,13 +110,13 @@ router.get('/:product_id/edit', middleware.checkIsAdmin, function(req, res) {
 });
 
 //Product Edit route
-router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
-    Client.findById(req.params.id, function(err, foundClient) {
+router.put("/:product_id", middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We connot find the Client!!!");
             res.redirect("/clients");
         } else {
-            Product.findByIdAndUpdate(req.params.product_id, req.body.product, function(err, updatedProduct){
+            Product.findByIdAndUpdate(req.params.product_id, req.body.product, (err, updatedProduct) => {
                 if(err){
                     req.flash('error', "We cannot find Product!!!");
                     res.redirect("/clients/"+req.params.id+"/products/");
@@ -136,12 +130,12 @@ router.put("/:product_id", middleware.checkIsAdmin, function(req, res){
 });
 
 //Delete a Product
-router.delete("/:product_id", middleware.checkIsAdminDelete, function(req, res){
-    Product.findByIdAndRemove(req.params.product_id, function(err){
+router.delete("/:product_id", middleware.checkIsAdminDelete,  (req, res) => {
+    Product.findByIdAndRemove(req.params.product_id, (err) => {
         if(err){
             console.log(err);
         } else {
-            Client.findById(req.params.id, function(err, client) {
+            Client.findById(req.params.id, (err, client) => {
                 if(err){
                     console.log(err);
                 }
@@ -153,13 +147,13 @@ router.delete("/:product_id", middleware.checkIsAdminDelete, function(req, res){
 });
 
 //Product Menu Route
-router.get('/:product_id/menu', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/:product_id/menu', middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            Product.findById(req.params.product_id, function(err, foundProduct){
+            Product.findById(req.params.product_id, (err, foundProduct) => {
                 if(err){
                     req.flash('error',"We cannot find this Product!");
                     console.log(err);

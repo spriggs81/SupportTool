@@ -1,12 +1,12 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var middleware = require("../middleware");
-var Dbsupportplan = require("../models/dbsupportplan");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      middleware = require("../middleware"),
+      Dbsupportplan = require("../models/dbsupportplan");
 
 
 //Product Index Ruote
-router.get("/supportplan", middleware.checkIsAdmin, function(req, res) {
-    Dbsupportplan.find({}).sort({'keyname': 1}).exec(function(err, foundPlans){
+router.get("/supportplan", middleware.checkIsAdmin, (req, res) => {
+    Dbsupportplan.find({}).sort({'keyname': 1}).exec((err, foundPlans) => {
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');
@@ -19,7 +19,7 @@ router.get("/supportplan", middleware.checkIsAdmin, function(req, res) {
 
 
 //Product New Route
-router.post("/supportplan/new", middleware.checkIsAdmin, function(req, res) {
+router.post("/supportplan/new", middleware.checkIsAdmin, (req, res) => {
     var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
@@ -31,13 +31,13 @@ router.post("/supportplan/new", middleware.checkIsAdmin, function(req, res) {
         res.redirect("/admin/db/supportplan");
     } else {
         //checking for duplicates
-        Dbsupportplan.find({keyname: keyname}, function(err, foundPlan){
+        Dbsupportplan.find({keyname: keyname}, (err, foundPlan) => {
             if(err){
                 req.flash('error', "Error with Finding DBSUPPORTPLAN!!!");
                 res.redirect("/admin/db/supportplan");
             } else if(foundPlan == false){
                 //adding new product to DB
-                 Dbsupportplan.create({name: name, keyname: keyname}, function(err, newPlan){
+                 Dbsupportplan.create({name: name, keyname: keyname}, (err, newPlan) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err+" error creating Support Plan");
@@ -56,8 +56,8 @@ router.post("/supportplan/new", middleware.checkIsAdmin, function(req, res) {
 });
 
 //bd edit page routeEdit page
-router.get("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, function(req, res){
-    Dbsupportplan.findById(req.params.dbsupportplan_id, function(err, foundPlan){
+router.get("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, (req, res) => {
+    Dbsupportplan.findById(req.params.dbsupportplan_id, (err, foundPlan) => {
         if(err){
             console.log(err);
             req.flash('error', "i'm an error");
@@ -70,7 +70,7 @@ router.get("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, funct
 
 
 //DB Product Edit Route
-router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, function(req, res) {
+router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, (req, res) => {
     var name = req.sanitize(req.body.name);
     //removing special chara and spaces
     var step1 = name.replace(/[^A-Z0-9]/ig, "");
@@ -82,15 +82,14 @@ router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, funct
         res.redirect("/admin/db/supportplan");
     } else {
         //checking for duplicates
-        Dbsupportplan.find({keyname: keyname}, function(err, foundPlan){
+        Dbsupportplan.find({keyname: keyname}, (err, foundPlan) => {
             if(err){
                 req.flash('error',err);
                 res.redirect("/admin/db/supportplan");
             } else if(foundPlan == false){
                 //updating old product to new product name
-                 Dbsupportplan.findByIdAndUpdate(req.params.dbsupportplan_id,{name: name, keyname: keyname}, function(err, updatedPlan){
+                 Dbsupportplan.findByIdAndUpdate(req.params.dbsupportplan_id,{name: name, keyname: keyname}, (err, updatedPlan) => {
                     if(err){
-                        console.log(err);
                         req.flash('error', err);
                         res.redirect("/admin/db/supportplan");
                     } else {
@@ -108,8 +107,8 @@ router.put("/supportplan/:dbsupportplan_id/edit", middleware.checkIsAdmin, funct
 
 
 //delete route for DB Server
-router.delete("/supportplan/:dbsupportplan_id/delete", middleware.checkIsAdminDelete, function(req, res){
-    Dbsupportplan.findByIdAndRemove(req.params.dbsupportplan_id, function(err) {
+router.delete("/supportplan/:dbsupportplan_id/delete", middleware.checkIsAdminDelete, (req, res) => {
+    Dbsupportplan.findByIdAndRemove(req.params.dbsupportplan_id, (err) => {
         if(err){
             req.flash('error', "We could not delete this Server!!!");
             res.redirect("/supportplan");

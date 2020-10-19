@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var clientSchema = new mongoose.Schema({
+const clientSchema = new mongoose.Schema({
     name: String,
     supportPlan: String,
     status: String,
@@ -29,7 +29,7 @@ var clientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "DBserver"
     }]
-    
+
 });
 
 module.exports = mongoose.model("Client", clientSchema);

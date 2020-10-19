@@ -1,12 +1,12 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var middleware = require("../middleware");
-var Dbdepartment = require("../models/departandtitle");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      middleware = require("../middleware"),
+      Dbdepartment = require("../models/departandtitle");
 
 
 //Product Index Ruote
-router.get("/departments", middleware.checkIsAdmin, function(req, res) {
-    Dbdepartment.find({}).sort({'department': 1, 'title': 1}).exec(function(err, foundDeparts){
+router.get("/departments", middleware.checkIsAdmin, (req, res) => {
+    Dbdepartment.find({}).sort({'department': 1, 'title': 1}).exec((err, foundDeparts) => {
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');
@@ -19,9 +19,9 @@ router.get("/departments", middleware.checkIsAdmin, function(req, res) {
 
 
 //Department and Title New Route
-router.post("/departments/new", middleware.checkIsAdmin, function(req, res) {
+router.post("/departments/new", middleware.checkIsAdmin, (req, res) => {
     //adding new product to DB
-    Dbdepartment.create({department: req.body.department, title: req.body.title}, function(err, newdepart){
+    Dbdepartment.create({department: req.body.department, title: req.body.title}, (err, newdepart) => {
         if(err){
             console.log(err);
             req.flash('error', err+" error creating department and title");
@@ -34,8 +34,8 @@ router.post("/departments/new", middleware.checkIsAdmin, function(req, res) {
 });
 
 //bd edit page routeEdit page
-router.get("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, function(req, res){
-    Dbdepartment.findById(req.params.Dbdepartment_id, function(err, foundDepart){
+router.get("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, (req, res) => {
+    Dbdepartment.findById(req.params.Dbdepartment_id, (err, foundDepart) => {
         if(err){
             console.log(err);
             req.flash('error', "Error editing department");
@@ -48,8 +48,8 @@ router.get("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, functi
 
 
 //DB Product Edit Route
-router.put("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, function(req, res) {
-    Dbdepartment.findByIdAndUpdate(req.params.Dbdepartment_id,{department: req.body.department, title: req.body.title}, function(err, updatedDepart){
+router.put("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, (req, res) => {
+    Dbdepartment.findByIdAndUpdate(req.params.Dbdepartment_id,{department: req.body.department, title: req.body.title}, (err, updatedDepart) => {
       if(err){
         console.log(err);
         req.flash('error', err);
@@ -63,8 +63,8 @@ router.put("/departments/:Dbdepartment_id/edit", middleware.checkIsAdmin, functi
 
 
 //delete route for DB Server
-router.delete("/department/:Dbdepartment_id/delete", middleware.checkIsAdminDelete, function(req, res){
-    Dbdepartment.findByIdAndRemove(req.params.Dbdepartment_id, function(err) {
+router.delete("/department/:Dbdepartment_id/delete", middleware.checkIsAdminDelete, (req, res) => {
+    Dbdepartment.findByIdAndRemove(req.params.Dbdepartment_id, (err) => {
         if(err){
             req.flash('error', "We could not delete this!!!");
             res.redirect("/department");

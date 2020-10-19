@@ -1,16 +1,16 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var middleware = require("../middleware");
-var Credprofile = require("../models/credprofile");
-var Users = require("../models/user");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      middleware = require("../middleware"),
+      Credprofile = require("../models/credprofile"),
+      Users = require("../models/user");
 
 
 // =====================
 //  ADMIN ROUTES
 // =====================
 //Admin ladning page;
-router.get("/", middleware.checkIsAdmin, function(req, res) {
-    Credprofile.find({}, function(err, foundProfiles){
+router.get("/", middleware.checkIsAdmin, (req, res) => {
+    Credprofile.find({}, (err, foundProfiles) => {
         if(err){
             console.log(err);
             req.flash('error', 'please report to an admin!');

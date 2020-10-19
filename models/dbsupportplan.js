@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var dbsupportplanSchema = new mongoose.Schema({
+const dbsupportplanSchema = new mongoose.Schema({
     name: String,
     keyname: String
 });

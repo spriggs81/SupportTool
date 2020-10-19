@@ -1,32 +1,30 @@
-var express     = require("express");
-var router      = express.Router({mergeParams: true});
-var passport    = require("passport");
-var User        = require("../models/user");
-var Credprofile = require("../models/credprofile");
-var middleware  = require("../middleware");
+const express     = require("express"),
+      router      = express.Router({mergeParams: true}),
+      passport    = require("passport"),
+      User        = require("../models/user"),
+      Credprofile = require("../models/credprofile");
 
 
 //root Router
-router.get("/", function(req, res){
+router.get("/", (req, res) => {
     //res.redirect("/clients");
     res.render("landing");
 });
 
 //register form route
-router.get("/register", function(req, res) {
+router.get("/register", (req, res) => {
    res.render('register');
 });
 
 
 //create user post route
-router.post("/register", function(req, res) {
+router.post("/register", (req, res) => {
     var username = req.sanitize(req.body.username);
     var firstname = req.sanitize(req.body.firstname);
     var lastname = req.sanitize(req.body.lastname);
     Credprofile.find({}, function(err, foundprofiles){
         var foundprofile = foundprofiles[0];
         if(err){
-            console.log(err);
             req.flash('error','Please report this issue to an admin!');
             res.redirect('/register');
        } else if(!foundprofile){
@@ -40,7 +38,7 @@ router.post("/register", function(req, res) {
                     lastname: lastname,
                     admin: false
                 });
-                User.register(newUser, req.body.password, function(err, newUser) {
+                User.register(newUser, req.body.password, (err, newUser) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err);
@@ -57,7 +55,7 @@ router.post("/register", function(req, res) {
                     lastname: lastname,
                     admin: true
                 });
-                User.register(newUser, req.body.password, function(err, newUser) {
+                User.register(newUser, req.body.password, (err, newUser) => {
                     if(err){
                         console.log(err);
                         req.flash('error', err.message);
@@ -76,7 +74,7 @@ router.post("/register", function(req, res) {
 });
 
 //show login form
-router.get("/login", function(req, res) {
+router.get("/login", (req, res) => {
     res.render("login");
 });
 //handling login logic
@@ -88,7 +86,7 @@ router.post("/login", passport.authenticate("local",
 })
 
 //logout route
-router.get("/logout", function(req, res) {
+router.get("/logout", (req, res) => {
     req.logout()
     req.flash('success', "You're Now Logged Out!!!")
     res.redirect("/");

@@ -1,19 +1,17 @@
-var express = require("express");
-var router = express.Router({mergeParams: true});
-var Client = require("../models/client");
-var Product = require("../models/product");
-var Appserver = require("../models/appserver");
-var DBserver = require("../models/dbserver");
-var User = require("../models/user");
-var middleware = require("../middleware");
+const express = require("express"),
+      router = express.Router({mergeParams: true}),
+      Client = require("../models/client"),
+      Appserver = require("../models/appserver"),
+      DBserver = require("../models/dbserver"),
+      middleware = require("../middleware");
 
 
 // =========================
 //      SERVER ROUTE
 // ==========================
 //Server Index Page
-router.get("/", middleware.isLoggedIn, function(req, res) {
-    Client.findById(req.params.id).populate("appservers dbservers").exec(function(err, foundClient) {
+router.get("/", middleware.isLoggedIn, (req, res) => {
+    Client.findById(req.params.id).populate("appservers dbservers").exec((err, foundClient) => {
         if(err){
             req.flash('error', 'We cannot find the Client!!!');
         } else{
@@ -23,8 +21,8 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 });
 
 // New App Server Form route
-router.get("/new/app", middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/new/app", middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "Can't find client!!!");
             res.redirect("/clients/:id/server/new");
@@ -35,8 +33,8 @@ router.get("/new/app", middleware.checkIsAdmin, function(req, res) {
 });
 
 // New DB Server Form route
-router.get("/new/db", middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/new/db", middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "Can't find client!!!");
             res.redirect("/clients/:id/server/new");
@@ -47,14 +45,14 @@ router.get("/new/db", middleware.checkIsAdmin, function(req, res) {
 });
 
 //Add New App Server
-router.post("/app", middleware.checkIsAdmin, function(req, res){
+router.post("/app", middleware.checkIsAdmin, (req, res) => {
     req.body = req.sanitize(req.body);
-    Client.findById(req.params.id, function(err, foundClient) {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             return res.redirect("/clients/:id/servers/new");
         }
-        Appserver.create(req.body.appserver, function(err, newAppserver){
+        Appserver.create(req.body.appserver, (err, newAppserver) => {
             if(err){
                 req.flash('error', "We cannot create this Server, please try again!!!");
                 console.log(JSON.stringify(err));
@@ -70,14 +68,14 @@ router.post("/app", middleware.checkIsAdmin, function(req, res){
 
 
 //Add New Database Sever
-router.post("/db", middleware.checkIsAdmin, function(req, res){
+router.post("/db", middleware.checkIsAdmin, (req, res) => {
     req.body = req.sanitize(req.body);
-    Client.findById(req.params.id, function(err, foundClient) {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             return res.redirect("/clients/:id/servers/new");
         }
-        DBserver.create(req.body.appserver, function(err, newDBserver){
+        DBserver.create(req.body.appserver, (err, newDBserver) =>{
             if(err){
                 req.flash('error', "Error trying to create Database Server.  Please try again!!!");
                 console.log(JSON.stringify(err));
@@ -93,13 +91,13 @@ router.post("/db", middleware.checkIsAdmin, function(req, res){
 
 
 //Server Show Page for App server
-router.get("/app/:server_id", middleware.isLoggedIn, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/app/:server_id", middleware.isLoggedIn, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            Appserver.findById(req.params.server_id, function(err, foundServer) {
+            Appserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error', "We cannot find the Server Information!!!");
                     res.redirect("back");
@@ -113,13 +111,13 @@ router.get("/app/:server_id", middleware.isLoggedIn, function(req, res) {
 
 
 //Server Show Page for DB server
-router.get("/db/:server_id", middleware.isLoggedIn, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get("/db/:server_id", middleware.isLoggedIn, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            DBserver.findById(req.params.server_id, function(err, foundServer) {
+            DBserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error', "We cannot find the Server Information!!!");
                     res.redirect("back");
@@ -133,13 +131,13 @@ router.get("/db/:server_id", middleware.isLoggedIn, function(req, res) {
 
 
 //Get App Server Edit Form
-router.get('/app/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/app/:server_id/edit', middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            Appserver.findById(req.params.server_id, function(err, foundServer){
+            Appserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error',"We cannot find this Server!");
                     console.log(err);
@@ -153,14 +151,14 @@ router.get('/app/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
 });
 
 //Update route for app server
-router.put("/app/:server_id", middleware.checkIsAdmin, function(req, res) {
+router.put("/app/:server_id", middleware.checkIsAdmin, (req, res) => {
     req.body = req.sanitize(req.body);
-    Client.findById(req.params.id, function(err, foundClient) {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            Appserver.findByIdAndUpdate(req.params.server_id, req.body.appserver, function(err, updatedServer){
+            Appserver.findByIdAndUpdate(req.params.server_id, req.body.appserver, (err, updatedServer) => {
                 if(err){
                     req.flash('error', "We cannot find the Server!!!");
                     req.redirect("/clients/"+foundClient._id+"/servers");
@@ -174,13 +172,13 @@ router.put("/app/:server_id", middleware.checkIsAdmin, function(req, res) {
 });
 
 //Get DB Server Edit Form
-router.get('/db/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/db/:server_id/edit', middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            DBserver.findById(req.params.server_id, function(err, foundServer){
+            DBserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error',"We cannot find this Server!");
                     console.log(err);
@@ -194,14 +192,14 @@ router.get('/db/:server_id/edit', middleware.checkIsAdmin, function(req, res) {
 });
 
 //Update route for db server
-router.put("/db/:server_id", middleware.checkIsAdmin, function(req, res) {
+router.put("/db/:server_id", middleware.checkIsAdmin, (req, res) => {
     req.body = req.sanitize(req.body);
-    Client.findById(req.params.id, function(err, foundClient) {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            DBserver.findByIdAndUpdate(req.params.server_id, req.body.dbserver, function(err, updatedServer){
+            DBserver.findByIdAndUpdate(req.params.server_id, req.body.dbserver, (err, updatedServer) => {
                 if(err){
                     req.flash('error', "We cannot find the Server!!!");
                     req.redirect("/clients/"+foundClient._id+"/servers");
@@ -215,13 +213,13 @@ router.put("/db/:server_id", middleware.checkIsAdmin, function(req, res) {
 });
 
 //delete route for App Server
-router.delete("/app/:server_id", middleware.checkIsAdminDelete, function(req, res){
-    Client.findById(req.params.id, function(err, foundClient) {
+router.delete("/app/:server_id", middleware.checkIsAdminDelete, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            Appserver.findByIdAndRemove(req.params.server_id, function(err) {
+            Appserver.findByIdAndRemove(req.params.server_id, (err) => {
                 if(err){
                     req.flash('error', "We could not delete this Server!!!");
                     res.redirect("/clients/" + req.params.id + "/servers");
@@ -234,13 +232,13 @@ router.delete("/app/:server_id", middleware.checkIsAdminDelete, function(req, re
 });
 
 //delete route for DB Server
-router.delete("/db/:server_id", middleware.checkIsAdminDelete, function(req, res){
-    Client.findById(req.params.id, function(err, foundClient) {
+router.delete("/db/:server_id", middleware.checkIsAdminDelete, (req, res) => {
+    Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else {
-            DBserver.findByIdAndRemove(req.params.server_id, function(err) {
+            DBserver.findByIdAndRemove(req.params.server_id, (err) => {
                 if(err){
                     req.flash('error', "We could not delete this Server!!!");
                     res.redirect("/clients/" + req.params.id + "/servers");
@@ -253,13 +251,13 @@ router.delete("/db/:server_id", middleware.checkIsAdminDelete, function(req, res
 });
 
 //App Server Menu Reoute
-router.get('/app/:server_id/menu', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/app/:server_id/menu', middleware.checkIsAdmin, (req, res) => {
+     Client.findById(req.params.id, (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            Appserver.findById(req.params.server_id, function(err, foundServer){
+            Appserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error',"We cannot find this Server!");
                     console.log(err);
@@ -273,13 +271,13 @@ router.get('/app/:server_id/menu', middleware.checkIsAdmin, function(req, res) {
 });
 
 //DB Server Menu Route
-router.get('/db/:server_id/menu', middleware.checkIsAdmin, function(req, res) {
-    Client.findById(req.params.id, function(err, foundClient) {
+router.get('/db/:server_id/menu', middleware.checkIsAdmin, (req, res) => {
+    Client.findById(req.params.id,  (err, foundClient) => {
         if(err){
             req.flash('error', "We cannot find the Client!!!");
             res.redirect("/clients");
         } else{
-            DBserver.findById(req.params.server_id, function(err, foundServer){
+            DBserver.findById(req.params.server_id, (err, foundServer) => {
                 if(err){
                     req.flash('error',"We cannot find this Server!");
                     console.log(err);

@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var appserverSchema = new mongoose.Schema({
+const appserverSchema = new mongoose.Schema({
     type: String,
     role: String,
     rdpip: String,

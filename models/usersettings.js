@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var usersettingsSchema = new mongoose.Schema({
+const usersettingsSchema = new mongoose.Schema({
      settingid: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User"

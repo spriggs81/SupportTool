@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var dbserverSchema = new mongoose.Schema({
+const dbserverSchema = new mongoose.Schema({
     type: String,
     dbtype: String,
     dbversion: String,

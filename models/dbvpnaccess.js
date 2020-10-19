@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var dbvpnaccessSchema = new mongoose.Schema({
+const dbvpnaccessSchema = new mongoose.Schema({
     name: String,
     keyname: String
 });
