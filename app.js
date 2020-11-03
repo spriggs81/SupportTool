@@ -31,6 +31,8 @@ const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.D
 const port = typeof(Number(process.env.PORT)) == 'number' && process.env.PORT != null ? process.env.PORT : 3000;
 const ip = typeof(process.env.IP) == 'string' && process.env.IP.length > 0 ? process.env.IP : "localhost";
 
+console.log("databaseurl: ",databaseurl,"\nport: ",port,"\nip: ",ip);
+
 //setup MongoDB
 mongoose.connect(databaseurl, (err) => {
     if(!err){
