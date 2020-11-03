@@ -29,7 +29,7 @@ const homeRoute               = require("./routes/home"),
 
 const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.DATABASEURL.length > 0 ? process.env.DATABASEURL : "mongodb://localhost:27017/support_tools_v4";
 const port = typeof(Number(process.env.PORT)) == 'number' && process.env.PORT != null ? process.env.PORT : 3000;
-const ip = typeof(process.env.IP) == 'string' && process.env.IP.length > 0 ? process.env.IP : "localhost";
+const ip = process.env.IP != null ? process.env.IP : "localhost";
 
 console.log("databaseurl: ",databaseurl,"\nport: ",port,"\nip: ",ip);
 
