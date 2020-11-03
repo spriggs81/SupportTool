@@ -1,12 +1,12 @@
 const express     = require("express"),
       router      = express.Router({mergeParams: true}),
-      Settings    = require("../models/usersettings"),
+      Users       = require("../models/user"),
       middleware  = require("../middleware");
 
 //root Router
 router.get("/", middleware.isLoggedIn, (req, res) => {
      var userinfo = req.user;
-     Settings.findById(userinfo.settings, (err, foundSetting) => {
+     Users.findById(userinfo, (err, foundSetting) => {
           if(err){
                return JSON.parser(err.message);
           } else {

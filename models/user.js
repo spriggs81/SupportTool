@@ -10,8 +10,12 @@ const UserSchema = new mongoose.Schema({
     defaultview:Boolean,
     startDate: Date,
     settings: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Usersettings"
+      urlpic: String,
+      department: String,
+      title: String,
+      manager: String,
+      lead: String,
+      timedifference: String
     }
 });
 

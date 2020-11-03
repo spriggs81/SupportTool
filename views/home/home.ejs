@@ -5,17 +5,17 @@
      <form class="ui form" action="/knowledge" method="POST">
           <div class="ui grid">
                <div class="sixteen wide column">
-                    <% if(settings && settings.urlpic){ %>
-                         <input name="urlpic" placeholder="<%= settings.urlpic %>">
+                    <% if(currentUser.settings && currentUser.settings.urlpic){ %>
+                         <input name="urlpic" placeholder="<%= currentUser.settings.urlpic %>">
                     <% } else { %>
                          <input name="urlpic" placeholder="Please Add a Picture URL">
                     <% } %>
                </div>
                <div class="sixteen wide column">
-                    <% if(settings){ %>
+                    <% if(currentUser.settings){ %>
                     <select class="ui select" name="depart" onchange="department()">
-                         <% dep %>
-
+                         <%# <% dep %> %>
+                         <h1>Something that was dep</h1>
                     </select>
                     <% } %>
                </div>
@@ -26,19 +26,19 @@
      <h1> Hello <%= currentUser.firstname + " " + currentUser.lastname %> </h1>
      <hr>
 </div>
-<% if(settings) {%>
+<% if(currentUser.settings) {%>
      <div id="withsets" class="ui grid">
           <div class="ui sixteen wide">
                <div class="ui grid">
                     <div class="ui eight wide">
-                         <img class="ui medium bordered image" src="<%= settings.urlpic %>">
+                         <img class="ui medium bordered image" src="<%= currentUser.settings.urlpic %>">
                     </div>
                     <div class="ui eight wide">
                          <ul>
-                              <h3>Department: <%= settings.department %></h3>
-                              <h3>Title: <%= settings.title %></h3>
-                              <h3>Manager: <%= settings.manager %></h3>
-                              <h3>Lead: <%= settings.lead %></h3>
+                              <h3>Department: <%= currentUser.settings.department %></h3>
+                              <h3>Title: <%= currentUser.settings.title %></h3>
+                              <h3>Manager: <%= currentUser.settings.manager %></h3>
+                              <h3>Lead: <%= currentUser.settings.lead %></h3>
                          </ul>
                     </div>
                </div>
