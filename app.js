@@ -29,10 +29,6 @@ const homeRoute               = require("./routes/home"),
 
 const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.DATABASEURL.length > 0 ? process.env.DATABASEURL : "mongodb://localhost:27017/support_tools_v4";
 const port = typeof(Number(process.env.PORT)) == 'number' && process.env.PORT != null ? process.env.PORT : 3000;
-const ip = process.env.IP != null ? process.env.IP : "localhost";
-console.log("IP is ",process.env.IP);
-
-console.log("databaseurl: ",databaseurl,"\nport: ",port,"\nip: ",ip);
 
 //setup MongoDB
 mongoose.connect(databaseurl, (err) => {
@@ -93,6 +89,6 @@ app.use("/clients/:id/servers", serverRoutes);
 app.use("/knowledge", knowledgeRoutes);
 
 
-app.listen(port, ip, () => {
+app.listen(port, () => {
     console.log("Support Tool Is Online!");
 });
