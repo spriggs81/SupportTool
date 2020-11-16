@@ -6,6 +6,7 @@ const bodyParser       = require("body-parser"),
       passport         = require("passport"),
       LocalStrategy    = require("passport-local"),
       flash            = require("connect-flash"),
+      path             = require('path'),
       User             = require("./models/user"),
       //seedDB           = require("./seeds"),
       app              = express();
@@ -41,7 +42,7 @@ mongoose.connect(databaseurl, (err) => {
 
 // APP CONFIG
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

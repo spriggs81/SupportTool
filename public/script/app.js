@@ -86,6 +86,9 @@ function closeModal() {
     backdrop.style.display = 'none';
     modal.style.display = 'none';
 }
-
-modalButton.onclick = openModal;
-backdrop.onclick = closeModal;
+if(document.querySelector('.mbutt')){
+   modalButton.onclick = openModal;
+}
+if(document.querySelector('.backdrop')){
+   backdrop.onclick = closeModal;
+}

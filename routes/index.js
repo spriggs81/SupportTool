@@ -31,44 +31,23 @@ router.post("/register", (req, res) => {
             req.flash('error', 'Missing Credentials Information, Please see Admin.');
             res.redirect('/');
        } else {
-            if(req.body.code == foundprofile.user){
-                var newUser = new User({
-                    username: username,
-                    firstname: firstname,
-                    lastname: lastname,
-                    admin: false
-                });
-                User.register(newUser, req.body.password, (err, newUser) => {
-                    if(err){
-                        console.log(err);
-                        req.flash('error', err);
-                        res.redirect("/register");
-                    } else {
-                        req.flash('success', newUser.username + " has been added as a User!");
-                        res.redirect("/");
-                    }
-                });
-            } else if(req.body.code == foundprofile.admin){
-                var newUser = new User({
-                    username: username,
-                    firstname: firstname,
-                    lastname: lastname,
-                    admin: true
-                });
-                User.register(newUser, req.body.password, (err, newUser) => {
-                    if(err){
-                        console.log(err);
-                        req.flash('error', err.message);
-                        res.redirect("/register");
-                    } else {
-                        req.flash('success', newUser.username + " has been added as a User!");
-                        res.redirect("/");
-                    }
-                });
-            } else {
-                req.flash('error',"The code you are trying to use wasn't found, please try again!");
-                res.redirect('/register');
-            }
+          const isAdmin = foundprofile.admin == req.body.code ? true : false;
+          var newUser = new User({
+              username: username,
+              firstname: firstname,
+              lastname: lastname,
+              admin: isAdmin
+          });
+          User.register(newUser, req.body.password, (err, newUser) => {
+              if(err){
+                  console.log(err);
+                  req.flash('error', err);
+                  res.redirect("/register");
+              } else {
+                  req.flash('success', newUser.username + " has been added as a User!");
+                  res.redirect("/");
+              }
+          });
         }
     });
 });
