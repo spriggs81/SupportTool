@@ -8,7 +8,7 @@ const bodyParser       = require("body-parser"),
       flash            = require("connect-flash"),
       path             = require('path'),
       User             = require("./models/user"),
-      //seedDB           = require("./seeds"),
+      seedDB           = require("./seeds"),
       app              = express();
 
 
@@ -28,7 +28,7 @@ const homeRoute               = require("./routes/home"),
       indexRoutes             = require("./routes/index"),
       knowledgeRoutes         = require("./routes/knowledge");
 
-const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.DATABASEURL.length > 0 ? process.env.DATABASEURL : "mongodb://localhost:27017/support_tools_v4";
+const databaseurl = typeof(process.env.DATABASEURL) == 'string' && process.env.DATABASEURL.length > 0 ? process.env.DATABASEURL : "mongodb://mongo:27017/support_tools_v4";
 const port = typeof(Number(process.env.PORT)) == 'number' && process.env.PORT != null ? process.env.PORT : 3000;
 
 //setup MongoDB
@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 app.use(flash());
-//seedDB();
+seedDB();
 
 
 //Passport config
