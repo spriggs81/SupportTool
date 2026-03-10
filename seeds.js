@@ -3,6 +3,7 @@ var Client   = require('./models/client'),
     Appserver= require("./models/appserver"),
     DBserver = require("./models/dbserver"),
     Credprofile = require("./models/credprofile");
+    User = require('./models/user')
 
 var data = [
     {
@@ -361,7 +362,53 @@ function seedDB(){
     });
 }
 
-function seedCreds(){
+const createAccessUsers = () => {
+    console.log('Adding access users to DB!')
+    const accessUsers = [
+        {
+            username: 'admin-user',
+            firstname: 'admin',
+            lastname: 'user',
+            password: 'password987',
+            admin: true
+        },
+        {
+            username: 'read-user',
+            firstname: 'read',
+            lastname: 'user',
+            password: 'password123',
+            admin: false
+        }
+    ]
+    accessUsers.map(user => {
+        console.log(`Creating ${user.username}, now!`)
+        const newUser = new User({
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            admin: user.admin
+        })
+        createUser(newUser, user.password)
+    })
+    return
+}
+
+const createUser = (userInfo, password) => {
+    User.register(userInfo, password,(err, newUser) => {
+        if(err){
+            console.log(err);
+            // ('error', err);
+            // res.redirect("/register");
+            return
+        } else {
+            console.log('success', newUser.username + " has been added as a User!");
+            // res.redirect("/");
+            return
+        }
+    })
+}
+
+const seedCreds = () => {
      console.log('started the seed function!');
      Credprofile.remove({}, function(err){
           console.log('removed the pervious data!')
@@ -386,9 +433,13 @@ function seedCreds(){
 
 }
 
+seedCreds()
+createAccessUsers()
+
 function end(){
     console.log("Database Has Now Been Seeded!!!");
 }
 
+end()
 
 module.exports = seedDB;
